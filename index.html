@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure systems, embedded security, and software projects." />
+    <meta name="theme-color" content="#07111f" />
+    <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Vimalan Ramakrishnan home">
+        <span class="brand-mark" aria-hidden="true">VR</span>
+        <span>Vimalan Ramakrishnan</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Cybersecurity student · Malaysia</p>
+          <h1>I build secure systems across <em>hardware</em> and <em>software.</em></h1>
+          <p class="hero-lede">From biometric access control to web security testing, I turn technical ideas into practical, documented projects.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">View my work</a>
+            <a class="button secondary" href="https://github.com/VimalanRamakrishnan" target="_blank" rel="noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <aside class="signal-card" aria-label="Current focus">
+          <div class="signal-topline"><span>PROFILE / 01</span><span class="live-dot">Building</span></div>
+          <div class="monogram" aria-hidden="true">VR</div>
+          <dl>
+            <div><dt>Focus</dt><dd>Cybersecurity</dd></div>
+            <div><dt>Degree</dt><dd>Computer Security</dd></div>
+            <div><dt>Current</dt><dd>Portfolio development</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="section two-column" id="about">
+        <div>
+          <p class="section-index">01 / About</p>
+          <h2>Security-minded.<br />Hands-on by nature.</h2>
+        </div>
+        <div class="section-copy">
+          <p>I am a Bachelor of Computer Science (Computer Security) student at Universiti Teknikal Malaysia Melaka. My work combines cybersecurity, software development, networking, and embedded systems.</p>
+          <p>I enjoy understanding how systems behave, where they can fail, and how to make them safer and more useful.</p>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-heading">
+          <div><p class="section-index">02 / Skills</p><h2>Technical toolkit</h2></div>
+          <p>Tools and concepts I have applied through university projects and labs.</p>
+        </div>
+        <div class="skill-grid">
+          <article><span>01</span><h3>Programming</h3><p>C++, Java, Python, SQL, PHP, HTML, CSS, JavaScript</p></article>
+          <article><span>02</span><h3>Cybersecurity</h3><p>Vulnerability assessment, OWASP testing, access control, secure development</p></article>
+          <article><span>03</span><h3>Infrastructure</h3><p>Active Directory, DNS, VLAN, RADIUS, Windows Server, MySQL</p></article>
+          <article><span>04</span><h3>Embedded systems</h3><p>Arduino, ESP32-CAM, fingerprint sensors, servos, GSM and IoT integration</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <div><p class="section-index">03 / Projects</p><h2>Selected work</h2></div>
+          <p>Practical projects with clear implementation notes and security considerations.</p>
+        </div>
+
+        <article class="featured-project">
+          <div class="project-image-wrap">
+            <img src="assets/prototype-overview.jpg" alt="Completed biometric smart-home security prototype with fingerprint reader, camera, LCD and servo lock" />
+            <span>Final-year project · 2026</span>
+          </div>
+          <div class="project-details">
+            <p class="project-number">Featured / 01</p>
+            <h3>IoT-Enabled Smart Home Security</h3>
+            <p>A biometric door-access prototype that logs authentication attempts and triggers an ESP32-CAM image capture and Telegram alert after three consecutive failures.</p>
+            <ul>
+              <li>Fingerprint authentication and automatic relocking</li>
+              <li>Traceable access and incident records</li>
+              <li>Real-time image-based security alerts</li>
+            </ul>
+            <div class="tag-row"><span>Arduino</span><span>ESP32-CAM</span><span>IoT</span><span>Cybersecurity</span></div>
+            <a class="text-link" href="https://github.com/VimalanRamakrishnan/biometric-door-access-system" target="_blank" rel="noreferrer">Explore the repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <div class="upcoming-grid">
+          <article><p>C++ · MySQL</p><h3>Clubhouse Management System</h3><span>Case study in preparation</span></article>
+          <article><p>Web security</p><h3>VAPT University Lab</h3><span>Sanitized write-up in preparation</span></article>
+          <article><p>Windows Server</p><h3>Active Directory & DNS</h3><span>Documentation in preparation</span></article>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <p class="section-index">04 / Contact</p>
+        <h2>Let’s build something secure.</h2>
+        <p>I’m developing my portfolio for internship and graduate opportunities in cybersecurity and software development.</p>
+        <a class="button primary" href="https://github.com/VimalanRamakrishnan" target="_blank" rel="noreferrer">Connect on GitHub <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Vimalan Ramakrishnan</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
