@@ -50,3 +50,56 @@ exploreButton?.addEventListener('click', (event) => {
     }, grantedTime);
   }, scanTime);
 });
+
+const secureLinks = document.querySelectorAll('.secure-link');
+const secureOverlay = document.querySelector('#secure-overlay');
+const secureStatus = document.querySelector('#secure-status');
+const handshakeSteps = [...document.querySelectorAll('.handshake-steps li')];
+let connectionInProgress = false;
+
+secureLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (connectionInProgress) return;
+
+    connectionInProgress = true;
+    const destination = link.href;
+    const stepTime = reducedMotion.matches ? 120 : 520;
+    const finishTime = reducedMotion.matches ? 150 : 650;
+
+    secureOverlay.classList.remove('connected');
+    secureOverlay.classList.add('active');
+    secureOverlay.setAttribute('aria-hidden', 'false');
+    secureStatus.textContent = 'Starting secure handshake…';
+    handshakeSteps.forEach((step) => {
+      step.classList.remove('running', 'done');
+      step.querySelector('b').textContent = 'WAIT';
+    });
+
+    handshakeSteps.forEach((step, index) => {
+      window.setTimeout(() => {
+        handshakeSteps[index - 1]?.classList.remove('running');
+        if (index > 0) {
+          handshakeSteps[index - 1]?.classList.add('done');
+          handshakeSteps[index - 1].querySelector('b').textContent = 'OK';
+        }
+        step.classList.add('running');
+        step.querySelector('b').textContent = 'RUN';
+        secureStatus.textContent = step.querySelector('span').textContent + '…';
+      }, index * stepTime);
+    });
+
+    window.setTimeout(() => {
+      const finalStep = handshakeSteps.at(-1);
+      finalStep.classList.remove('running');
+      finalStep.classList.add('done');
+      finalStep.querySelector('b').textContent = 'OK';
+      secureOverlay.classList.add('connected');
+      secureStatus.textContent = 'Secure connection established';
+
+      window.setTimeout(() => {
+        window.location.assign(destination);
+      }, finishTime);
+    }, handshakeSteps.length * stepTime);
+  });
+});

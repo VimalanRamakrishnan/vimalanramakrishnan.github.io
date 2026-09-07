@@ -35,7 +35,7 @@
           <p class="hero-lede">I create practical systems across software, networks, and embedded hardware—then study how to make them safer.</p>
           <div class="hero-actions">
             <a class="button primary" id="explore-work" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
-            <a class="button secondary" href="https://github.com/VimalanRamakrishnan" target="_blank" rel="noreferrer">View GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button secondary secure-link" href="https://github.com/VimalanRamakrishnan">View GitHub <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-meta" aria-label="Professional focus">
             <p><strong>Focus</strong><span>Cybersecurity</span></p>
@@ -117,7 +117,7 @@
         <p class="section-index">04 / Contact</p>
         <h2>Let’s build something <span>secure.</span></h2>
         <p>I’m developing my portfolio for internship and graduate opportunities in cybersecurity and software development.</p>
-        <a class="button primary" href="https://github.com/VimalanRamakrishnan" target="_blank" rel="noreferrer">Connect on GitHub <span aria-hidden="true">↗</span></a>
+        <a class="button primary secure-link" href="https://github.com/VimalanRamakrishnan">Connect on GitHub <span aria-hidden="true">↗</span></a>
       </section>
     </main>
 
@@ -139,6 +139,26 @@
         </div>
         <p class="scanner-status" id="scanner-status">Scanning fingerprint…</p>
         <div class="scan-progress" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+
+    <div class="secure-overlay" id="secure-overlay" aria-hidden="true">
+      <div class="secure-console" role="status" aria-live="polite">
+        <div class="console-head">
+          <span>SECURE OUTBOUND LINK</span>
+          <span class="console-code">GH://443</span>
+        </div>
+        <div class="connection-visual" aria-hidden="true">
+          <span class="node local-node">VR</span>
+          <i class="connection-line"><b></b></i>
+          <span class="node github-node">GH</span>
+        </div>
+        <ol class="handshake-steps">
+          <li data-step="1"><i></i><span>Encrypting connection</span><b>WAIT</b></li>
+          <li data-step="2"><i></i><span>Verifying destination</span><b>WAIT</b></li>
+          <li data-step="3"><i></i><span>Opening GitHub profile</span><b>WAIT</b></li>
+        </ol>
+        <p class="secure-status" id="secure-status">Starting secure handshake…</p>
       </div>
     </div>
 
