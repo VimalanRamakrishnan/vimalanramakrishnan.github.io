@@ -34,7 +34,7 @@
           <h1>Building at the edge of <span>security</span> and <span>innovation.</span></h1>
           <p class="hero-lede">I create practical systems across software, networks, and embedded hardware—then study how to make them safer.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
+            <a class="button primary" id="explore-work" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
             <a class="button secondary" href="https://github.com/VimalanRamakrishnan" target="_blank" rel="noreferrer">View GitHub <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-meta" aria-label="Professional focus">
@@ -125,6 +125,22 @@
       <p>© <span id="year"></span> Vimalan Ramakrishnan</p>
       <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
     </footer>
+
+    <div class="access-overlay" id="access-overlay" aria-hidden="true">
+      <div class="scanner-card" role="status" aria-live="polite">
+        <p class="scanner-kicker">Portfolio access</p>
+        <div class="fingerprint" aria-hidden="true">
+          <span class="ridge ridge-1"></span>
+          <span class="ridge ridge-2"></span>
+          <span class="ridge ridge-3"></span>
+          <span class="ridge ridge-4"></span>
+          <span class="ridge ridge-5"></span>
+          <i class="scan-line"></i>
+        </div>
+        <p class="scanner-status" id="scanner-status">Scanning fingerprint…</p>
+        <div class="scan-progress" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
