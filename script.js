@@ -56,6 +56,27 @@ const secureOverlay = document.querySelector('#secure-overlay');
 const secureStatus = document.querySelector('#secure-status');
 const handshakeSteps = [...document.querySelectorAll('.handshake-steps li')];
 let connectionInProgress = false;
+let connectionTimers = [];
+
+function resetSecureConnection() {
+  connectionTimers.forEach((timer) => window.clearTimeout(timer));
+  connectionTimers = [];
+  connectionInProgress = false;
+
+  secureOverlay?.classList.remove('active', 'connected');
+  secureOverlay?.setAttribute('aria-hidden', 'true');
+  if (secureStatus) secureStatus.textContent = 'Starting secure handshake…';
+
+  handshakeSteps.forEach((step) => {
+    step.classList.remove('running', 'done');
+    const state = step.querySelector('b');
+    if (state) state.textContent = 'WAIT';
+  });
+}
+
+// Browsers can restore this page exactly as it was when Back is pressed.
+// Always return the connection animation to its closed state.
+window.addEventListener('pageshow', resetSecureConnection);
 
 secureLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
@@ -77,7 +98,7 @@ secureLinks.forEach((link) => {
     });
 
     handshakeSteps.forEach((step, index) => {
-      window.setTimeout(() => {
+      connectionTimers.push(window.setTimeout(() => {
         handshakeSteps[index - 1]?.classList.remove('running');
         if (index > 0) {
           handshakeSteps[index - 1]?.classList.add('done');
@@ -86,10 +107,10 @@ secureLinks.forEach((link) => {
         step.classList.add('running');
         step.querySelector('b').textContent = 'RUN';
         secureStatus.textContent = step.querySelector('span').textContent + '…';
-      }, index * stepTime);
+      }, index * stepTime));
     });
 
-    window.setTimeout(() => {
+    connectionTimers.push(window.setTimeout(() => {
       const finalStep = handshakeSteps.at(-1);
       finalStep.classList.remove('running');
       finalStep.classList.add('done');
@@ -97,9 +118,10 @@ secureLinks.forEach((link) => {
       secureOverlay.classList.add('connected');
       secureStatus.textContent = 'Secure connection established';
 
-      window.setTimeout(() => {
+      connectionTimers.push(window.setTimeout(() => {
+        resetSecureConnection();
         window.location.assign(destination);
-      }, finishTime);
-    }, handshakeSteps.length * stepTime);
+      }, finishTime));
+    }, handshakeSteps.length * stepTime));
   });
 });
