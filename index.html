@@ -106,31 +106,52 @@
           </div>
         </article>
 
-        <div class="project-gallery-block">
+        <div class="project-gallery-block evidence-archive">
           <div class="gallery-heading">
-            <div><p class="section-index">Visual archive</p><h3>From prototype to proof</h3></div>
-            <span>19 project visuals</span>
+            <div><p class="section-index">Cyber evidence archive</p><h3>From prototype to proof</h3></div>
+            <span>Real devices · Real results</span>
           </div>
-          <div class="project-gallery" aria-label="Biometric security project gallery">
-            <figure><button class="gallery-item" type="button" data-caption="Fingerprint sensor and LCD module"><img src="assets/fyp-gallery/01-fingerprint-lcd.webp" alt="Fingerprint sensor beside an LCD module" loading="lazy" decoding="async"></button><figcaption>Fingerprint sensor and LCD</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="ESP32-CAM controller module"><img src="assets/fyp-gallery/02-esp32-cam-module.webp" alt="ESP32-CAM controller module connected for testing" loading="lazy" decoding="async"></button><figcaption>ESP32-CAM module</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Controller wiring prototype"><img src="assets/fyp-gallery/03-controller-wiring.webp" alt="Prototype controller wiring on a breadboard" loading="lazy" decoding="async"></button><figcaption>Controller wiring</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Complete biometric access prototype"><img src="assets/fyp-gallery/04-complete-prototype.webp" alt="Complete biometric door access prototype with display and servo" loading="lazy" decoding="async"></button><figcaption>Complete prototype</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Overall authentication workflow"><img src="assets/fyp-gallery/05-overall-flowchart.webp" alt="Overall system authentication flowchart" loading="lazy" decoding="async"></button><figcaption>Overall flowchart</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Detailed system workflow"><img src="assets/fyp-gallery/06-detailed-flowchart.webp" alt="Detailed biometric security system flowchart" loading="lazy" decoding="async"></button><figcaption>Detailed flowchart</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Modified waterfall methodology"><img src="assets/fyp-gallery/07-methodology.webp" alt="Modified waterfall project methodology" loading="lazy" decoding="async"></button><figcaption>Methodology</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Project development schedule"><img src="assets/fyp-gallery/08-gantt-chart.webp" alt="Project development Gantt chart" loading="lazy" decoding="async"></button><figcaption>Gantt chart</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Successful fingerprint access test"><img src="assets/fyp-gallery/09-successful-access-test.webp" alt="Successful fingerprint authentication test on the prototype" loading="lazy" decoding="async"></button><figcaption>Successful access test</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Fingerprint recognition results"><img src="assets/fyp-gallery/10-recognition-results.webp" alt="Table of fingerprint recognition testing results" loading="lazy" decoding="async"></button><figcaption>Recognition results</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Live security dashboard"><img src="assets/fyp-gallery/11-web-dashboard.webp" alt="Web dashboard showing security status and incident records" loading="lazy" decoding="async"></button><figcaption>Web dashboard</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Dashboard camera view"><img src="assets/fyp-gallery/12-dashboard-camera-view.webp" alt="Camera view panel inside the web dashboard" loading="lazy" decoding="async"></button><figcaption>Dashboard camera view</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="System code and operation"><img src="assets/fyp-gallery/13-system-code-overview.webp" alt="System code overview explaining monitoring and alerts" loading="lazy" decoding="async"></button><figcaption>System code overview</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Camera demonstration setup"><img src="assets/fyp-gallery/14-demo-camera-setup.webp" alt="Camera equipment used during the project demonstration" loading="lazy" decoding="async"></button><figcaption>Demo camera setup</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Access denied security test"><img src="assets/fyp-gallery/15-access-denied-test.webp" alt="Prototype showing an access denied test state" loading="lazy" decoding="async"></button><figcaption>Access denied test</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Access granted security test"><img src="assets/fyp-gallery/16-access-granted-test.webp" alt="Prototype showing an access granted test state" loading="lazy" decoding="async"></button><figcaption>Access granted test</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Prototype internal assembly"><img src="assets/fyp-gallery/17-prototype-interior.webp" alt="Internal assembly and wiring inside the prototype enclosure" loading="lazy" decoding="async"></button><figcaption>Prototype interior</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="Controller and relay assembly"><img src="assets/fyp-gallery/18-controller-and-relay.webp" alt="Controller board and relay wiring inside the enclosure" loading="lazy" decoding="async"></button><figcaption>Controller and relay</figcaption></figure>
-            <figure><button class="gallery-item" type="button" data-caption="ESP32-CAM enclosure assembly"><img src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" alt="ESP32-CAM and supporting components mounted in the enclosure" loading="lazy" decoding="async"></button><figcaption>ESP32-CAM enclosure</figcaption></figure>
+          <div class="archive-tabs" aria-label="Filter project visuals">
+            <button class="archive-filter active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="archive-filter" type="button" data-filter="hardware" aria-pressed="false">Hardware</button>
+            <button class="archive-filter" type="button" data-filter="testing" aria-pressed="false">Testing</button>
+            <button class="archive-filter" type="button" data-filter="dashboard" aria-pressed="false">Dashboard</button>
+            <button class="archive-filter" type="button" data-filter="design" aria-pressed="false">Design</button>
+          </div>
+          <div class="archive-shell">
+            <div class="archive-viewer" tabindex="0" aria-label="Project evidence viewer. Use left and right arrow keys to navigate.">
+              <div class="archive-frame" id="archive-frame">
+                <img id="archive-image" src="assets/fyp-gallery/01-fingerprint-lcd.webp" alt="Fingerprint sensor beside an LCD module">
+                <i class="archive-scan-line" aria-hidden="true"></i>
+                <span class="archive-counter" id="archive-counter" aria-live="polite">IMAGE 01 / 19</span>
+              </div>
+              <div class="archive-caption">
+                <button id="archive-prev" type="button" aria-label="Previous project image">‹</button>
+                <div><h4 id="archive-title">Fingerprint sensor and LCD</h4><p id="archive-category">Hardware · Prototype component</p></div>
+                <button id="archive-next" type="button" aria-label="Next project image">›</button>
+              </div>
+            </div>
+            <div class="archive-thumbnails" id="archive-thumbnails" aria-label="Project image thumbnails">
+              <button class="archive-thumb active" type="button" data-category="hardware" data-src="assets/fyp-gallery/01-fingerprint-lcd.webp" data-title="Fingerprint sensor and LCD" data-meta="Hardware · Prototype component" data-alt="Fingerprint sensor beside an LCD module" aria-current="true"><img src="assets/fyp-gallery/01-fingerprint-lcd.webp" alt="" loading="lazy"><span>01</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/02-esp32-cam-module.webp" data-title="ESP32-CAM module" data-meta="Hardware · Core module" data-alt="ESP32-CAM controller module connected for testing"><img src="assets/fyp-gallery/02-esp32-cam-module.webp" alt="" loading="lazy"><span>02</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/03-controller-wiring.webp" data-title="Controller wiring" data-meta="Hardware · Controller assembly" data-alt="Prototype controller wiring on a breadboard"><img src="assets/fyp-gallery/03-controller-wiring.webp" alt="" loading="lazy"><span>03</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/04-complete-prototype.webp" data-title="Complete prototype" data-meta="Hardware · Complete system" data-alt="Complete biometric door access prototype with display and servo"><img src="assets/fyp-gallery/04-complete-prototype.webp" alt="" loading="lazy"><span>04</span></button>
+              <button class="archive-thumb" type="button" data-category="design" data-src="assets/fyp-gallery/05-overall-flowchart.webp" data-title="Overall flowchart" data-meta="Design · System workflow" data-alt="Overall system authentication flowchart"><img src="assets/fyp-gallery/05-overall-flowchart.webp" alt="" loading="lazy"><span>05</span></button>
+              <button class="archive-thumb" type="button" data-category="design" data-src="assets/fyp-gallery/06-detailed-flowchart.webp" data-title="Detailed flowchart" data-meta="Design · System logic" data-alt="Detailed biometric security system flowchart"><img src="assets/fyp-gallery/06-detailed-flowchart.webp" alt="" loading="lazy"><span>06</span></button>
+              <button class="archive-thumb" type="button" data-category="design" data-src="assets/fyp-gallery/07-methodology.webp" data-title="Methodology" data-meta="Design · Development process" data-alt="Modified waterfall project methodology"><img src="assets/fyp-gallery/07-methodology.webp" alt="" loading="lazy"><span>07</span></button>
+              <button class="archive-thumb" type="button" data-category="design" data-src="assets/fyp-gallery/08-gantt-chart.webp" data-title="Gantt chart" data-meta="Design · Project schedule" data-alt="Project development Gantt chart"><img src="assets/fyp-gallery/08-gantt-chart.webp" alt="" loading="lazy"><span>08</span></button>
+              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/09-successful-access-test.webp" data-title="Successful access test" data-meta="Testing · Authentication test" data-alt="Successful fingerprint authentication test on the prototype"><img src="assets/fyp-gallery/09-successful-access-test.webp" alt="" loading="lazy"><span>09</span></button>
+              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/10-recognition-results.webp" data-title="Recognition results" data-meta="Testing · Performance results" data-alt="Table of fingerprint recognition testing results"><img src="assets/fyp-gallery/10-recognition-results.webp" alt="" loading="lazy"><span>10</span></button>
+              <button class="archive-thumb" type="button" data-category="dashboard" data-src="assets/fyp-gallery/11-web-dashboard.webp" data-title="Web dashboard" data-meta="Dashboard · Monitoring interface" data-alt="Web dashboard showing security status and incident records"><img src="assets/fyp-gallery/11-web-dashboard.webp" alt="" loading="lazy"><span>11</span></button>
+              <button class="archive-thumb" type="button" data-category="dashboard" data-src="assets/fyp-gallery/12-dashboard-camera-view.webp" data-title="Dashboard camera view" data-meta="Dashboard · Camera evidence" data-alt="Camera view panel inside the web dashboard"><img src="assets/fyp-gallery/12-dashboard-camera-view.webp" alt="" loading="lazy"><span>12</span></button>
+              <button class="archive-thumb" type="button" data-category="design" data-src="assets/fyp-gallery/13-system-code-overview.webp" data-title="System code overview" data-meta="Design · Firmware operation" data-alt="System code overview explaining monitoring and alerts"><img src="assets/fyp-gallery/13-system-code-overview.webp" alt="" loading="lazy"><span>13</span></button>
+              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/14-demo-camera-setup.webp" data-title="Demo camera setup" data-meta="Testing · Demonstration capture" data-alt="Camera equipment used during the project demonstration"><img src="assets/fyp-gallery/14-demo-camera-setup.webp" alt="" loading="lazy"><span>14</span></button>
+              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/15-access-denied-test.webp" data-title="Access denied test" data-meta="Testing · Failure state" data-alt="Prototype showing an access denied test state"><img src="assets/fyp-gallery/15-access-denied-test.webp" alt="" loading="lazy"><span>15</span></button>
+              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/16-access-granted-test.webp" data-title="Access granted test" data-meta="Testing · Success state" data-alt="Prototype showing an access granted test state"><img src="assets/fyp-gallery/16-access-granted-test.webp" alt="" loading="lazy"><span>16</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/17-prototype-interior.webp" data-title="Prototype interior" data-meta="Hardware · Internal assembly" data-alt="Internal assembly and wiring inside the prototype enclosure"><img src="assets/fyp-gallery/17-prototype-interior.webp" alt="" loading="lazy"><span>17</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/18-controller-and-relay.webp" data-title="Controller and relay" data-meta="Hardware · Relay assembly" data-alt="Controller board and relay wiring inside the enclosure"><img src="assets/fyp-gallery/18-controller-and-relay.webp" alt="" loading="lazy"><span>18</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" data-title="ESP32-CAM enclosure" data-meta="Hardware · Camera assembly" data-alt="ESP32-CAM and supporting components mounted in the enclosure"><img src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" alt="" loading="lazy"><span>19</span></button>
+            </div>
           </div>
         </div>
 
@@ -215,17 +236,6 @@
         <p class="secure-status" id="clubhouse-status">Requesting project access…</p>
       </div>
     </div>
-
-    <dialog class="gallery-lightbox" id="gallery-lightbox" aria-labelledby="lightbox-caption">
-      <button class="lightbox-close" type="button" aria-label="Close image viewer">×</button>
-      <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">‹</button>
-      <div class="lightbox-content">
-        <img id="lightbox-image" src="" alt="">
-        <p id="lightbox-caption"></p>
-        <span id="lightbox-count" aria-live="polite"></span>
-      </div>
-      <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">›</button>
-    </dialog>
 
     <script src="script.js"></script>
   </body>

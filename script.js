@@ -196,40 +196,75 @@ clubhouseLink?.addEventListener('click', (event) => {
   }, clubhouseSteps.length * stepTime));
 });
 
-const galleryItems = [...document.querySelectorAll('.gallery-item')];
-const galleryLightbox = document.querySelector('#gallery-lightbox');
-const lightboxImage = document.querySelector('#lightbox-image');
-const lightboxCaption = document.querySelector('#lightbox-caption');
-const lightboxCount = document.querySelector('#lightbox-count');
-let activeGalleryIndex = 0;
+const archiveViewer = document.querySelector('.archive-viewer');
+const archiveFrame = document.querySelector('#archive-frame');
+const archiveImage = document.querySelector('#archive-image');
+const archiveTitle = document.querySelector('#archive-title');
+const archiveCategory = document.querySelector('#archive-category');
+const archiveCounter = document.querySelector('#archive-counter');
+const archiveThumbs = [...document.querySelectorAll('.archive-thumb')];
+const archiveFilters = [...document.querySelectorAll('.archive-filter')];
+let visibleArchiveThumbs = [...archiveThumbs];
+let activeArchiveIndex = 0;
 
-function showGalleryImage(index) {
-  if (!galleryItems.length) return;
-  activeGalleryIndex = (index + galleryItems.length) % galleryItems.length;
-  const item = galleryItems[activeGalleryIndex];
-  const thumbnail = item.querySelector('img');
-  lightboxImage.src = thumbnail.src;
-  lightboxImage.alt = thumbnail.alt;
-  lightboxCaption.textContent = item.dataset.caption;
-  lightboxCount.textContent = `${activeGalleryIndex + 1} / ${galleryItems.length}`;
+function showArchiveImage(index, moveFocus = false) {
+  if (!visibleArchiveThumbs.length) return;
+  activeArchiveIndex = (index + visibleArchiveThumbs.length) % visibleArchiveThumbs.length;
+  const thumb = visibleArchiveThumbs[activeArchiveIndex];
+
+  archiveThumbs.forEach((item) => {
+    const selected = item === thumb;
+    item.classList.toggle('active', selected);
+    if (selected) item.setAttribute('aria-current', 'true');
+    else item.removeAttribute('aria-current');
+  });
+
+  archiveFrame.classList.add('changing');
+  window.setTimeout(() => {
+    archiveImage.src = thumb.dataset.src;
+    archiveImage.alt = thumb.dataset.alt;
+    archiveTitle.textContent = thumb.dataset.title;
+    archiveCategory.textContent = thumb.dataset.meta;
+    archiveCounter.textContent = `IMAGE ${String(activeArchiveIndex + 1).padStart(2, '0')} / ${String(visibleArchiveThumbs.length).padStart(2, '0')}`;
+    archiveFrame.classList.remove('changing', 'scanning');
+    void archiveFrame.offsetWidth;
+    archiveFrame.classList.add('scanning');
+    thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+    if (moveFocus) thumb.focus({ preventScroll: true });
+  }, 120);
 }
 
-galleryItems.forEach((item, index) => {
-  item.addEventListener('click', () => {
-    showGalleryImage(index);
-    galleryLightbox.showModal();
+archiveThumbs.forEach((thumb) => {
+  thumb.setAttribute('aria-label', `View ${thumb.dataset.title}`);
+  thumb.addEventListener('click', () => showArchiveImage(visibleArchiveThumbs.indexOf(thumb)));
+});
+
+archiveFilters.forEach((filter) => {
+  filter.addEventListener('click', () => {
+    const category = filter.dataset.filter;
+    archiveFilters.forEach((item) => {
+      const selected = item === filter;
+      item.classList.toggle('active', selected);
+      item.setAttribute('aria-pressed', String(selected));
+    });
+    archiveThumbs.forEach((thumb) => {
+      thumb.hidden = category !== 'all' && thumb.dataset.category !== category;
+    });
+    visibleArchiveThumbs = archiveThumbs.filter((thumb) => !thumb.hidden);
+    showArchiveImage(0);
   });
 });
 
-document.querySelector('.lightbox-close')?.addEventListener('click', () => galleryLightbox.close());
-document.querySelector('.lightbox-prev')?.addEventListener('click', () => showGalleryImage(activeGalleryIndex - 1));
-document.querySelector('.lightbox-next')?.addEventListener('click', () => showGalleryImage(activeGalleryIndex + 1));
+document.querySelector('#archive-prev')?.addEventListener('click', () => showArchiveImage(activeArchiveIndex - 1));
+document.querySelector('#archive-next')?.addEventListener('click', () => showArchiveImage(activeArchiveIndex + 1));
 
-galleryLightbox?.addEventListener('click', (event) => {
-  if (event.target === galleryLightbox) galleryLightbox.close();
-});
-
-galleryLightbox?.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowLeft') showGalleryImage(activeGalleryIndex - 1);
-  if (event.key === 'ArrowRight') showGalleryImage(activeGalleryIndex + 1);
+archiveViewer?.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault();
+    showArchiveImage(activeArchiveIndex - 1, true);
+  }
+  if (event.key === 'ArrowRight') {
+    event.preventDefault();
+    showArchiveImage(activeArchiveIndex + 1, true);
+  }
 });
