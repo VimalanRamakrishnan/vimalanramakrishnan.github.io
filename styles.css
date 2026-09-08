@@ -246,6 +246,11 @@ footer a { color: var(--text); text-decoration: none; }
 .handshake-steps li.done b { color: #5cffc0; }
 .secure-status { margin: 1.2rem 1.4rem 1.4rem; padding: .8rem 1rem; border: 1px solid var(--line); border-radius: 10px; background: rgba(0,0,0,.16); color: #c9d8ef; font: 700 .8rem/1.5 ui-monospace, monospace; text-align: center; }
 .secure-overlay.connected .secure-status { border-color: rgba(92,255,192,.28); color: #75ffd0; background: rgba(28,124,93,.08); }
+.clubhouse-console { border-color: rgba(118,87,255,.42); box-shadow: 0 32px 100px rgba(0,0,0,.54), 0 0 65px rgba(118,87,255,.2); }
+.clubhouse-db-node { border-color: rgba(92,221,255,.5); background: rgba(92,221,255,.09); }
+.clubhouse-overlay .connection-line b { background: linear-gradient(90deg, var(--violet), var(--cyan), #75ffd0); }
+.clubhouse-overlay.ready .clubhouse-console { border-color: rgba(92,255,192,.52); }
+.clubhouse-overlay.ready .secure-status { border-color: rgba(92,255,192,.3); color: #75ffd0; background: rgba(28,124,93,.1); }
 
 @keyframes data-packet {
   from { left: 0; }
