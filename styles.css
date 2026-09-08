@@ -130,6 +130,29 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .project-specs p { margin: 0; color: #c6d2e9; }
 .tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
 .tag-row span { padding: .42rem .62rem; border: 1px solid rgba(118,137,255,.3); border-radius: 999px; background: rgba(72,75,194,.1); }
+.project-gallery-block { margin-top: 1.5rem; padding: clamp(1.3rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: 24px; background: rgba(7,17,38,.52); }
+.gallery-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.4rem; }
+.gallery-heading h3 { margin: .35rem 0 0; font-size: clamp(1.65rem, 3vw, 2.4rem); }
+.gallery-heading > span { padding: .45rem .65rem; border: 1px solid rgba(92,221,255,.28); border-radius: 999px; color: var(--cyan); font: 700 .72rem/1.2 ui-monospace, monospace; white-space: nowrap; }
+.project-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+.project-gallery figure { min-width: 0; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: rgba(3,9,24,.62); transition: transform .22s ease, border-color .22s ease; }
+.project-gallery figure:hover { transform: translateY(-3px); border-color: rgba(92,221,255,.42); }
+.gallery-item { display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 3; padding: 0; overflow: hidden; border: 0; background: #020817; cursor: zoom-in; }
+.gallery-item img { width: 100%; height: 100%; object-fit: contain; transition: transform .28s ease; }
+.gallery-item:hover img { transform: scale(1.035); }
+.project-gallery figcaption { padding: .75rem .85rem; color: #bdc9df; font-size: .85rem; }
+.gallery-lightbox { width: min(94vw, 1200px); max-width: none; height: min(90vh, 820px); max-height: none; padding: 0; overflow: hidden; border: 1px solid rgba(92,221,255,.32); border-radius: 22px; background: rgba(3,9,24,.98); color: var(--text); box-shadow: 0 35px 120px rgba(0,0,0,.72), 0 0 65px rgba(47,116,255,.16); }
+.gallery-lightbox::backdrop { background: rgba(0,4,14,.84); backdrop-filter: blur(14px); }
+.lightbox-content { display: grid; grid-template-rows: minmax(0, 1fr) auto auto; height: 100%; padding: 1.5rem 4.5rem 1.25rem; }
+.lightbox-content img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.lightbox-content p { margin: .9rem 0 0; color: #dce7fb; text-align: center; font-weight: 720; }
+.lightbox-content > span { color: var(--muted); text-align: center; font: 700 .72rem/1.5 ui-monospace, monospace; }
+.lightbox-close, .lightbox-nav { position: absolute; z-index: 2; display: grid; place-items: center; border: 1px solid var(--line); background: rgba(13,28,62,.92); color: var(--text); cursor: pointer; }
+.lightbox-close { top: 1rem; right: 1rem; width: 42px; height: 42px; border-radius: 50%; font-size: 1.6rem; }
+.lightbox-nav { top: 50%; width: 44px; height: 64px; border-radius: 14px; font-size: 2rem; transform: translateY(-50%); }
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+.lightbox-close:hover, .lightbox-nav:hover { border-color: var(--cyan); color: var(--cyan); }
 .upcoming-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
 .upcoming-grid article { padding: 1.5rem; border-radius: 18px; transition: transform .25s ease, border-color .25s ease; }
 .upcoming-grid article:hover { transform: translateY(-4px); border-color: rgba(118,87,255,.48); }
@@ -279,6 +302,7 @@ footer a { color: var(--text); text-decoration: none; }
   .skill-grid { grid-template-columns: repeat(2, 1fr); }
   .featured-project { grid-template-columns: 1fr; }
   .project-specs { border-left: 0; border-top: 1px solid var(--line); }
+  .project-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .upcoming-grid { grid-template-columns: 1fr; }
 }
 
@@ -302,6 +326,12 @@ footer a { color: var(--text); text-decoration: none; }
   .skill-grid article { min-height: 205px; }
   .skill-grid h3 { margin-top: 3rem; }
   .project-number { margin-top: 3rem; }
+  .gallery-heading { align-items: flex-start; flex-direction: column; }
+  .project-gallery { grid-template-columns: 1fr; }
+  .lightbox-content { padding: 4rem 1rem 1rem; }
+  .lightbox-nav { top: auto; bottom: 1rem; width: 42px; height: 42px; border-radius: 50%; transform: none; }
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
   .principles { grid-template-columns: 1fr; }
   footer { align-items: flex-start; flex-direction: column; justify-content: center; gap: .25rem; }
   footer p { margin: 0; }
