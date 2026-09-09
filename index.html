@@ -6,7 +6,7 @@
     <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure software, networking and embedded-systems projects." />
     <meta name="theme-color" content="#050b19" />
     <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -170,12 +170,60 @@
         </div>
 
         <div class="upcoming-grid">
-          <article class="glass-panel completed-project">
+          <article class="glass-panel completed-project clubhouse-project-card">
             <p>02 / C++ · MySQL</p>
             <h3>Clubhouse Management System</h3>
             <span>A console application for customer registration, facility management, bookings, payments, receipts, and sales reporting.</span>
             <div class="compact-tags" aria-label="Project technologies"><span>C++</span><span>MySQL</span><span>Visual Studio</span></div>
-            <a class="compact-project-link clubhouse-link" href="https://github.com/VimalanRamakrishnan/clubhouse-management-system">View repository <span aria-hidden="true">↗</span></a>
+            <div class="clubhouse-project-actions">
+              <button class="clubhouse-gallery-toggle" id="clubhouse-gallery-toggle" type="button" aria-expanded="false" aria-controls="clubhouse-gallery-panel">
+                <span class="clubhouse-toggle-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="clubhouse-toggle-copy"><small>PROJECT ARCHIVE</small><b>VIEW PROJECT IMAGES</b></span>
+                <span class="clubhouse-toggle-arrow" aria-hidden="true">↓</span>
+              </button>
+              <a class="compact-project-link clubhouse-link" href="https://github.com/VimalanRamakrishnan/clubhouse-management-system">View repository <span aria-hidden="true">↗</span></a>
+            </div>
+
+            <div class="clubhouse-gallery-panel" id="clubhouse-gallery-panel" aria-hidden="true">
+              <div class="clubhouse-gallery-inner">
+                <div class="clubhouse-gallery-heading">
+                  <div>
+                    <span class="clubhouse-gallery-kicker">APPLICATION WALKTHROUGH</span>
+                    <h4>Clubhouse system in action</h4>
+                  </div>
+                  <span class="clubhouse-gallery-total">12 CONSOLE SCREENS</span>
+                </div>
+
+                <div class="clubhouse-gallery-viewer" tabindex="0" aria-label="Clubhouse project image viewer. Use left and right arrow keys to navigate.">
+                  <div class="clubhouse-gallery-frame">
+                    <img id="clubhouse-gallery-image" src="assets/clubhouse-gallery/01-welcome-screen.png" alt="Clubhouse Management System welcome screen" />
+                    <span class="clubhouse-gallery-count" id="clubhouse-gallery-count">01 / 12</span>
+                    <span class="clubhouse-gallery-corner top" aria-hidden="true"></span>
+                    <span class="clubhouse-gallery-corner bottom" aria-hidden="true"></span>
+                  </div>
+                  <div class="clubhouse-gallery-caption">
+                    <button id="clubhouse-gallery-prev" type="button" aria-label="Previous Clubhouse screenshot">←</button>
+                    <div><small>SCREEN DETAILS</small><h5 id="clubhouse-gallery-caption">Welcome and role selection</h5></div>
+                    <button id="clubhouse-gallery-next" type="button" aria-label="Next Clubhouse screenshot">→</button>
+                  </div>
+                </div>
+
+                <div class="clubhouse-gallery-thumbs" aria-label="Choose a Clubhouse screenshot">
+                  <button class="clubhouse-gallery-thumb active" type="button" data-src="assets/clubhouse-gallery/01-welcome-screen.png" data-title="Welcome and role selection" data-alt="Clubhouse Management System welcome screen" aria-current="true"><img src="assets/clubhouse-gallery/01-welcome-screen.png" alt="" loading="lazy"><span>01</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/02-admin-loading.png" data-title="Administrator authentication" data-alt="Administrator login loading screen"><img src="assets/clubhouse-gallery/02-admin-loading.png" alt="" loading="lazy"><span>02</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/03-manage-facilities.png" data-title="Facility management" data-alt="Facility list and management menu"><img src="assets/clubhouse-gallery/03-manage-facilities.png" alt="" loading="lazy"><span>03</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/04-manage-bookings.png" data-title="Booking administration" data-alt="Booking history and management menu"><img src="assets/clubhouse-gallery/04-manage-bookings.png" alt="" loading="lazy"><span>04</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/05-manage-customers.png" data-title="Customer administration" data-alt="Customer records and management menu using demo data"><img src="assets/clubhouse-gallery/05-manage-customers.png" alt="" loading="lazy"><span>05</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/06-sales-report.png" data-title="Sales reporting" data-alt="Clubhouse facility sales report"><img src="assets/clubhouse-gallery/06-sales-report.png" alt="" loading="lazy"><span>06</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/07-invalid-choice.png" data-title="Input validation" data-alt="Invalid menu choice validation message"><img src="assets/clubhouse-gallery/07-invalid-choice.png" alt="" loading="lazy"><span>07</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/08-customer-registration.png" data-title="Customer registration" data-alt="Customer registration and password validation using demo data"><img src="assets/clubhouse-gallery/08-customer-registration.png" alt="" loading="lazy"><span>08</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/09-facility-selection.png" data-title="Facility selection" data-alt="Daily facility availability and selection screen"><img src="assets/clubhouse-gallery/09-facility-selection.png" alt="" loading="lazy"><span>09</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/10-booking-history.png" data-title="Customer booking history" data-alt="Customer booking history and cancellation menu"><img src="assets/clubhouse-gallery/10-booking-history.png" alt="" loading="lazy"><span>10</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/11-booking-summary.png" data-title="Availability and booking summary" data-alt="Availability calculation and completed booking summary"><img src="assets/clubhouse-gallery/11-booking-summary.png" alt="" loading="lazy"><span>11</span></button>
+                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/12-booking-receipt.png" data-title="Generated booking receipt" data-alt="Generated Clubhouse booking receipt using demo data"><img src="assets/clubhouse-gallery/12-booking-receipt.png" alt="" loading="lazy"><span>12</span></button>
+                </div>
+              </div>
+            </div>
           </article>
           <article class="glass-panel"><p>03 / Web security</p><h3>VAPT University Lab</h3><span>Sanitized write-up in preparation</span></article>
           <article class="glass-panel"><p>04 / Windows Server</p><h3>Active Directory &amp; DNS</h3><span>Documentation in preparation</span></article>
@@ -251,6 +299,6 @@
       </div>
     </div>
 
-    <script src="script.js?v=13"></script>
+    <script src="script.js?v=14"></script>
   </body>
 </html>

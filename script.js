@@ -288,3 +288,71 @@ archiveViewer?.addEventListener('keydown', (event) => {
     showArchiveImage(activeArchiveIndex + 1, true);
   }
 });
+
+// Expandable Clubhouse project gallery
+const clubhouseProjectCard = document.querySelector('.clubhouse-project-card');
+const clubhouseGalleryToggle = document.querySelector('#clubhouse-gallery-toggle');
+const clubhouseGalleryPanel = document.querySelector('#clubhouse-gallery-panel');
+const clubhouseGalleryViewer = document.querySelector('.clubhouse-gallery-viewer');
+const clubhouseGalleryFrame = document.querySelector('.clubhouse-gallery-frame');
+const clubhouseGalleryImage = document.querySelector('#clubhouse-gallery-image');
+const clubhouseGalleryCaption = document.querySelector('#clubhouse-gallery-caption');
+const clubhouseGalleryCount = document.querySelector('#clubhouse-gallery-count');
+const clubhouseGalleryThumbs = [...document.querySelectorAll('.clubhouse-gallery-thumb')];
+let clubhouseGalleryIndex = 0;
+
+function showClubhouseGalleryImage(index, focusThumbnail = false) {
+  if (!clubhouseGalleryThumbs.length || !clubhouseGalleryImage) return;
+  clubhouseGalleryIndex = (index + clubhouseGalleryThumbs.length) % clubhouseGalleryThumbs.length;
+  const selectedThumb = clubhouseGalleryThumbs[clubhouseGalleryIndex];
+
+  clubhouseGalleryThumbs.forEach((thumb) => {
+    const selected = thumb === selectedThumb;
+    thumb.classList.toggle('active', selected);
+    if (selected) thumb.setAttribute('aria-current', 'true');
+    else thumb.removeAttribute('aria-current');
+  });
+
+  clubhouseGalleryFrame?.classList.add('changing');
+  window.setTimeout(() => {
+    clubhouseGalleryImage.src = selectedThumb.dataset.src;
+    clubhouseGalleryImage.alt = selectedThumb.dataset.alt;
+    clubhouseGalleryCaption.textContent = selectedThumb.dataset.title;
+    clubhouseGalleryCount.textContent = `${String(clubhouseGalleryIndex + 1).padStart(2, '0')} / ${String(clubhouseGalleryThumbs.length).padStart(2, '0')}`;
+    clubhouseGalleryFrame?.classList.remove('changing');
+    selectedThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if (focusThumbnail) selectedThumb.focus({ preventScroll: true });
+  }, 130);
+}
+
+clubhouseGalleryThumbs.forEach((thumb) => {
+  thumb.setAttribute('aria-label', `View ${thumb.dataset.title}`);
+  thumb.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryThumbs.indexOf(thumb)));
+});
+
+clubhouseGalleryToggle?.addEventListener('click', () => {
+  const opening = !clubhouseProjectCard.classList.contains('gallery-open');
+  clubhouseProjectCard.classList.toggle('gallery-open', opening);
+  clubhouseGalleryToggle.setAttribute('aria-expanded', String(opening));
+  clubhouseGalleryPanel.setAttribute('aria-hidden', String(!opening));
+  const toggleLabel = clubhouseGalleryToggle.querySelector('.clubhouse-toggle-copy b');
+  if (toggleLabel) toggleLabel.textContent = opening ? 'HIDE PROJECT IMAGES' : 'VIEW PROJECT IMAGES';
+
+  if (opening) {
+    window.setTimeout(() => clubhouseGalleryViewer?.focus({ preventScroll: true }), 500);
+  }
+});
+
+document.querySelector('#clubhouse-gallery-prev')?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex - 1));
+document.querySelector('#clubhouse-gallery-next')?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex + 1));
+
+clubhouseGalleryViewer?.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault();
+    showClubhouseGalleryImage(clubhouseGalleryIndex - 1);
+  }
+  if (event.key === 'ArrowRight') {
+    event.preventDefault();
+    showClubhouseGalleryImage(clubhouseGalleryIndex + 1);
+  }
+});
