@@ -109,9 +109,17 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .section-heading h2 { margin: 0; }
 
 .skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-.skill-grid article { min-height: 255px; padding: 1.5rem; border-radius: 18px; transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+.skill-grid article { position: relative; min-height: 255px; padding: 1.5rem; overflow: hidden; border-radius: 18px; transition: transform .25s ease, border-color .25s ease, background .25s ease; }
 .skill-grid article:hover { transform: translateY(-6px); border-color: rgba(92,221,255,.38); background: linear-gradient(145deg, rgba(31,58,118,.76), rgba(12,26,57,.55)); }
 .skill-grid article > span { color: var(--cyan); font: 700 .75rem/1 ui-monospace, monospace; }
+.skill-icon { --icon-accent: var(--cyan); position: absolute; top: 1.2rem; right: 1.2rem; display: grid; place-items: center; width: 58px; height: 58px; border: 1px solid color-mix(in srgb, var(--icon-accent) 42%, transparent); border-radius: 16px; background: color-mix(in srgb, var(--icon-accent) 8%, rgba(7,17,38,.72)); color: var(--icon-accent) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 26px rgba(0,0,0,.16); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.skill-icon::after { content: ""; position: absolute; width: 28px; height: 1px; right: 42px; bottom: -8px; opacity: .45; background: linear-gradient(90deg, transparent, var(--icon-accent)); transform: rotate(-36deg); transform-origin: right; }
+.skill-icon svg { width: 30px; height: 30px; }
+.programming-icon { --icon-accent: #5cddff; }
+.security-icon { --icon-accent: #9b82ff; }
+.infrastructure-icon { --icon-accent: #72a6ff; }
+.embedded-icon { --icon-accent: #65efc4; }
+.skill-grid article:hover .skill-icon { transform: translateY(-3px) rotate(2deg); border-color: var(--icon-accent); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 32px color-mix(in srgb, var(--icon-accent) 18%, transparent); }
 .skill-grid h3 { margin: 4.5rem 0 .85rem; font-size: 1.35rem; letter-spacing: -.025em; }
 .skill-grid p { margin: 0; color: var(--muted); }
 
@@ -340,6 +348,8 @@ footer a { color: var(--text); text-decoration: none; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
   .skill-grid { grid-template-columns: 1fr; }
   .skill-grid article { min-height: 205px; }
+  .skill-icon { width: 52px; height: 52px; border-radius: 14px; }
+  .skill-icon svg { width: 27px; height: 27px; }
   .skill-grid h3 { margin-top: 3rem; }
   .project-number { margin-top: 3rem; }
   .gallery-heading { align-items: flex-start; flex-direction: column; }
