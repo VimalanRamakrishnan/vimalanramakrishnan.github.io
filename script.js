@@ -199,6 +199,7 @@ clubhouseLink?.addEventListener('click', (event) => {
 const archiveViewer = document.querySelector('.archive-viewer');
 const archiveFrame = document.querySelector('#archive-frame');
 const archiveImage = document.querySelector('#archive-image');
+const archiveVideo = document.querySelector('#archive-video');
 const archiveTitle = document.querySelector('#archive-title');
 const archiveCategory = document.querySelector('#archive-category');
 const archiveCounter = document.querySelector('#archive-counter');
@@ -221,11 +222,26 @@ function showArchiveImage(index, moveFocus = false) {
 
   archiveFrame.classList.add('changing');
   window.setTimeout(() => {
-    archiveImage.src = thumb.dataset.src;
-    archiveImage.alt = thumb.dataset.alt;
+    const isVideo = thumb.dataset.type === 'video';
+    archiveVideo.pause();
+    if (isVideo) {
+      archiveImage.hidden = true;
+      archiveVideo.hidden = false;
+      archiveVideo.src = thumb.dataset.src;
+      archiveVideo.poster = thumb.dataset.poster;
+      archiveVideo.setAttribute('aria-label', thumb.dataset.alt);
+      archiveVideo.load();
+    } else {
+      archiveVideo.hidden = true;
+      archiveVideo.removeAttribute('src');
+      archiveVideo.load();
+      archiveImage.hidden = false;
+      archiveImage.src = thumb.dataset.src;
+      archiveImage.alt = thumb.dataset.alt;
+    }
     archiveTitle.textContent = thumb.dataset.title;
     archiveCategory.textContent = thumb.dataset.meta;
-    archiveCounter.textContent = `IMAGE ${String(activeArchiveIndex + 1).padStart(2, '0')} / ${String(visibleArchiveThumbs.length).padStart(2, '0')}`;
+    archiveCounter.textContent = `MEDIA ${String(activeArchiveIndex + 1).padStart(2, '0')} / ${String(visibleArchiveThumbs.length).padStart(2, '0')}`;
     archiveFrame.classList.remove('changing', 'scanning');
     void archiveFrame.offsetWidth;
     archiveFrame.classList.add('scanning');
@@ -248,7 +264,8 @@ archiveFilters.forEach((filter) => {
       item.setAttribute('aria-pressed', String(selected));
     });
     archiveThumbs.forEach((thumb) => {
-      thumb.hidden = category !== 'all' && thumb.dataset.category !== category;
+      const categories = thumb.dataset.category.split(' ');
+      thumb.hidden = category !== 'all' && !categories.includes(category);
     });
     visibleArchiveThumbs = archiveThumbs.filter((thumb) => !thumb.hidden);
     showArchiveImage(0);
