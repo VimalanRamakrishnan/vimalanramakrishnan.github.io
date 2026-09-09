@@ -6,7 +6,7 @@
     <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure software, networking and embedded-systems projects." />
     <meta name="theme-color" content="#050b19" />
     <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=11" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -116,16 +116,16 @@
             <button class="archive-filter" type="button" data-filter="hardware" aria-pressed="false">Hardware</button>
             <button class="archive-filter" type="button" data-filter="testing" aria-pressed="false">Testing</button>
             <button class="archive-filter" type="button" data-filter="dashboard" aria-pressed="false">Dashboard</button>
-            <button class="archive-filter" type="button" data-filter="design" aria-pressed="false">Design</button>
             <button class="archive-filter" type="button" data-filter="video" aria-pressed="false">Videos</button>
           </div>
           <div class="archive-shell">
             <div class="archive-viewer" tabindex="0" aria-label="Project evidence viewer. Use left and right arrow keys to navigate.">
               <div class="archive-frame" id="archive-frame">
-                <img id="archive-image" src="assets/fyp-gallery/01-fingerprint-lcd.webp" alt="Fingerprint sensor beside an LCD module">
-                <video id="archive-video" controls playsinline preload="metadata" hidden></video>
+                <img class="archive-backdrop" id="archive-backdrop" src="assets/fyp-gallery/01-fingerprint-lcd.webp" alt="" aria-hidden="true">
+                <img class="archive-media-main" id="archive-image" src="assets/fyp-gallery/01-fingerprint-lcd.webp" alt="Fingerprint sensor beside an LCD module">
+                <video class="archive-media-main" id="archive-video" controls playsinline preload="metadata" hidden></video>
                 <i class="archive-scan-line" aria-hidden="true"></i>
-                <span class="archive-counter" id="archive-counter" aria-live="polite">MEDIA 01 / 17</span>
+                <span class="archive-counter" id="archive-counter" aria-live="polite">MEDIA 01 / 15</span>
               </div>
               <div class="archive-caption">
                 <button id="archive-prev" type="button" aria-label="Previous project image">‹</button>
@@ -139,18 +139,16 @@
               <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/03-controller-wiring.webp" data-title="Controller wiring" data-meta="Hardware · Controller assembly" data-alt="Prototype controller wiring on a breadboard"><img src="assets/fyp-gallery/03-controller-wiring.webp" alt="" loading="lazy"><span>03</span></button>
               <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/04-complete-prototype.webp" data-title="Complete prototype" data-meta="Hardware · Complete system" data-alt="Complete biometric door access prototype with display and servo"><img src="assets/fyp-gallery/04-complete-prototype.webp" alt="" loading="lazy"><span>04</span></button>
               <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/09-successful-access-test.webp" data-title="Access granted" data-meta="Testing · Successful fingerprint authentication" data-alt="Fingerprint authentication granting access on the finished prototype"><img src="assets/fyp-gallery/09-successful-access-test.webp" alt="" loading="lazy"><span>05</span></button>
-              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/10-recognition-results.webp" data-title="Recognition results" data-meta="Testing · Performance results" data-alt="Table of fingerprint recognition testing results"><img src="assets/fyp-gallery/10-recognition-results.webp" alt="" loading="lazy"><span>06</span></button>
-              <button class="archive-thumb" type="button" data-category="dashboard" data-src="assets/fyp-gallery/11-web-dashboard.webp" data-title="Web dashboard" data-meta="Dashboard · Monitoring interface" data-alt="Web dashboard showing security status and incident records"><img src="assets/fyp-gallery/11-web-dashboard.webp" alt="" loading="lazy"><span>07</span></button>
-              <button class="archive-thumb" type="button" data-category="dashboard" data-src="assets/fyp-gallery/12-dashboard-camera-view.webp" data-title="Dashboard camera view" data-meta="Dashboard · Camera evidence" data-alt="Camera view panel inside the web dashboard"><img src="assets/fyp-gallery/12-dashboard-camera-view.webp" alt="" loading="lazy"><span>08</span></button>
-              <button class="archive-thumb" type="button" data-category="design" data-src="assets/fyp-gallery/13-system-code-overview.webp" data-title="System code overview" data-meta="Design · Firmware operation" data-alt="System code overview explaining monitoring and alerts"><img src="assets/fyp-gallery/13-system-code-overview.webp" alt="" loading="lazy"><span>09</span></button>
-              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/15-access-denied-test.webp" data-title="Access denied test" data-meta="Testing · Failure state" data-alt="Prototype showing an access denied test state"><img src="assets/fyp-gallery/15-access-denied-test.webp" alt="" loading="lazy"><span>10</span></button>
-              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/17-prototype-interior.webp" data-title="Prototype interior" data-meta="Hardware · Complete internal assembly" data-alt="Internal wiring and components inside the prototype enclosure"><img src="assets/fyp-gallery/17-prototype-interior.webp" alt="" loading="lazy"><span>11</span></button>
-              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/18-controller-and-relay.webp" data-title="LCD and sensor assembly" data-meta="Hardware · Internal component detail" data-alt="LCD, fingerprint sensor and supporting components mounted inside the enclosure"><img src="assets/fyp-gallery/18-controller-and-relay.webp" alt="" loading="lazy"><span>12</span></button>
-              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" data-title="Controller assembly" data-meta="Hardware · Camera and display wiring" data-alt="ESP32-CAM, LCD controller and fingerprint assembly inside the enclosure"><img src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" alt="" loading="lazy"><span>13</span></button>
-              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/20-prototype-exterior.webp" data-title="Finished enclosure" data-meta="Hardware · Exterior interface" data-alt="Finished biometric door access enclosure with camera, display and fingerprint sensor"><img src="assets/fyp-gallery/20-prototype-exterior.webp" alt="" loading="lazy"><span>14</span></button>
-              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/21-camera-controller.webp" data-title="ESP32-CAM controller" data-meta="Hardware · Camera control board" data-alt="ESP32 camera controller powered for testing"><img src="assets/fyp-gallery/21-camera-controller.webp" alt="" loading="lazy"><span>15</span></button>
-              <button class="archive-thumb video-thumb" type="button" data-type="video" data-category="testing video" data-src="assets/fyp-gallery/22-bench-test.mp4" data-poster="assets/fyp-gallery/22-bench-test-poster.webp" data-title="Development bench test" data-meta="Video · Early hardware integration" data-alt="Video of the biometric system during breadboard testing"><img src="assets/fyp-gallery/22-bench-test-poster.webp" alt="" loading="lazy"><span>▶ 16</span></button>
-              <button class="archive-thumb video-thumb" type="button" data-type="video" data-category="testing video" data-src="assets/fyp-gallery/23-system-ready.mp4" data-poster="assets/fyp-gallery/23-system-ready-poster.webp" data-title="System ready state" data-meta="Video · Finished prototype operation" data-alt="Video of the completed biometric system waiting for a fingerprint"><img src="assets/fyp-gallery/23-system-ready-poster.webp" alt="" loading="lazy"><span>▶ 17</span></button>
+              <button class="archive-thumb" type="button" data-category="dashboard" data-src="assets/fyp-gallery/11-web-dashboard.webp" data-title="Web dashboard" data-meta="Dashboard · Monitoring interface" data-alt="Web dashboard showing security status and incident records"><img src="assets/fyp-gallery/11-web-dashboard.webp" alt="" loading="lazy"><span>06</span></button>
+              <button class="archive-thumb" type="button" data-category="dashboard" data-src="assets/fyp-gallery/12-dashboard-camera-view.webp" data-title="Dashboard camera view" data-meta="Dashboard · Camera evidence" data-alt="Camera view panel inside the web dashboard"><img src="assets/fyp-gallery/12-dashboard-camera-view.webp" alt="" loading="lazy"><span>07</span></button>
+              <button class="archive-thumb" type="button" data-category="testing" data-src="assets/fyp-gallery/15-access-denied-test.webp" data-title="Access denied test" data-meta="Testing · Failure state" data-alt="Prototype showing an access denied test state"><img src="assets/fyp-gallery/15-access-denied-test.webp" alt="" loading="lazy"><span>08</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/17-prototype-interior.webp" data-title="Prototype interior" data-meta="Hardware · Complete internal assembly" data-alt="Internal wiring and components inside the prototype enclosure"><img src="assets/fyp-gallery/17-prototype-interior.webp" alt="" loading="lazy"><span>09</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/18-controller-and-relay.webp" data-title="LCD and sensor assembly" data-meta="Hardware · Internal component detail" data-alt="LCD, fingerprint sensor and supporting components mounted inside the enclosure"><img src="assets/fyp-gallery/18-controller-and-relay.webp" alt="" loading="lazy"><span>10</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" data-title="Controller assembly" data-meta="Hardware · Camera and display wiring" data-alt="ESP32-CAM, LCD controller and fingerprint assembly inside the enclosure"><img src="assets/fyp-gallery/19-esp32-cam-enclosure.webp" alt="" loading="lazy"><span>11</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/20-prototype-exterior.webp" data-title="Finished enclosure" data-meta="Hardware · Exterior interface" data-alt="Finished biometric door access enclosure with camera, display and fingerprint sensor"><img src="assets/fyp-gallery/20-prototype-exterior.webp" alt="" loading="lazy"><span>12</span></button>
+              <button class="archive-thumb" type="button" data-category="hardware" data-src="assets/fyp-gallery/21-camera-controller.webp" data-title="ESP32-CAM controller" data-meta="Hardware · Camera control board" data-alt="ESP32 camera controller powered for testing"><img src="assets/fyp-gallery/21-camera-controller.webp" alt="" loading="lazy"><span>13</span></button>
+              <button class="archive-thumb video-thumb" type="button" data-type="video" data-category="testing video" data-src="assets/fyp-gallery/22-bench-test.mp4" data-poster="assets/fyp-gallery/22-bench-test-poster.webp" data-title="Development bench test" data-meta="Video · Early hardware integration" data-alt="Video of the biometric system during breadboard testing"><img src="assets/fyp-gallery/22-bench-test-poster.webp" alt="" loading="lazy"><span>▶ 14</span></button>
+              <button class="archive-thumb video-thumb" type="button" data-type="video" data-category="testing video" data-src="assets/fyp-gallery/23-system-ready.mp4" data-poster="assets/fyp-gallery/23-system-ready-poster.webp" data-title="System ready state" data-meta="Video · Finished prototype operation" data-alt="Video of the completed biometric system waiting for a fingerprint"><img src="assets/fyp-gallery/23-system-ready-poster.webp" alt="" loading="lazy"><span>▶ 15</span></button>
             </div>
           </div>
         </div>
@@ -237,6 +235,6 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=11"></script>
   </body>
 </html>

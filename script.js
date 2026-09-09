@@ -198,6 +198,7 @@ clubhouseLink?.addEventListener('click', (event) => {
 
 const archiveViewer = document.querySelector('.archive-viewer');
 const archiveFrame = document.querySelector('#archive-frame');
+const archiveBackdrop = document.querySelector('#archive-backdrop');
 const archiveImage = document.querySelector('#archive-image');
 const archiveVideo = document.querySelector('#archive-video');
 const archiveTitle = document.querySelector('#archive-title');
@@ -225,6 +226,7 @@ function showArchiveImage(index, moveFocus = false) {
     const isVideo = thumb.dataset.type === 'video';
     archiveVideo.pause();
     if (isVideo) {
+      archiveBackdrop.src = thumb.dataset.poster;
       archiveImage.hidden = true;
       archiveVideo.hidden = false;
       archiveVideo.src = thumb.dataset.src;
@@ -232,6 +234,7 @@ function showArchiveImage(index, moveFocus = false) {
       archiveVideo.setAttribute('aria-label', thumb.dataset.alt);
       archiveVideo.load();
     } else {
+      archiveBackdrop.src = thumb.dataset.src;
       archiveVideo.hidden = true;
       archiveVideo.removeAttribute('src');
       archiveVideo.load();

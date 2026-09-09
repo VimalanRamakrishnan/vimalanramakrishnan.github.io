@@ -141,14 +141,15 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .archive-filter.active::after { transform: scaleX(1); }
 .archive-shell { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 1rem; }
 .archive-viewer { min-width: 0; overflow: hidden; border: 1px solid rgba(92,221,255,.2); border-radius: 18px; background: rgba(2,8,23,.72); }
-.archive-frame { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; overflow: hidden; background: radial-gradient(circle at 50% 45%, rgba(31,65,130,.28), transparent 62%), #020817; }
+.archive-frame { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; overflow: hidden; isolation: isolate; background: #020817; }
 .archive-frame::before, .archive-frame::after { content: ""; position: absolute; z-index: 2; width: 36px; height: 36px; border-color: rgba(92,221,255,.75); pointer-events: none; }
 .archive-frame::before { top: 1rem; left: 1rem; border-top: 2px solid; border-left: 2px solid; }
 .archive-frame::after { right: 1rem; bottom: 1rem; border-right: 2px solid; border-bottom: 2px solid; }
-.archive-frame > img, .archive-frame > video { width: 100%; height: 100%; object-fit: contain; background: #020817; transition: opacity .16s ease, transform .3s ease; }
-.archive-frame > video { position: absolute; inset: 0; z-index: 1; }
+.archive-frame > .archive-backdrop { position: absolute; z-index: 0; inset: -32px; width: calc(100% + 64px); height: calc(100% + 64px); object-fit: cover; opacity: .32; filter: blur(28px) saturate(.85) brightness(.62); transform: scale(1.08); }
+.archive-frame > .archive-media-main { position: relative; z-index: 1; width: auto !important; height: auto !important; max-width: calc(100% - 2rem); max-height: calc(100% - 2rem); object-fit: contain !important; background: transparent; filter: drop-shadow(0 14px 28px rgba(0,0,0,.38)); transition: opacity .16s ease, transform .3s ease; }
+.archive-frame > video.archive-media-main { position: absolute; inset: 1rem; width: calc(100% - 2rem) !important; height: calc(100% - 2rem) !important; max-width: none; max-height: none; background: rgba(2,8,23,.78); }
 .archive-frame > [hidden] { display: none; }
-.archive-frame.changing > img, .archive-frame.changing > video { opacity: .45; transform: scale(.985); }
+.archive-frame.changing > .archive-media-main { opacity: .45; transform: scale(.985); }
 .archive-scan-line { position: absolute; z-index: 3; top: -8%; right: 0; left: 0; height: 2px; opacity: 0; background: linear-gradient(90deg, transparent, rgba(92,221,255,.95), transparent); box-shadow: 0 0 22px rgba(92,221,255,.9), 0 10px 35px rgba(92,221,255,.18); pointer-events: none; }
 .archive-frame.scanning .archive-scan-line { animation: evidence-scan .72s ease-out; }
 .archive-counter { position: absolute; z-index: 4; right: 1rem; top: 1rem; padding: .42rem .6rem; border: 1px solid rgba(92,221,255,.26); border-radius: 7px; background: rgba(2,8,23,.82); color: var(--cyan); font: 700 .68rem/1.2 ui-monospace, monospace; backdrop-filter: blur(8px); }
@@ -162,7 +163,7 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .archive-thumb[hidden] { display: none; }
 .archive-thumb:hover { opacity: .9; transform: translateX(-2px); }
 .archive-thumb.active { opacity: 1; border-color: var(--cyan); box-shadow: inset 0 0 0 1px rgba(92,221,255,.36), 0 0 22px rgba(47,116,255,.18); }
-.archive-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.archive-thumb img { width: 100%; height: 100%; padding: .22rem; object-fit: contain; background: radial-gradient(circle, rgba(31,65,130,.36), #020817 72%); }
 .archive-thumb span { position: absolute; right: .45rem; bottom: .4rem; padding: .23rem .38rem; border-radius: 5px; background: rgba(2,8,23,.84); color: var(--cyan); font: 700 .64rem/1 ui-monospace, monospace; }
 .video-thumb::before { content: "VIDEO"; position: absolute; z-index: 2; top: .4rem; left: .4rem; padding: .22rem .35rem; border: 1px solid rgba(117,245,199,.35); border-radius: 5px; background: rgba(2,8,23,.86); color: #75f5c7; letter-spacing: .08em; font: 700 .58rem/1 ui-monospace, monospace; }
 @keyframes evidence-scan { 0% { top: -8%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: 108%; opacity: 0; } }
