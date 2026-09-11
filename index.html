@@ -6,7 +6,7 @@
     <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure software, networking and embedded-systems projects." />
     <meta name="theme-color" content="#050b19" />
     <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=15-collapsible-evidence" />
+    <link rel="stylesheet" href="styles.css?v=19-spaced-inside-about" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -65,9 +65,44 @@
         <div class="about-copy glass-panel">
           <p>I am a Bachelor of Computer Science (Computer Security) student at Universiti Teknikal Malaysia Melaka.</p>
           <p>My projects connect cybersecurity with software development, networking, and embedded systems. I enjoy understanding how technology behaves, where it can fail, and how to make it more dependable.</p>
-          <div class="principles">
-            <span>01 · Learn</span><span>02 · Analyze</span><span>03 · Build</span><span>04 · Protect</span>
+          <div class="principles" aria-label="Security lifecycle">
+            <article class="principle-card is-active" data-principle="0" tabindex="0">
+              <span class="principle-label"><b>01</b><strong>Learn</strong></span>
+              <span class="principle-scene learn-scene" aria-hidden="true">
+                <span class="mini-human learn-human"><i class="human-head"></i><i class="human-body"></i><i class="human-arm"></i></span>
+                <span class="learning-book"><i></i></span><span class="idea-spark">✦</span>
+              </span>
+            </article>
+            <article class="principle-card" data-principle="1" tabindex="0">
+              <span class="principle-label"><b>02</b><strong>Analyze</strong></span>
+              <span class="principle-scene analyze-scene" aria-hidden="true">
+                <span class="mini-human analyze-human"><i class="human-head"></i><i class="human-body"></i><i class="human-arm"></i></span>
+                <span class="magnifier"></span><span class="analysis-radar"><i></i><b></b></span>
+              </span>
+            </article>
+            <article class="principle-card" data-principle="2" tabindex="0">
+              <span class="principle-label"><b>03</b><strong>Build</strong></span>
+              <span class="principle-scene build-scene" aria-hidden="true">
+                <span class="mini-human build-human"><i class="human-head"></i><i class="human-body"></i><i class="human-arm"></i><i class="human-arm arm-two"></i></span>
+                <span class="build-terminal"><i></i><b></b></span>
+              </span>
+            </article>
+            <article class="principle-card" data-principle="3" tabindex="0">
+              <span class="principle-label"><b>04</b><strong>Protect</strong></span>
+              <span class="principle-scene protect-scene" aria-hidden="true">
+                <span class="mini-human protect-human"><i class="human-head"></i><i class="human-body"></i><i class="human-arm"></i></span>
+                <span class="protect-shield">✓</span><span class="threat-packets"><i></i><i></i><i></i></span>
+              </span>
+            </article>
           </div>
+        </div>
+        <div class="about-lifecycle" aria-label="My security lifecycle">
+          <div class="lifecycle-heading"><h3>My security lifecycle</h3><span id="lifecycle-status" aria-live="polite">Active stage · Learn</span></div>
+          <div class="lifecycle-track" aria-hidden="true">
+            <i></i><b id="lifecycle-packet"></b>
+            <span class="active">01<em>Learn</em></span><span>02<em>Analyze</em></span><span>03<em>Build</em></span><span>04<em>Protect</em></span>
+          </div>
+          <p id="lifecycle-detail"><strong>Learn —</strong> understand the system, its users, and its risks.</p>
         </div>
       </section>
 
@@ -464,6 +499,6 @@
       </div>
     </div>
 
-    <script src="script.js?v=15-collapsible-evidence"></script>
+    <script src="script.js?v=19-spaced-inside-about"></script>
   </body>
 </html>

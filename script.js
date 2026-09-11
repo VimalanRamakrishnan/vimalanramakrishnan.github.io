@@ -13,6 +13,33 @@ navigation?.querySelectorAll('a').forEach((link) => {
   });
 });
 
+// About lifecycle: every stage previews a distinct action on hover or keyboard focus.
+const principleCards = [...document.querySelectorAll('.principle-card')];
+const lifecycleStages = [...document.querySelectorAll('.lifecycle-track > span')];
+const lifecyclePacket = document.querySelector('#lifecycle-packet');
+const lifecycleStatus = document.querySelector('#lifecycle-status');
+const lifecycleDetail = document.querySelector('#lifecycle-detail');
+const lifecycleCopy = [
+  ['Learn', 'understand the system, its users, and its risks.'],
+  ['Analyze', 'trace behaviour, identify weak points, and validate evidence.'],
+  ['Build', 'turn findings into secure, dependable technical solutions.'],
+  ['Protect', 'verify controls, reduce exposure, and keep improving.']
+];
+
+function activatePrinciple(index) {
+  principleCards.forEach((card, cardIndex) => card.classList.toggle('is-active', cardIndex === index));
+  lifecycleStages.forEach((stage, stageIndex) => stage.classList.toggle('active', stageIndex === index));
+  if (lifecyclePacket) lifecyclePacket.style.left = `calc(${12.5 + index * 25}% - 5px)`;
+  if (lifecycleStatus) lifecycleStatus.textContent = `Active stage · ${lifecycleCopy[index][0]}`;
+  if (lifecycleDetail) lifecycleDetail.innerHTML = `<strong>${lifecycleCopy[index][0]} —</strong> ${lifecycleCopy[index][1]}`;
+}
+
+principleCards.forEach((card) => {
+  const activate = () => activatePrinciple(Number(card.dataset.principle));
+  card.addEventListener('mouseenter', activate);
+  card.addEventListener('focus', activate);
+});
+
 // Topic-specific toolkit previews: hover to preview, click to pin on touch devices.
 const skillCards = [...document.querySelectorAll('.skill-card')];
 
