@@ -13,6 +13,30 @@ navigation?.querySelectorAll('a').forEach((link) => {
   });
 });
 
+// Topic-specific toolkit previews: hover to preview, click to pin on touch devices.
+const skillCards = [...document.querySelectorAll('.skill-card')];
+
+function toggleSkillMotion(card) {
+  const willActivate = !card.classList.contains('motion-active');
+  skillCards.forEach((item) => {
+    item.classList.remove('motion-active');
+    item.setAttribute('aria-pressed', 'false');
+  });
+  if (willActivate) {
+    card.classList.add('motion-active');
+    card.setAttribute('aria-pressed', 'true');
+  }
+}
+
+skillCards.forEach((card) => {
+  card.addEventListener('click', () => toggleSkillMotion(card));
+  card.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    toggleSkillMotion(card);
+  });
+});
+
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 const exploreButton = document.querySelector('#explore-work');

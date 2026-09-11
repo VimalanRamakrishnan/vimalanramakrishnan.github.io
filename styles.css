@@ -120,7 +120,70 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .infrastructure-icon { --icon-accent: #72a6ff; }
 .embedded-icon { --icon-accent: #65efc4; }
 .skill-grid article:hover .skill-icon { border-color: var(--icon-accent); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 32px color-mix(in srgb, var(--icon-accent) 18%, transparent); animation: toolkit-icon-float 1.45s ease-in-out infinite; }
+.skill-card.motion-active .skill-icon { border-color: var(--icon-accent); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 32px color-mix(in srgb, var(--icon-accent) 18%, transparent); animation: toolkit-icon-float 1.45s ease-in-out infinite; }
 @keyframes toolkit-icon-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.skill-card { cursor: pointer; isolation: isolate; }
+.skill-card:focus-visible { outline: 2px solid var(--icon-accent, var(--cyan)); outline-offset: 4px; }
+.skill-motion { position: absolute; z-index: 2; top: 3.85rem; right: 5.65rem; left: 1.5rem; height: 43px; overflow: hidden; opacity: 0; color: var(--icon-accent); transform: translateY(6px); transition: opacity .2s ease, transform .28s ease; pointer-events: none; }
+.skill-card:hover .skill-motion, .skill-card.motion-active .skill-motion { opacity: 1; transform: translateY(0); }
+
+/* Programming: two live code statements type into the activity window. */
+.programming-card { --icon-accent: #5cddff; }
+.code-motion { display: grid; align-content: center; gap: .25rem; font: 700 .52rem/1 ui-monospace, monospace; }
+.code-motion > span { display: block; width: 0; overflow: hidden; color: #a9bad7; white-space: nowrap; }
+.code-motion > span b, .code-motion .code-bracket { color: #5cddff; font: inherit; }
+.code-motion > i { position: absolute; right: 0; bottom: 3px; width: 4px; height: 8px; background: #5cddff; opacity: 0; }
+.programming-card:hover .code-motion > span, .programming-card.motion-active .code-motion > span { animation: toolkit-code-type 2.2s steps(18,end) infinite; }
+.programming-card:hover .code-motion > span:nth-child(2), .programming-card.motion-active .code-motion > span:nth-child(2) { animation-delay: .35s; }
+.programming-card:hover .code-motion > i, .programming-card.motion-active .code-motion > i { animation: toolkit-cursor .7s steps(1,end) infinite; }
+
+/* Cybersecurity: a scanner sweeps three endpoints and confirms protection. */
+.security-card { --icon-accent: #9b82ff; }
+.cyber-motion { display: grid; grid-template-columns: repeat(3,9px) 1fr; align-items: center; gap: .42rem; }
+.cyber-motion > i { width: 8px; height: 8px; border: 1px solid #9b82ff; border-radius: 2px; background: rgba(155,130,255,.08); }
+.cyber-motion > span { align-self: start; grid-column: 1 / -1; color: #887bb6; letter-spacing: .08em; font: 750 .46rem/1 ui-monospace, monospace; }
+.cyber-motion > b { position: absolute; right: 0; top: 18px; color: #75f5c7; letter-spacing: .08em; font: 800 .47rem/1 ui-monospace, monospace; opacity: .25; }
+.cyber-motion::after { content: ""; position: absolute; top: 11px; bottom: 5px; left: -3px; width: 2px; background: #9b82ff; box-shadow: 0 0 10px rgba(155,130,255,.95); opacity: 0; }
+.security-card:hover .cyber-motion::after, .security-card.motion-active .cyber-motion::after { animation: toolkit-security-scan 1.6s ease-in-out infinite; }
+.security-card:hover .cyber-motion > i, .security-card.motion-active .cyber-motion > i { animation: toolkit-secure-node 1.6s ease-in-out infinite; }
+.security-card:hover .cyber-motion > i:nth-child(2), .security-card.motion-active .cyber-motion > i:nth-child(2) { animation-delay: .18s; }
+.security-card:hover .cyber-motion > i:nth-child(3), .security-card.motion-active .cyber-motion > i:nth-child(3) { animation-delay: .36s; }
+.security-card:hover .cyber-motion > b, .security-card.motion-active .cyber-motion > b { animation: toolkit-secure-label 1.6s ease-in-out infinite; }
+
+/* Infrastructure: a packet travels from client to DNS and the domain. */
+.infrastructure-card { --icon-accent: #72a6ff; }
+.network-motion { display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; gap: .3rem; }
+.network-motion > span { display: grid; place-items: center; min-width: 26px; height: 21px; padding: 0 .25rem; border: 1px solid rgba(114,166,255,.48); border-radius: 4px; background: #0a1833; color: #b9d2ff; font: 800 .44rem/1 ui-monospace, monospace; }
+.network-motion > i { height: 1px; background: rgba(114,166,255,.38); }
+.network-motion > b { position: absolute; left: 5px; top: 19px; width: 7px; height: 4px; border-radius: 99px; background: #72a6ff; box-shadow: 0 0 9px rgba(114,166,255,.9); opacity: 0; }
+.infrastructure-card:hover .network-motion > b, .infrastructure-card.motion-active .network-motion > b { animation: toolkit-network-packet 1.55s linear infinite; }
+.infrastructure-card:hover .network-motion > span, .infrastructure-card.motion-active .network-motion > span { animation: toolkit-network-node 1.55s ease-in-out infinite; }
+
+/* Embedded systems: the ESP32 chip emits timed circuit pulses. */
+.embedded-card { --icon-accent: #65efc4; }
+.circuit-motion { display: grid; place-items: center; }
+.circuit-motion > i { position: absolute; right: 0; left: 0; top: 21px; height: 1px; background: rgba(101,239,196,.34); }
+.circuit-motion > span { position: relative; z-index: 2; display: grid; place-items: center; width: 47px; height: 28px; border: 1px solid rgba(101,239,196,.62); border-radius: 5px; background: #09231f; color: #b6ffe8; letter-spacing: .04em; font: 800 .45rem/1 ui-monospace, monospace; }
+.circuit-motion > b { position: absolute; left: 0; top: 18px; width: 7px; height: 7px; border-radius: 50%; background: #65efc4; opacity: 0; box-shadow: 0 0 9px rgba(101,239,196,.9); }
+.circuit-motion > b:nth-of-type(2) { animation-delay: .45s !important; }
+.circuit-motion > b:nth-of-type(3) { animation-delay: .9s !important; }
+.circuit-motion > em { position: absolute; right: 0; bottom: 0; color: #65efc4; letter-spacing: .08em; font: 800 .43rem/1 ui-monospace, monospace; font-style: normal; opacity: .28; }
+.embedded-card:hover .circuit-motion > b, .embedded-card.motion-active .circuit-motion > b { animation: toolkit-circuit-pulse 1.35s linear infinite; }
+.embedded-card:hover .circuit-motion > b:nth-of-type(2), .embedded-card.motion-active .circuit-motion > b:nth-of-type(2) { animation-delay: .45s; }
+.embedded-card:hover .circuit-motion > b:nth-of-type(3), .embedded-card.motion-active .circuit-motion > b:nth-of-type(3) { animation-delay: .9s; }
+.embedded-card:hover .circuit-motion > span, .embedded-card.motion-active .circuit-motion > span { animation: toolkit-chip-live 1.35s ease-in-out infinite; }
+.embedded-card:hover .circuit-motion > em, .embedded-card.motion-active .circuit-motion > em { animation: toolkit-live-label 1.35s ease-in-out infinite; }
+
+@keyframes toolkit-code-type { 0%,12% { width: 0; opacity: .25; } 55%,82% { width: 100%; opacity: 1; } 100% { width: 100%; opacity: .15; } }
+@keyframes toolkit-cursor { 0%,49% { opacity: 1; } 50%,100% { opacity: .12; } }
+@keyframes toolkit-security-scan { 0% { left: -3px; opacity: 0; } 15%,80% { opacity: 1; } 100% { left: calc(100% + 2px); opacity: 0; } }
+@keyframes toolkit-secure-node { 0%,25%,100% { background: rgba(155,130,255,.08); box-shadow: none; } 48%,72% { background: #9b82ff; box-shadow: 0 0 9px rgba(155,130,255,.8); } }
+@keyframes toolkit-secure-label { 0%,50% { opacity: .2; } 72%,100% { opacity: 1; } }
+@keyframes toolkit-network-packet { 0% { left: 5px; opacity: 0; } 10%,90% { opacity: 1; } 100% { left: calc(100% - 10px); opacity: 0; } }
+@keyframes toolkit-network-node { 0%,100% { border-color: rgba(114,166,255,.35); } 50% { border-color: #72a6ff; box-shadow: 0 0 10px rgba(114,166,255,.16); } }
+@keyframes toolkit-circuit-pulse { 0% { left: 0; opacity: 0; } 12%,82% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
+@keyframes toolkit-chip-live { 0%,100% { box-shadow: none; } 50% { box-shadow: 0 0 15px rgba(101,239,196,.23); } }
+@keyframes toolkit-live-label { 0%,45% { opacity: .28; } 55%,100% { opacity: 1; } }
 .skill-grid h3 { margin: 4.5rem 0 .85rem; font-size: 1.35rem; letter-spacing: -.025em; }
 .skill-grid p { margin: 0; color: var(--muted); }
 
@@ -600,7 +663,7 @@ footer a { color: var(--text); text-decoration: none; }
   .skill-grid article { min-height: 205px; }
   .skill-icon { width: 52px; height: 52px; border-radius: 14px; }
   .skill-icon svg { width: 27px; height: 27px; }
-  .skill-grid h3 { margin-top: 3rem; }
+  .skill-grid h3 { margin-top: 4.5rem; }
   .project-number { margin-top: 3rem; }
   .smart-access-scene { grid-template-columns: 76px minmax(24px,1fr) 88px; gap: .3rem; min-height: 168px; padding: .75rem; }
   .fingerprint-trigger { width: 76px; min-height: 98px; }
@@ -905,4 +968,5 @@ html.camera-flashing::after {
 @media (prefers-reduced-motion: reduce) {
   html.camera-flashing::after { animation-duration: .12s; }
   .skill-grid article:hover .skill-icon { animation: none; }
+  .skill-card.motion-active .skill-icon, .skill-motion *, .skill-motion::after { animation: none !important; }
 }
