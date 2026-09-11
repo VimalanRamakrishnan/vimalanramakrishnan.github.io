@@ -289,45 +289,65 @@ archiveViewer?.addEventListener('keydown', (event) => {
   }
 });
 
-// Expandable Clubhouse project gallery
+// Expandable Clubhouse project filmstrip
 const clubhouseProjectCard = document.querySelector('.clubhouse-project-card');
 const clubhouseGalleryToggle = document.querySelector('#clubhouse-gallery-toggle');
 const clubhouseGalleryPanel = document.querySelector('#clubhouse-gallery-panel');
-const clubhouseGalleryViewer = document.querySelector('.clubhouse-gallery-viewer');
-const clubhouseGalleryFrame = document.querySelector('.clubhouse-gallery-frame');
-const clubhouseGalleryImage = document.querySelector('#clubhouse-gallery-image');
+const clubhouseFilmstrip = document.querySelector('.clubhouse-filmstrip');
+const clubhouseFilmstripViewport = document.querySelector('#clubhouse-filmstrip-viewport');
+const clubhouseFilmstripTrack = document.querySelector('#clubhouse-filmstrip-track');
+const clubhouseFilmstripSlides = [...document.querySelectorAll('.clubhouse-filmstrip-slide')];
+const clubhouseTimelineButtons = [...document.querySelectorAll('#clubhouse-filmstrip-timeline button')];
+const clubhouseFilmstripProgress = document.querySelector('#clubhouse-filmstrip-progress');
 const clubhouseGalleryCaption = document.querySelector('#clubhouse-gallery-caption');
 const clubhouseGalleryCount = document.querySelector('#clubhouse-gallery-count');
-const clubhouseGalleryThumbs = [...document.querySelectorAll('.clubhouse-gallery-thumb')];
+const clubhousePreviousButton = document.querySelector('#clubhouse-gallery-prev');
+const clubhouseNextButton = document.querySelector('#clubhouse-gallery-next');
 let clubhouseGalleryIndex = 0;
+let clubhouseTrackPosition = 0;
+let clubhouseDragStart = 0;
+let clubhouseDragDistance = 0;
+let clubhouseDragging = false;
 
-function showClubhouseGalleryImage(index, focusThumbnail = false) {
-  if (!clubhouseGalleryThumbs.length || !clubhouseGalleryImage) return;
-  clubhouseGalleryIndex = (index + clubhouseGalleryThumbs.length) % clubhouseGalleryThumbs.length;
-  const selectedThumb = clubhouseGalleryThumbs[clubhouseGalleryIndex];
-
-  clubhouseGalleryThumbs.forEach((thumb) => {
-    const selected = thumb === selectedThumb;
-    thumb.classList.toggle('active', selected);
-    if (selected) thumb.setAttribute('aria-current', 'true');
-    else thumb.removeAttribute('aria-current');
-  });
-
-  clubhouseGalleryFrame?.classList.add('changing');
-  window.setTimeout(() => {
-    clubhouseGalleryImage.src = selectedThumb.dataset.src;
-    clubhouseGalleryImage.alt = selectedThumb.dataset.alt;
-    clubhouseGalleryCaption.textContent = selectedThumb.dataset.title;
-    clubhouseGalleryCount.textContent = `${String(clubhouseGalleryIndex + 1).padStart(2, '0')} / ${String(clubhouseGalleryThumbs.length).padStart(2, '0')}`;
-    clubhouseGalleryFrame?.classList.remove('changing');
-    selectedThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    if (focusThumbnail) selectedThumb.focus({ preventScroll: true });
-  }, 130);
+function positionClubhouseFilmstrip(animate = true) {
+  const activeSlide = clubhouseFilmstripSlides[clubhouseGalleryIndex];
+  if (!activeSlide || !clubhouseFilmstripViewport || !clubhouseFilmstripTrack) return;
+  clubhouseFilmstripTrack.style.transition = animate ? '' : 'none';
+  clubhouseTrackPosition = (clubhouseFilmstripViewport.clientWidth / 2) - activeSlide.offsetLeft - (activeSlide.offsetWidth / 2);
+  clubhouseFilmstripTrack.style.transform = `translate3d(${clubhouseTrackPosition}px, 0, 0)`;
+  if (!animate) requestAnimationFrame(() => { clubhouseFilmstripTrack.style.transition = ''; });
 }
 
-clubhouseGalleryThumbs.forEach((thumb) => {
-  thumb.setAttribute('aria-label', `View ${thumb.dataset.title}`);
-  thumb.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryThumbs.indexOf(thumb)));
+function showClubhouseGalleryImage(index, focusTimeline = false) {
+  if (!clubhouseFilmstripSlides.length) return;
+  clubhouseGalleryIndex = Math.max(0, Math.min(index, clubhouseFilmstripSlides.length - 1));
+  const activeSlide = clubhouseFilmstripSlides[clubhouseGalleryIndex];
+
+  clubhouseFilmstripSlides.forEach((slide, slideIndex) => {
+    slide.classList.toggle('active', slideIndex === clubhouseGalleryIndex);
+  });
+  clubhouseTimelineButtons.forEach((button, buttonIndex) => {
+    const selected = buttonIndex === clubhouseGalleryIndex;
+    button.classList.toggle('active', selected);
+    if (selected) button.setAttribute('aria-current', 'true');
+    else button.removeAttribute('aria-current');
+  });
+
+  clubhouseGalleryCaption.textContent = activeSlide.dataset.title;
+  clubhouseGalleryCount.textContent = `${String(clubhouseGalleryIndex + 1).padStart(2, '0')} — ${String(clubhouseFilmstripSlides.length).padStart(2, '0')}`;
+  const progressRange = 100 - (100 / clubhouseFilmstripSlides.length);
+  clubhouseFilmstripProgress.style.width = `${(clubhouseGalleryIndex / (clubhouseFilmstripSlides.length - 1)) * progressRange}%`;
+  clubhousePreviousButton.disabled = clubhouseGalleryIndex === 0;
+  clubhouseNextButton.disabled = clubhouseGalleryIndex === clubhouseFilmstripSlides.length - 1;
+  positionClubhouseFilmstrip();
+
+  const activeTimelineButton = clubhouseTimelineButtons[clubhouseGalleryIndex];
+  activeTimelineButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  if (focusTimeline) activeTimelineButton?.focus({ preventScroll: true });
+}
+
+clubhouseTimelineButtons.forEach((button) => {
+  button.addEventListener('click', () => showClubhouseGalleryImage(Number(button.dataset.index)));
 });
 
 clubhouseGalleryToggle?.addEventListener('click', () => {
@@ -339,14 +359,17 @@ clubhouseGalleryToggle?.addEventListener('click', () => {
   if (toggleLabel) toggleLabel.textContent = opening ? 'HIDE PROJECT IMAGES' : 'VIEW PROJECT IMAGES';
 
   if (opening) {
-    window.setTimeout(() => clubhouseGalleryViewer?.focus({ preventScroll: true }), 500);
+    window.setTimeout(() => {
+      positionClubhouseFilmstrip(false);
+      clubhouseFilmstrip?.focus({ preventScroll: true });
+    }, 620);
   }
 });
 
-document.querySelector('#clubhouse-gallery-prev')?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex - 1));
-document.querySelector('#clubhouse-gallery-next')?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex + 1));
+clubhousePreviousButton?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex - 1));
+clubhouseNextButton?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex + 1));
 
-clubhouseGalleryViewer?.addEventListener('keydown', (event) => {
+clubhouseFilmstrip?.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowLeft') {
     event.preventDefault();
     showClubhouseGalleryImage(clubhouseGalleryIndex - 1);
@@ -355,4 +378,172 @@ clubhouseGalleryViewer?.addEventListener('keydown', (event) => {
     event.preventDefault();
     showClubhouseGalleryImage(clubhouseGalleryIndex + 1);
   }
+});
+
+clubhouseFilmstripViewport?.addEventListener('pointerdown', (event) => {
+  clubhouseDragging = true;
+  clubhouseDragStart = event.clientX;
+  clubhouseDragDistance = 0;
+  clubhouseFilmstripViewport.classList.add('dragging');
+  clubhouseFilmstripViewport.setPointerCapture(event.pointerId);
+});
+
+clubhouseFilmstripViewport?.addEventListener('pointermove', (event) => {
+  if (!clubhouseDragging) return;
+  clubhouseDragDistance = event.clientX - clubhouseDragStart;
+  clubhouseFilmstripTrack.style.transform = `translate3d(${clubhouseTrackPosition + clubhouseDragDistance}px, 0, 0)`;
+});
+
+function finishClubhouseDrag(event) {
+  if (!clubhouseDragging) return;
+  clubhouseDragging = false;
+  clubhouseFilmstripViewport.classList.remove('dragging');
+  if (event?.pointerId !== undefined && clubhouseFilmstripViewport.hasPointerCapture(event.pointerId)) {
+    clubhouseFilmstripViewport.releasePointerCapture(event.pointerId);
+  }
+  if (clubhouseDragDistance < -45) showClubhouseGalleryImage(clubhouseGalleryIndex + 1);
+  else if (clubhouseDragDistance > 45) showClubhouseGalleryImage(clubhouseGalleryIndex - 1);
+  else positionClubhouseFilmstrip();
+}
+
+clubhouseFilmstripViewport?.addEventListener('pointerup', finishClubhouseDrag);
+clubhouseFilmstripViewport?.addEventListener('pointercancel', finishClubhouseDrag);
+window.addEventListener('resize', () => positionClubhouseFilmstrip(false));
+showClubhouseGalleryImage(0);
+
+// DNS project resolver gallery
+const dnsProjectCard = document.querySelector('.dns-project-card');
+const dnsGalleryToggle = document.querySelector('#dns-gallery-toggle');
+const dnsGalleryPanel = document.querySelector('#dns-gallery-panel');
+const dnsGalleryConsole = document.querySelector('.dns-resolver-console');
+const dnsGalleryImageWrap = document.querySelector('.dns-gallery-image-wrap');
+const dnsGalleryImage = document.querySelector('#dns-gallery-image');
+const dnsGalleryCaption = document.querySelector('#dns-gallery-caption');
+const dnsGalleryCount = document.querySelector('#dns-gallery-count');
+const dnsQueryProgress = document.querySelector('#dns-query-progress');
+const dnsPreviousButton = document.querySelector('#dns-gallery-prev');
+const dnsNextButton = document.querySelector('#dns-gallery-next');
+const dnsStepButtons = [...document.querySelectorAll('#dns-step-buttons button')];
+const dnsGalleryItems = [
+  { src: 'assets/dns-gallery/01-dns-role-selection.png', title: 'Select the DNS Server role', alt: 'DNS Server role selected in Server Manager' },
+  { src: 'assets/dns-gallery/02-server-manager.png', title: 'Confirm DNS in Server Manager', alt: 'DNS role visible in the Server Manager dashboard' },
+  { src: 'assets/dns-gallery/03-new-zone-wizard.png', title: 'Open the New Zone Wizard', alt: 'New Zone Wizard welcome screen' },
+  { src: 'assets/dns-gallery/04-primary-zone.png', title: 'Create a primary forward zone', alt: 'Primary zone selected in the New Zone Wizard' },
+  { src: 'assets/dns-gallery/05-secure-updates.png', title: 'Apply secure dynamic updates', alt: 'Secure dynamic update option selected' },
+  { src: 'assets/dns-gallery/06-reverse-zone.png', title: 'Create an IPv4 reverse zone', alt: 'IPv4 reverse lookup zone selected' },
+  { src: 'assets/dns-gallery/07-cname-record.png', title: 'Open the CNAME record menu', alt: 'New Alias CNAME option in DNS Manager' }
+];
+let dnsGalleryIndex = 0;
+
+function showDnsGalleryItem(index, moveFocus = false) {
+  if (!dnsGalleryItems.length || !dnsGalleryImage) return;
+  dnsGalleryIndex = Math.max(0, Math.min(index, dnsGalleryItems.length - 1));
+  const item = dnsGalleryItems[dnsGalleryIndex];
+
+  dnsGalleryImageWrap?.classList.add('changing');
+  window.setTimeout(() => {
+    dnsGalleryImage.src = item.src;
+    dnsGalleryImage.alt = item.alt;
+    dnsGalleryCaption.textContent = item.title;
+    dnsGalleryCount.textContent = `STEP ${String(dnsGalleryIndex + 1).padStart(2, '0')} / ${String(dnsGalleryItems.length).padStart(2, '0')}`;
+    dnsQueryProgress.style.width = `${((dnsGalleryIndex + 1) / dnsGalleryItems.length) * 100}%`;
+    dnsGalleryImageWrap?.classList.remove('changing');
+    dnsGalleryImageWrap?.classList.remove('scanning');
+    void dnsGalleryImageWrap?.offsetWidth;
+    dnsGalleryImageWrap?.classList.add('scanning');
+  }, reducedMotion.matches ? 0 : 150);
+
+  dnsStepButtons.forEach((button, buttonIndex) => {
+    const selected = buttonIndex === dnsGalleryIndex;
+    button.classList.toggle('active', selected);
+    if (selected) button.setAttribute('aria-current', 'true');
+    else button.removeAttribute('aria-current');
+  });
+  dnsPreviousButton.disabled = dnsGalleryIndex === 0;
+  dnsNextButton.disabled = dnsGalleryIndex === dnsGalleryItems.length - 1;
+  if (moveFocus) dnsStepButtons[dnsGalleryIndex]?.focus({ preventScroll: true });
+}
+
+dnsGalleryToggle?.addEventListener('click', () => {
+  const opening = !dnsProjectCard.classList.contains('dns-open');
+  dnsProjectCard.classList.toggle('dns-open', opening);
+  dnsGalleryToggle.setAttribute('aria-expanded', String(opening));
+  dnsGalleryPanel.setAttribute('aria-hidden', String(!opening));
+  const label = dnsGalleryToggle.querySelector('b');
+  if (label) label.textContent = opening ? 'HIDE PROJECT IMAGES' : 'VIEW PROJECT IMAGES';
+  if (opening) window.setTimeout(() => dnsGalleryConsole?.focus({ preventScroll: true }), 620);
+});
+
+dnsStepButtons.forEach((button) => button.addEventListener('click', () => showDnsGalleryItem(Number(button.dataset.index), true)));
+dnsPreviousButton?.addEventListener('click', () => showDnsGalleryItem(dnsGalleryIndex - 1));
+dnsNextButton?.addEventListener('click', () => showDnsGalleryItem(dnsGalleryIndex + 1));
+dnsGalleryConsole?.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') { event.preventDefault(); showDnsGalleryItem(dnsGalleryIndex - 1, true); }
+  if (event.key === 'ArrowRight') { event.preventDefault(); showDnsGalleryItem(dnsGalleryIndex + 1, true); }
+});
+showDnsGalleryItem(0);
+
+// DNS repository resolution animation
+const dnsLink = document.querySelector('.dns-link');
+const dnsOverlay = document.querySelector('#dns-overlay');
+const dnsStatus = document.querySelector('#dns-status');
+const dnsSteps = [...document.querySelectorAll('#dns-overlay .dns-steps li')];
+let dnsAccessInProgress = false;
+let dnsTimers = [];
+
+function resetDnsAccess() {
+  dnsTimers.forEach((timer) => window.clearTimeout(timer));
+  dnsTimers = [];
+  dnsAccessInProgress = false;
+  dnsOverlay?.classList.remove('active', 'resolved');
+  dnsOverlay?.setAttribute('aria-hidden', 'true');
+  if (dnsStatus) dnsStatus.textContent = 'Connecting clients to DNS…';
+  dnsSteps.forEach((step) => {
+    step.classList.remove('running', 'done');
+    const state = step.querySelector('b');
+    if (state) state.textContent = 'WAIT';
+  });
+}
+
+window.addEventListener('pageshow', resetDnsAccess);
+
+dnsLink?.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (dnsAccessInProgress) return;
+  const destination = dnsLink.href;
+  const stepTime = reducedMotion.matches ? 120 : 560;
+  const finishTime = reducedMotion.matches ? 150 : 720;
+
+  resetDnsAccess();
+  dnsAccessInProgress = true;
+  dnsOverlay.classList.add('active');
+  dnsOverlay.setAttribute('aria-hidden', 'false');
+  dnsStatus.textContent = 'Connecting clients to DNS…';
+
+  dnsSteps.forEach((step, index) => {
+    dnsTimers.push(window.setTimeout(() => {
+      const previousStep = dnsSteps[index - 1];
+      if (previousStep) {
+        previousStep.classList.remove('running');
+        previousStep.classList.add('done');
+        previousStep.querySelector('b').textContent = 'OK';
+      }
+      step.classList.add('running');
+      step.querySelector('b').textContent = 'RUN';
+      dnsStatus.textContent = `${step.querySelector('span').textContent}…`;
+    }, index * stepTime));
+  });
+
+  dnsTimers.push(window.setTimeout(() => {
+    const finalStep = dnsSteps.at(-1);
+    finalStep.classList.remove('running');
+    finalStep.classList.add('done');
+    finalStep.querySelector('b').textContent = 'OK';
+    dnsOverlay.classList.add('resolved');
+    dnsStatus.textContent = 'Domain resolved · Opening repository';
+    dnsTimers.push(window.setTimeout(() => {
+      resetDnsAccess();
+      window.location.assign(destination);
+    }, finishTime));
+  }, dnsSteps.length * stepTime));
 });

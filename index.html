@@ -6,7 +6,7 @@
     <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure software, networking and embedded-systems projects." />
     <meta name="theme-color" content="#050b19" />
     <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=14" />
+    <link rel="stylesheet" href="styles.css?v=15-dns" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -188,45 +188,112 @@
               <div class="clubhouse-gallery-inner">
                 <div class="clubhouse-gallery-heading">
                   <div>
-                    <span class="clubhouse-gallery-kicker">APPLICATION WALKTHROUGH</span>
+                    <span class="clubhouse-gallery-kicker">PROJECT FILMSTRIP / 12 SCREENS</span>
                     <h4>Clubhouse system in action</h4>
                   </div>
-                  <span class="clubhouse-gallery-total">12 CONSOLE SCREENS</span>
+                  <span class="clubhouse-gallery-hint">DRAG · CLICK · USE ARROWS</span>
                 </div>
 
-                <div class="clubhouse-gallery-viewer" tabindex="0" aria-label="Clubhouse project image viewer. Use left and right arrow keys to navigate.">
-                  <div class="clubhouse-gallery-frame">
-                    <img id="clubhouse-gallery-image" src="assets/clubhouse-gallery/01-welcome-screen.png" alt="Clubhouse Management System welcome screen" />
-                    <span class="clubhouse-gallery-count" id="clubhouse-gallery-count">01 / 12</span>
-                    <span class="clubhouse-gallery-corner top" aria-hidden="true"></span>
-                    <span class="clubhouse-gallery-corner bottom" aria-hidden="true"></span>
+                <div class="clubhouse-filmstrip" tabindex="0" aria-label="Clubhouse project filmstrip. Use left and right arrow keys to navigate.">
+                  <div class="clubhouse-filmstrip-topbar" aria-hidden="true">
+                    <span><i></i><i></i><i></i></span>
+                    <b>CLUBHOUSE / CONSOLE CAPTURES</b>
+                    <em id="clubhouse-gallery-count">01 — 12</em>
                   </div>
-                  <div class="clubhouse-gallery-caption">
-                    <button id="clubhouse-gallery-prev" type="button" aria-label="Previous Clubhouse screenshot">←</button>
-                    <div><small>SCREEN DETAILS</small><h5 id="clubhouse-gallery-caption">Welcome and role selection</h5></div>
-                    <button id="clubhouse-gallery-next" type="button" aria-label="Next Clubhouse screenshot">→</button>
+                  <button class="filmstrip-arrow filmstrip-prev" id="clubhouse-gallery-prev" type="button" aria-label="Previous Clubhouse screenshot">←</button>
+                  <div class="clubhouse-filmstrip-viewport" id="clubhouse-filmstrip-viewport">
+                    <div class="clubhouse-filmstrip-track" id="clubhouse-filmstrip-track">
+                      <figure class="clubhouse-filmstrip-slide active" data-title="Welcome and role selection"><img src="assets/clubhouse-gallery/01-welcome-screen.png" alt="Clubhouse Management System welcome screen"><figcaption>01</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Administrator authentication"><img src="assets/clubhouse-gallery/02-admin-loading.png" alt="Administrator login loading screen" loading="lazy"><figcaption>02</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Facility management"><img src="assets/clubhouse-gallery/03-manage-facilities.png" alt="Facility list and management menu" loading="lazy"><figcaption>03</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Booking administration"><img src="assets/clubhouse-gallery/04-manage-bookings.png" alt="Booking history and management menu" loading="lazy"><figcaption>04</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Customer administration"><img src="assets/clubhouse-gallery/05-manage-customers.png" alt="Customer records and management menu using demo data" loading="lazy"><figcaption>05</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Sales reporting"><img src="assets/clubhouse-gallery/06-sales-report.png" alt="Clubhouse facility sales report" loading="lazy"><figcaption>06</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Input validation"><img src="assets/clubhouse-gallery/07-invalid-choice.png" alt="Invalid menu choice validation message" loading="lazy"><figcaption>07</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Customer registration"><img src="assets/clubhouse-gallery/08-customer-registration.png" alt="Customer registration and password validation using demo data" loading="lazy"><figcaption>08</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Facility selection"><img src="assets/clubhouse-gallery/09-facility-selection.png" alt="Daily facility availability and selection screen" loading="lazy"><figcaption>09</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Customer booking history"><img src="assets/clubhouse-gallery/10-booking-history.png" alt="Customer booking history and cancellation menu" loading="lazy"><figcaption>10</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Availability and booking summary"><img src="assets/clubhouse-gallery/11-booking-summary.png" alt="Availability calculation and completed booking summary" loading="lazy"><figcaption>11</figcaption></figure>
+                      <figure class="clubhouse-filmstrip-slide" data-title="Generated booking receipt"><img src="assets/clubhouse-gallery/12-booking-receipt.png" alt="Generated Clubhouse booking receipt using demo data" loading="lazy"><figcaption>12</figcaption></figure>
+                    </div>
                   </div>
-                </div>
-
-                <div class="clubhouse-gallery-thumbs" aria-label="Choose a Clubhouse screenshot">
-                  <button class="clubhouse-gallery-thumb active" type="button" data-src="assets/clubhouse-gallery/01-welcome-screen.png" data-title="Welcome and role selection" data-alt="Clubhouse Management System welcome screen" aria-current="true"><img src="assets/clubhouse-gallery/01-welcome-screen.png" alt="" loading="lazy"><span>01</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/02-admin-loading.png" data-title="Administrator authentication" data-alt="Administrator login loading screen"><img src="assets/clubhouse-gallery/02-admin-loading.png" alt="" loading="lazy"><span>02</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/03-manage-facilities.png" data-title="Facility management" data-alt="Facility list and management menu"><img src="assets/clubhouse-gallery/03-manage-facilities.png" alt="" loading="lazy"><span>03</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/04-manage-bookings.png" data-title="Booking administration" data-alt="Booking history and management menu"><img src="assets/clubhouse-gallery/04-manage-bookings.png" alt="" loading="lazy"><span>04</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/05-manage-customers.png" data-title="Customer administration" data-alt="Customer records and management menu using demo data"><img src="assets/clubhouse-gallery/05-manage-customers.png" alt="" loading="lazy"><span>05</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/06-sales-report.png" data-title="Sales reporting" data-alt="Clubhouse facility sales report"><img src="assets/clubhouse-gallery/06-sales-report.png" alt="" loading="lazy"><span>06</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/07-invalid-choice.png" data-title="Input validation" data-alt="Invalid menu choice validation message"><img src="assets/clubhouse-gallery/07-invalid-choice.png" alt="" loading="lazy"><span>07</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/08-customer-registration.png" data-title="Customer registration" data-alt="Customer registration and password validation using demo data"><img src="assets/clubhouse-gallery/08-customer-registration.png" alt="" loading="lazy"><span>08</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/09-facility-selection.png" data-title="Facility selection" data-alt="Daily facility availability and selection screen"><img src="assets/clubhouse-gallery/09-facility-selection.png" alt="" loading="lazy"><span>09</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/10-booking-history.png" data-title="Customer booking history" data-alt="Customer booking history and cancellation menu"><img src="assets/clubhouse-gallery/10-booking-history.png" alt="" loading="lazy"><span>10</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/11-booking-summary.png" data-title="Availability and booking summary" data-alt="Availability calculation and completed booking summary"><img src="assets/clubhouse-gallery/11-booking-summary.png" alt="" loading="lazy"><span>11</span></button>
-                  <button class="clubhouse-gallery-thumb" type="button" data-src="assets/clubhouse-gallery/12-booking-receipt.png" data-title="Generated booking receipt" data-alt="Generated Clubhouse booking receipt using demo data"><img src="assets/clubhouse-gallery/12-booking-receipt.png" alt="" loading="lazy"><span>12</span></button>
+                  <button class="filmstrip-arrow filmstrip-next" id="clubhouse-gallery-next" type="button" aria-label="Next Clubhouse screenshot">→</button>
+                  <div class="clubhouse-filmstrip-caption">
+                    <span>NOW SHOWING</span>
+                    <h5 id="clubhouse-gallery-caption">Welcome and role selection</h5>
+                  </div>
+                  <div class="clubhouse-filmstrip-timeline" id="clubhouse-filmstrip-timeline" aria-label="Choose a Clubhouse screenshot">
+                    <span class="clubhouse-filmstrip-progress" id="clubhouse-filmstrip-progress" aria-hidden="true"></span>
+                    <button class="active" type="button" data-index="0" aria-label="View screen 1: Welcome and role selection" aria-current="true"><i></i><span>01</span></button>
+                    <button type="button" data-index="1" aria-label="View screen 2: Administrator authentication"><i></i><span>02</span></button>
+                    <button type="button" data-index="2" aria-label="View screen 3: Facility management"><i></i><span>03</span></button>
+                    <button type="button" data-index="3" aria-label="View screen 4: Booking administration"><i></i><span>04</span></button>
+                    <button type="button" data-index="4" aria-label="View screen 5: Customer administration"><i></i><span>05</span></button>
+                    <button type="button" data-index="5" aria-label="View screen 6: Sales reporting"><i></i><span>06</span></button>
+                    <button type="button" data-index="6" aria-label="View screen 7: Input validation"><i></i><span>07</span></button>
+                    <button type="button" data-index="7" aria-label="View screen 8: Customer registration"><i></i><span>08</span></button>
+                    <button type="button" data-index="8" aria-label="View screen 9: Facility selection"><i></i><span>09</span></button>
+                    <button type="button" data-index="9" aria-label="View screen 10: Customer booking history"><i></i><span>10</span></button>
+                    <button type="button" data-index="10" aria-label="View screen 11: Availability and booking summary"><i></i><span>11</span></button>
+                    <button type="button" data-index="11" aria-label="View screen 12: Generated booking receipt"><i></i><span>12</span></button>
+                  </div>
                 </div>
               </div>
             </div>
           </article>
           <article class="glass-panel"><p>03 / Web security</p><h3>VAPT University Lab</h3><span>Sanitized write-up in preparation</span></article>
-          <article class="glass-panel"><p>04 / Windows Server</p><h3>Active Directory &amp; DNS</h3><span>Documentation in preparation</span></article>
+          <article class="glass-panel completed-project dns-project-card">
+            <p>04 / Windows Server</p>
+            <div class="dns-domain-map" aria-label="Three client computers connect through DNS to the lab domain">
+              <div class="dns-client-stack">
+                <span><i></i><b>PC 01</b><small>JOINED</small></span>
+                <span><i></i><b>PC 02</b><small>JOINED</small></span>
+                <span><i></i><b>PC 03</b><small>JOINED</small></span>
+              </div>
+              <div class="dns-link-lines" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+              <div class="dns-server-stack">
+                <span class="dns-service-node"><small>PORT 53</small><b>DNS</b><em>RESOLVER</em></span>
+                <span class="ad-service-node"><small>DIRECTORY</small><b>AD DS</b><em>CONTROLLER</em></span>
+              </div>
+              <div class="dns-domain-line" aria-hidden="true"><i><b></b></i></div>
+              <div class="dns-domain-node"><i></i><b>LAB DOMAIN</b><small>DOMAIN CONNECTED</small></div>
+            </div>
+            <h3>Active Directory &amp; DNS Lab</h3>
+            <span>A Windows Server lab covering DNS role deployment, forward and reverse lookup zones, resource records, and client-to-domain connectivity.</span>
+            <div class="compact-tags" aria-label="Project technologies"><span>Windows Server</span><span>DNS</span><span>Networking</span></div>
+            <div class="dns-project-actions">
+              <button class="dns-gallery-toggle" id="dns-gallery-toggle" type="button" aria-expanded="false" aria-controls="dns-gallery-panel">
+                <span class="dns-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span><small>DNS EVIDENCE</small><b>VIEW PROJECT IMAGES</b></span>
+                <em aria-hidden="true">↓</em>
+              </button>
+              <a class="compact-project-link dns-link" href="https://github.com/VimalanRamakrishnan/active-directory-dns-lab">View repository <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="dns-gallery-panel" id="dns-gallery-panel" aria-hidden="true">
+              <div class="dns-gallery-inner">
+                <div class="dns-gallery-heading">
+                  <div><span>DNS RESOLUTION ARCHIVE / 07 STEPS</span><h4>From server role to resolved record</h4></div>
+                  <p>REFERENCE INTERFACE · SANITIZED</p>
+                </div>
+                <div class="dns-resolver-console" tabindex="0" aria-label="DNS project image viewer. Use left and right arrow keys to navigate.">
+                  <div class="dns-resolver-head"><span><i></i> DNS MANAGER TRACE</span><b id="dns-gallery-count">STEP 01 / 07</b></div>
+                  <div class="dns-query-path" aria-hidden="true"><span>CLIENT</span><i></i><span>RESOLVER</span><i></i><span>ZONE</span><i></i><span>ANSWER</span><b id="dns-query-progress"></b></div>
+                  <div class="dns-gallery-stage">
+                    <button id="dns-gallery-prev" type="button" aria-label="Previous DNS screenshot">‹</button>
+                    <div class="dns-gallery-image-wrap"><img id="dns-gallery-image" src="assets/dns-gallery/01-dns-role-selection.png" alt="DNS Server role selected in Server Manager"><i class="dns-scan" aria-hidden="true"></i></div>
+                    <button id="dns-gallery-next" type="button" aria-label="Next DNS screenshot">›</button>
+                  </div>
+                  <div class="dns-gallery-footer">
+                    <div><small>NOW RESOLVING</small><h5 id="dns-gallery-caption">Select the DNS Server role</h5></div>
+                    <div class="dns-step-buttons" id="dns-step-buttons" aria-label="Choose a DNS setup step">
+                      <button class="active" type="button" data-index="0" aria-current="true" aria-label="View DNS step 1">01</button><button type="button" data-index="1" aria-label="View DNS step 2">02</button><button type="button" data-index="2" aria-label="View DNS step 3">03</button><button type="button" data-index="3" aria-label="View DNS step 4">04</button><button type="button" data-index="4" aria-label="View DNS step 5">05</button><button type="button" data-index="5" aria-label="View DNS step 6">06</button><button type="button" data-index="6" aria-label="View DNS step 7">07</button>
+                    </div>
+                  </div>
+                </div>
+                <p class="dns-reference-note">These sanitized Windows Server screens are temporary interface references from a senior's logbook, not proof of my own execution. They will be replaced with original lab evidence when available.</p>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -299,6 +366,25 @@
       </div>
     </div>
 
-    <script src="script.js?v=14"></script>
+    <div class="secure-overlay dns-overlay" id="dns-overlay" aria-hidden="true">
+      <div class="secure-console dns-console" role="status" aria-live="polite">
+        <div class="console-head"><span>DNS RESOLUTION GATE</span><span class="console-code">DNS://53</span></div>
+        <div class="dns-overlay-network" aria-hidden="true">
+          <span class="dns-overlay-clients"><i>PC1</i><i>PC2</i><i>PC3</i></span>
+          <b class="dns-overlay-route"><i></i></b>
+          <span class="node dns-server-node">DNS</span>
+          <b class="dns-overlay-route"><i></i></b>
+          <span class="node dns-domain-end">AD</span>
+        </div>
+        <ol class="handshake-steps dns-steps">
+          <li><i></i><span>Receiving client domain query</span><b>WAIT</b></li>
+          <li><i></i><span>Resolving the domain controller</span><b>WAIT</b></li>
+          <li><i></i><span>Opening the project repository</span><b>WAIT</b></li>
+        </ol>
+        <p class="secure-status" id="dns-status">Connecting clients to DNS…</p>
+      </div>
+    </div>
+
+    <script src="script.js?v=15-dns"></script>
   </body>
 </html>
