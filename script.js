@@ -307,8 +307,27 @@ const archiveCategory = document.querySelector('#archive-category');
 const archiveCounter = document.querySelector('#archive-counter');
 const archiveThumbs = [...document.querySelectorAll('.archive-thumb')];
 const archiveFilters = [...document.querySelectorAll('.archive-filter')];
+const evidenceDisclosure = document.querySelector('#evidence-disclosure');
+const evidenceGalleryToggle = document.querySelector('#evidence-gallery-toggle');
+const evidenceGalleryPanel = document.querySelector('#evidence-gallery-panel');
 let visibleArchiveThumbs = [...archiveThumbs];
 let activeArchiveIndex = 0;
+
+function setEvidenceGallery(opening) {
+  evidenceDisclosure?.classList.toggle('evidence-open', opening);
+  evidenceGalleryToggle?.setAttribute('aria-expanded', String(opening));
+  evidenceGalleryPanel?.setAttribute('aria-hidden', String(!opening));
+  if (evidenceGalleryPanel) evidenceGalleryPanel.inert = !opening;
+  const label = evidenceGalleryToggle?.querySelector('.evidence-toggle-copy b');
+  if (label) label.textContent = opening ? 'HIDE PROJECT EVIDENCE' : 'VIEW PROJECT EVIDENCE';
+  if (!opening) archiveVideo?.pause();
+}
+
+evidenceGalleryToggle?.addEventListener('click', () => {
+  setEvidenceGallery(!evidenceDisclosure?.classList.contains('evidence-open'));
+});
+
+window.addEventListener('pageshow', () => setEvidenceGallery(false));
 
 function showArchiveImage(index, moveFocus = false) {
   if (!visibleArchiveThumbs.length) return;
