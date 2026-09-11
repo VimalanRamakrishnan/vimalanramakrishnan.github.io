@@ -289,6 +289,79 @@ archiveViewer?.addEventListener('keydown', (event) => {
   }
 });
 
+// Interactive Clubhouse booking demonstration
+const facilityButtons = [...document.querySelectorAll('#facility-picker button')];
+const demoFacility = document.querySelector('#demo-facility');
+const demoRate = document.querySelector('#demo-rate');
+const demoCapacity = document.querySelector('#demo-capacity');
+const demoBookButton = document.querySelector('#demo-book-button');
+const demoBookButtonLabel = demoBookButton?.querySelector('span');
+const demoReceipt = document.querySelector('#booking-demo-receipt');
+const demoReceiptId = document.querySelector('#demo-receipt-id');
+const receiptFacility = document.querySelector('#receipt-facility');
+const receiptTotal = document.querySelector('#receipt-total');
+const demoBookAgain = document.querySelector('#demo-book-again');
+let selectedFacility = facilityButtons[0]?.dataset;
+let demoBookingNumber = 1;
+let demoBookingTimers = [];
+
+function clearDemoBookingTimers() {
+  demoBookingTimers.forEach((timer) => window.clearTimeout(timer));
+  demoBookingTimers = [];
+}
+
+function resetDemoReceipt() {
+  clearDemoBookingTimers();
+  demoBookButton?.classList.remove('processing', 'confirmed');
+  demoReceipt?.classList.remove('confirmed');
+  demoReceipt?.setAttribute('aria-hidden', 'true');
+  if (demoBookButtonLabel) demoBookButtonLabel.textContent = 'CREATE DEMO BOOKING';
+}
+
+function selectDemoFacility(button) {
+  selectedFacility = button.dataset;
+  facilityButtons.forEach((item) => {
+    const selected = item === button;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-pressed', String(selected));
+  });
+  if (demoFacility) demoFacility.textContent = selectedFacility.name;
+  if (demoRate) demoRate.textContent = `RM${selectedFacility.rate}`;
+  if (demoCapacity) demoCapacity.textContent = selectedFacility.capacity;
+  resetDemoReceipt();
+}
+
+facilityButtons.forEach((button) => button.addEventListener('click', () => selectDemoFacility(button)));
+
+demoBookButton?.addEventListener('click', () => {
+  if (!selectedFacility || demoBookButton.classList.contains('processing')) return;
+  resetDemoReceipt();
+  demoBookButton.classList.add('processing');
+  demoBookButtonLabel.textContent = 'CHECKING AVAILABILITY';
+  const firstDelay = reducedMotion.matches ? 100 : 480;
+  const confirmDelay = reducedMotion.matches ? 200 : 950;
+
+  demoBookingTimers.push(window.setTimeout(() => {
+    demoBookButtonLabel.textContent = 'RESERVING SAMPLE SLOT';
+  }, firstDelay));
+
+  demoBookingTimers.push(window.setTimeout(() => {
+    const bookingId = `CMS-${String(demoBookingNumber).padStart(4, '0')}`;
+    demoBookingNumber += 1;
+    demoBookButton.classList.remove('processing');
+    demoBookButton.classList.add('confirmed');
+    demoBookButtonLabel.textContent = 'BOOKING CONFIRMED';
+    demoReceiptId.textContent = bookingId;
+    receiptFacility.textContent = selectedFacility.name;
+    receiptTotal.textContent = `RM${selectedFacility.rate}`;
+    demoReceipt.classList.add('confirmed');
+    demoReceipt.setAttribute('aria-hidden', 'false');
+  }, confirmDelay));
+});
+
+demoBookAgain?.addEventListener('click', resetDemoReceipt);
+window.addEventListener('pageshow', resetDemoReceipt);
+
 // Expandable Clubhouse project filmstrip
 const clubhouseProjectCard = document.querySelector('.clubhouse-project-card');
 const clubhouseGalleryToggle = document.querySelector('#clubhouse-gallery-toggle');
@@ -359,12 +432,25 @@ clubhouseGalleryToggle?.addEventListener('click', () => {
   if (toggleLabel) toggleLabel.textContent = opening ? 'HIDE PROJECT IMAGES' : 'VIEW PROJECT IMAGES';
 
   if (opening) {
-    window.setTimeout(() => {
+    requestAnimationFrame(() => {
       positionClubhouseFilmstrip(false);
-      clubhouseFilmstrip?.focus({ preventScroll: true });
-    }, 620);
+      requestAnimationFrame(() => positionClubhouseFilmstrip(false));
+    });
   }
 });
+
+// Warm the first gallery frames during browser idle time so the drawer opens cleanly.
+const preloadClubhouseGallery = () => {
+  clubhouseFilmstripSlides.slice(0, 4).forEach((slide) => {
+    const source = slide.querySelector('img')?.currentSrc || slide.querySelector('img')?.src;
+    if (!source) return;
+    const image = new Image();
+    image.src = source;
+  });
+};
+
+if ('requestIdleCallback' in window) window.requestIdleCallback(preloadClubhouseGallery, { timeout: 900 });
+else window.setTimeout(preloadClubhouseGallery, 180);
 
 clubhousePreviousButton?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex - 1));
 clubhouseNextButton?.addEventListener('click', () => showClubhouseGalleryImage(clubhouseGalleryIndex + 1));

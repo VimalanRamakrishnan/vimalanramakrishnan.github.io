@@ -189,6 +189,50 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .compact-project-link { display: inline-flex; gap: .45rem; margin-top: 1.35rem; color: var(--text); font-weight: 760; text-decoration-color: var(--cyan); text-underline-offset: .3rem; }
 .compact-project-link:hover { color: var(--cyan); }
 
+/* Interactive Clubhouse booking demo */
+.clubhouse-booking-demo { margin-top: 1.35rem; overflow: hidden; border: 1px solid rgba(92,221,255,.23); border-radius: 12px; background: linear-gradient(150deg, rgba(3,13,30,.9), rgba(7,26,54,.82)); box-shadow: inset 0 1px rgba(255,255,255,.03); }
+.booking-demo-head { display: flex; align-items: center; justify-content: space-between; gap: .8rem; min-height: 40px; padding: 0 .8rem; border-bottom: 1px solid rgba(92,221,255,.14); background: rgba(6,20,43,.88); color: #a9bce0; letter-spacing: .08em; font: 700 .58rem/1 ui-monospace, monospace; }
+.booking-demo-head > span { display: flex; align-items: center; gap: .5rem; }
+.booking-demo-head i { width: 7px; height: 7px; border-radius: 50%; background: #75f5c7; box-shadow: 0 0 10px rgba(117,245,199,.7); animation: booking-led 1.5s ease-in-out infinite alternate; }
+.booking-demo-head b { padding: .25rem .4rem; border: 1px solid rgba(118,87,255,.35); border-radius: 4px; color: #b8aaff; font-size: .52rem; }
+.clubhouse-booking-demo .booking-demo-instruction { margin: 0 !important; padding: .75rem .8rem .1rem; color: #8294b5 !important; text-transform: none !important; letter-spacing: 0 !important; font: 500 .72rem/1.45 ui-monospace, monospace !important; }
+.facility-picker { display: grid; grid-template-columns: repeat(3,1fr); gap: .45rem; padding: .65rem .8rem; }
+.facility-picker button { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: .42rem; min-width: 0; padding: .48rem; border: 1px solid rgba(118,137,255,.2); border-radius: 8px; background: rgba(13,30,63,.7); color: #9cadcb; text-align: left; cursor: pointer; transition: transform .2s ease, color .2s ease, border-color .2s ease, background .2s ease; }
+.facility-picker button:hover { transform: translateY(-2px); border-color: rgba(92,221,255,.5); color: #e5f4ff; }
+.facility-picker button.active { border-color: rgba(92,221,255,.7); background: rgba(21,61,94,.72); color: #f2f8ff; box-shadow: inset 0 0 0 1px rgba(92,221,255,.1), 0 0 18px rgba(92,221,255,.08); }
+.facility-picker button i { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid rgba(92,221,255,.3); border-radius: 6px; color: var(--cyan); font: 800 .54rem/1 ui-monospace, monospace; font-style: normal; }
+.facility-picker button span { overflow: hidden; color: inherit !important; font: 700 .59rem/1.2 ui-monospace, monospace; text-overflow: ellipsis; }
+.booking-demo-readout { display: grid; grid-template-columns: 1.35fr 1fr .72fr; margin: 0 .8rem .75rem; border: 1px solid rgba(125,147,197,.16); border-radius: 8px; background: rgba(2,8,23,.55); }
+.booking-demo-readout > div { min-width: 0; padding: .62rem .65rem; border-right: 1px solid rgba(125,147,197,.13); }
+.booking-demo-readout > div:last-child { border-right: 0; }
+.booking-demo-readout small { display: block; margin-bottom: .3rem; color: #687a9a; letter-spacing: .08em; font: 700 .48rem/1 ui-monospace, monospace; }
+.booking-demo-readout strong { display: block; overflow: hidden; color: #d9e7f8; font: 750 .68rem/1.2 ui-monospace, monospace; text-overflow: ellipsis; white-space: nowrap; }
+.demo-book-button { position: relative; display: flex; align-items: center; justify-content: space-between; width: calc(100% - 1.6rem); min-height: 42px; margin: 0 .8rem .8rem; padding: 0 .85rem; overflow: hidden; border: 1px solid rgba(92,221,255,.42); border-radius: 8px; background: linear-gradient(90deg, rgba(15,62,99,.9), rgba(30,45,102,.9)); color: #e8f5ff; cursor: pointer; letter-spacing: .07em; font: 800 .62rem/1 ui-monospace, monospace; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.demo-book-button:hover { transform: translateY(-2px); border-color: var(--cyan); box-shadow: 0 10px 26px rgba(2,8,23,.32); }
+.demo-book-button::before { content: ""; position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, rgba(92,221,255,.06), rgba(92,221,255,.28)); }
+.demo-book-button.processing { pointer-events: none; }
+.demo-book-button.processing::before { animation: booking-progress .9s ease forwards; }
+.demo-book-button.confirmed { border-color: rgba(117,245,199,.55); background: rgba(23,94,76,.42); color: #92ffd8; }
+.demo-book-button > span, .demo-book-button > i { position: relative; z-index: 2; color: inherit !important; }
+.demo-book-button > i { font-size: 1rem; font-style: normal; }
+.booking-demo-receipt { display: grid; grid-template-rows: 0fr; padding: 0 .8rem; opacity: 0; transform: translateY(-8px); transition: grid-template-rows .45s cubic-bezier(.2,.75,.2,1), opacity .25s ease, transform .35s ease, padding .35s ease; }
+.booking-demo-receipt > * { min-height: 0; overflow: hidden; }
+.booking-demo-receipt.confirmed { grid-template-rows: auto auto auto; padding-bottom: .8rem; opacity: 1; transform: translateY(0); }
+.booking-demo-receipt > div:first-child { display: flex; align-items: center; gap: .7rem; padding: .7rem; border: 1px solid rgba(117,245,199,.24); border-radius: 8px 8px 0 0; background: rgba(25,91,73,.18); }
+.receipt-check { display: grid; flex: 0 0 34px; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(117,245,199,.48); border-radius: 50%; color: #75f5c7 !important; font-weight: 900; box-shadow: 0 0 18px rgba(117,245,199,.12); }
+.booking-demo-receipt p { display: grid; gap: .25rem; margin: 0 !important; color: inherit !important; text-transform: none !important; letter-spacing: 0 !important; font: inherit !important; }
+.booking-demo-receipt p small { color: #75f5c7; letter-spacing: .1em; font: 700 .52rem/1 ui-monospace, monospace; }
+.booking-demo-receipt p strong { color: #e4f8f0; font: 800 .72rem/1 ui-monospace, monospace; }
+.booking-demo-receipt dl { display: grid; grid-template-columns: 1.3fr 1fr .8fr; margin: 0; border: 1px solid rgba(117,245,199,.17); border-top: 0; }
+.booking-demo-receipt dl > div { min-width: 0; padding: .58rem; border-right: 1px solid rgba(117,245,199,.13); }
+.booking-demo-receipt dl > div:last-child { border-right: 0; }
+.booking-demo-receipt dt { margin-bottom: .25rem; color: #667c86; font: 700 .47rem/1 ui-monospace, monospace; }
+.booking-demo-receipt dd { margin: 0; overflow: hidden; color: #cfe7df; font: 700 .59rem/1.2 ui-monospace, monospace; text-overflow: ellipsis; white-space: nowrap; }
+.booking-demo-receipt > button { padding: .6rem; border: 1px solid rgba(117,245,199,.18); border-top: 0; border-radius: 0 0 8px 8px; background: transparent; color: #8eb9ad; cursor: pointer; font: 700 .55rem/1 ui-monospace, monospace; }
+.booking-demo-receipt > button:hover { color: #75f5c7; }
+@keyframes booking-led { from { opacity: .45; } to { opacity: 1; } }
+@keyframes booking-progress { from { width: 0; } to { width: 100%; } }
+
 /* Clubhouse project filmstrip */
 .upcoming-grid .clubhouse-project-card { transition: transform .25s ease, border-color .25s ease, box-shadow .35s ease; }
 .upcoming-grid .clubhouse-project-card.gallery-open { grid-column: 1 / -1; transform: none; border-color: rgba(92,221,255,.42); box-shadow: 0 24px 70px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.035); }
@@ -511,6 +555,14 @@ footer a { color: var(--text); text-decoration: none; }
   .archive-caption button { width: 38px; height: 38px; }
   .archive-counter { top: .7rem; right: .7rem; }
   .clubhouse-project-actions { align-items: stretch; flex-direction: column; }
+  .facility-picker { grid-template-columns: 1fr; }
+  .facility-picker button { grid-template-columns: 32px 1fr; }
+  .booking-demo-readout { grid-template-columns: 1fr 1fr; }
+  .booking-demo-readout > div:nth-child(2) { border-right: 0; }
+  .booking-demo-readout > div:last-child { grid-column: 1 / -1; border-top: 1px solid rgba(125,147,197,.13); }
+  .booking-demo-receipt dl { grid-template-columns: 1fr; }
+  .booking-demo-receipt dl > div { border-right: 0; border-bottom: 1px solid rgba(117,245,199,.13); }
+  .booking-demo-receipt dl > div:last-child { border-bottom: 0; }
   .clubhouse-gallery-toggle { width: 100%; min-width: 0; }
   .clubhouse-project-actions .compact-project-link { align-self: flex-start; }
   .clubhouse-gallery-heading { align-items: flex-start; flex-direction: column; }
@@ -558,4 +610,125 @@ footer a { color: var(--text); text-decoration: none; }
   *, *::before, *::after { transition: none !important; }
   .scan-line, .scan-progress i, .archive-scan-line { animation-duration: .01ms !important; }
   .connection-line b, .handshake-steps li.running i { animation-duration: .01ms !important; }
+}
+
+/* Clubhouse identity: midnight navy, warm gold and meaningful success green */
+.clubhouse-project-card {
+  --club-gold: #f4bd67;
+  --club-gold-soft: #ffe2a8;
+  --club-gold-border: rgba(244,189,103,.46);
+  --club-panel: #091326;
+}
+.clubhouse-project-card .clubhouse-booking-demo {
+  border-color: rgba(244,189,103,.28);
+  background: linear-gradient(145deg, rgba(8,16,32,.97), rgba(18,27,48,.94));
+  box-shadow: inset 0 1px rgba(255,226,168,.045), 0 14px 34px rgba(0,0,0,.16);
+}
+.clubhouse-project-card .booking-demo-head {
+  border-color: rgba(244,189,103,.18);
+  background: rgba(8,17,34,.94);
+}
+.clubhouse-project-card .booking-demo-head b {
+  border-color: rgba(244,189,103,.38);
+  color: var(--club-gold-soft);
+}
+.clubhouse-project-card .facility-picker button:hover {
+  border-color: var(--club-gold-border);
+  color: #fff7e8;
+}
+.clubhouse-project-card .facility-picker button.active {
+  border-color: rgba(244,189,103,.76);
+  background: linear-gradient(145deg, rgba(85,59,27,.72), rgba(35,35,53,.88));
+  color: #fff8ea;
+  box-shadow: inset 0 0 0 1px rgba(255,226,168,.08), 0 0 20px rgba(244,189,103,.08);
+}
+.clubhouse-project-card .facility-picker button i {
+  border-color: rgba(244,189,103,.38);
+  color: var(--club-gold);
+}
+.clubhouse-project-card .demo-book-button:not(.confirmed) {
+  border-color: rgba(244,189,103,.52);
+  background: linear-gradient(90deg, rgba(91,59,25,.92), rgba(56,40,34,.94));
+  color: #fff0cf;
+}
+.clubhouse-project-card .demo-book-button:not(.confirmed):hover {
+  border-color: var(--club-gold);
+  box-shadow: 0 10px 28px rgba(244,189,103,.12);
+}
+.clubhouse-project-card .demo-book-button::before {
+  background: linear-gradient(90deg, rgba(255,226,168,.04), rgba(244,189,103,.28));
+}
+.upcoming-grid .clubhouse-project-card.gallery-open {
+  border-color: rgba(244,189,103,.45);
+}
+.clubhouse-project-card .clubhouse-gallery-toggle {
+  border-color: rgba(244,189,103,.34);
+  background: linear-gradient(135deg, #091326, #171a2c);
+}
+.clubhouse-project-card .clubhouse-gallery-toggle:hover {
+  border-color: rgba(244,189,103,.82);
+  box-shadow: 0 12px 34px rgba(0,0,0,.32), 0 0 24px rgba(244,189,103,.06);
+}
+.clubhouse-project-card .clubhouse-toggle-symbol {
+  border-color: rgba(244,189,103,.46);
+  background: rgba(244,189,103,.07);
+}
+.clubhouse-project-card .clubhouse-toggle-symbol i,
+.clubhouse-project-card .clubhouse-filmstrip-topbar i {
+  background: var(--club-gold);
+}
+.clubhouse-project-card .clubhouse-toggle-copy b,
+.clubhouse-project-card .clubhouse-toggle-arrow,
+.clubhouse-project-card .clubhouse-gallery-kicker,
+.clubhouse-project-card .clubhouse-filmstrip-topbar em,
+.clubhouse-project-card .clubhouse-filmstrip-caption span,
+.clubhouse-project-card .clubhouse-filmstrip-timeline button.active {
+  color: var(--club-gold);
+}
+.clubhouse-project-card.gallery-open .clubhouse-toggle-arrow {
+  background: rgba(244,189,103,.1);
+}
+.clubhouse-gallery-panel {
+  transition: grid-template-rows .36s cubic-bezier(.22,.78,.2,1), opacity .2s ease, transform .3s cubic-bezier(.22,.78,.2,1);
+  will-change: grid-template-rows, opacity, transform;
+}
+.clubhouse-project-card .clubhouse-gallery-heading {
+  border-color: rgba(244,189,103,.2);
+}
+.clubhouse-project-card .clubhouse-filmstrip {
+  border-color: rgba(244,189,103,.3);
+}
+.clubhouse-project-card .clubhouse-filmstrip-topbar,
+.clubhouse-project-card .clubhouse-filmstrip-caption {
+  border-color: rgba(244,189,103,.18);
+  background: var(--club-panel);
+}
+.clubhouse-project-card .clubhouse-filmstrip-slide.active {
+  border-color: rgba(244,189,103,.68);
+  box-shadow: 0 18px 48px rgba(0,0,0,.42), 0 0 0 1px rgba(244,189,103,.14);
+}
+.clubhouse-project-card .clubhouse-filmstrip-slide figcaption,
+.clubhouse-project-card .filmstrip-arrow {
+  border-color: rgba(244,189,103,.45);
+}
+.clubhouse-project-card .clubhouse-filmstrip-slide figcaption {
+  color: var(--club-gold);
+}
+.clubhouse-project-card .filmstrip-arrow:hover {
+  border-color: var(--club-gold);
+  color: var(--club-gold);
+}
+.clubhouse-project-card .clubhouse-filmstrip-progress {
+  background: linear-gradient(90deg, var(--club-gold), #fff0c7);
+  box-shadow: 0 0 12px rgba(244,189,103,.38);
+}
+.clubhouse-project-card .clubhouse-filmstrip-timeline button:hover i,
+.clubhouse-project-card .clubhouse-filmstrip-timeline button.active i {
+  border-color: var(--club-gold);
+  background: var(--club-gold);
+  box-shadow: 0 0 0 4px rgba(244,189,103,.1), 0 0 14px rgba(244,189,103,.34);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clubhouse-gallery-panel { transition: none; }
 }
