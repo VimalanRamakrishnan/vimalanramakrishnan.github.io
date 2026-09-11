@@ -51,6 +51,83 @@ exploreButton?.addEventListener('click', (event) => {
   }, scanTime);
 });
 
+// Interactive smart-door demonstration in the featured fingerprint project.
+const smartAccessDemo = document.querySelector('#smart-access-demo');
+const fingerprintTrigger = document.querySelector('#fingerprint-trigger');
+const smartAccessState = document.querySelector('#smart-access-state');
+const smartAccessMessage = document.querySelector('#smart-access-message');
+const smartAccessEvent = document.querySelector('#smart-access-event');
+let smartAccessTimers = [];
+let smartAccessRunning = false;
+
+function resetSmartAccessDemo() {
+  smartAccessTimers.forEach((timer) => window.clearTimeout(timer));
+  smartAccessTimers = [];
+  smartAccessRunning = false;
+  document.documentElement.classList.remove('camera-flashing');
+  smartAccessDemo?.classList.remove('scanning', 'authorized', 'capturing', 'captured', 'relocking');
+  if (smartAccessState) smartAccessState.textContent = 'READY';
+  if (smartAccessMessage) smartAccessMessage.textContent = 'Touch the fingerprint sensor';
+  if (smartAccessEvent) smartAccessEvent.textContent = 'NO EVENT';
+  if (fingerprintTrigger) fingerprintTrigger.disabled = false;
+}
+
+fingerprintTrigger?.addEventListener('click', () => {
+  if (smartAccessRunning) return;
+  resetSmartAccessDemo();
+  smartAccessRunning = true;
+  fingerprintTrigger.disabled = true;
+  smartAccessDemo.classList.add('scanning');
+  smartAccessState.textContent = 'SCANNING';
+  smartAccessMessage.textContent = 'Matching fingerprint…';
+  smartAccessEvent.textContent = 'AUTH / 01';
+
+  const scanStep = reducedMotion.matches ? 120 : 680;
+  const captureStep = reducedMotion.matches ? 140 : 1180;
+  const loggedStep = reducedMotion.matches ? 180 : 1580;
+  const relockStep = reducedMotion.matches ? 260 : 3100;
+  const resetStep = reducedMotion.matches ? 420 : 3900;
+
+  smartAccessTimers.push(window.setTimeout(() => {
+    smartAccessDemo.classList.remove('scanning');
+    smartAccessDemo.classList.add('authorized');
+    smartAccessState.textContent = 'GRANTED';
+    smartAccessMessage.textContent = 'Identity verified · Door unlocked';
+    smartAccessEvent.textContent = 'SERVO / OPEN';
+  }, scanStep));
+
+  smartAccessTimers.push(window.setTimeout(() => {
+    smartAccessDemo.classList.add('capturing');
+    document.documentElement.classList.remove('camera-flashing');
+    void document.documentElement.offsetWidth;
+    document.documentElement.classList.add('camera-flashing');
+    smartAccessState.textContent = 'CAPTURE';
+    smartAccessMessage.textContent = 'ESP32-CAM capturing access image…';
+    smartAccessEvent.textContent = 'FLASH / ON';
+  }, captureStep));
+
+  smartAccessTimers.push(window.setTimeout(() => {
+    smartAccessDemo.classList.remove('capturing');
+    smartAccessDemo.classList.add('captured');
+    document.documentElement.classList.remove('camera-flashing');
+    smartAccessState.textContent = 'LOGGED';
+    smartAccessMessage.textContent = 'Access image captured and event recorded';
+    smartAccessEvent.textContent = 'IMAGE / 001';
+  }, loggedStep));
+
+  smartAccessTimers.push(window.setTimeout(() => {
+    smartAccessDemo.classList.remove('authorized');
+    smartAccessDemo.classList.add('relocking');
+    smartAccessState.textContent = 'RELOCKING';
+    smartAccessMessage.textContent = 'Door closing automatically…';
+    smartAccessEvent.textContent = 'SERVO / CLOSE';
+  }, relockStep));
+
+  smartAccessTimers.push(window.setTimeout(resetSmartAccessDemo, resetStep));
+});
+
+window.addEventListener('pageshow', resetSmartAccessDemo);
+
 const secureLinks = document.querySelectorAll('.secure-link');
 const secureOverlay = document.querySelector('#secure-overlay');
 const secureStatus = document.querySelector('#secure-status');

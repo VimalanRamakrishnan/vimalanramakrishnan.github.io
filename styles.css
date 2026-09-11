@@ -110,7 +110,7 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 
 .skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .skill-grid article { position: relative; min-height: 255px; padding: 1.5rem; overflow: hidden; border-radius: 18px; transition: transform .25s ease, border-color .25s ease, background .25s ease; }
-.skill-grid article:hover { transform: translateY(-6px); border-color: rgba(92,221,255,.38); background: linear-gradient(145deg, rgba(31,58,118,.76), rgba(12,26,57,.55)); }
+.skill-grid article:hover { transform: none; border-color: rgba(92,221,255,.38); background: linear-gradient(145deg, rgba(31,58,118,.76), rgba(12,26,57,.55)); }
 .skill-grid article > span { color: var(--cyan); font: 700 .75rem/1 ui-monospace, monospace; }
 .skill-icon { --icon-accent: var(--cyan); position: absolute; top: 1.2rem; right: 1.2rem; display: grid; place-items: center; width: 58px; height: 58px; border: 1px solid color-mix(in srgb, var(--icon-accent) 42%, transparent); border-radius: 16px; background: color-mix(in srgb, var(--icon-accent) 8%, rgba(7,17,38,.72)); color: var(--icon-accent) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 26px rgba(0,0,0,.16); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
 .skill-icon::after { content: ""; position: absolute; width: 28px; height: 1px; right: 42px; bottom: -8px; opacity: .45; background: linear-gradient(90deg, transparent, var(--icon-accent)); transform: rotate(-36deg); transform-origin: right; }
@@ -119,7 +119,8 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .security-icon { --icon-accent: #9b82ff; }
 .infrastructure-icon { --icon-accent: #72a6ff; }
 .embedded-icon { --icon-accent: #65efc4; }
-.skill-grid article:hover .skill-icon { transform: translateY(-3px) rotate(2deg); border-color: var(--icon-accent); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 32px color-mix(in srgb, var(--icon-accent) 18%, transparent); }
+.skill-grid article:hover .skill-icon { border-color: var(--icon-accent); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 32px color-mix(in srgb, var(--icon-accent) 18%, transparent); animation: toolkit-icon-float 1.45s ease-in-out infinite; }
+@keyframes toolkit-icon-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 .skill-grid h3 { margin: 4.5rem 0 .85rem; font-size: 1.35rem; letter-spacing: -.025em; }
 .skill-grid p { margin: 0; color: var(--muted); }
 
@@ -138,6 +139,60 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .project-specs p { margin: 0; color: #c6d2e9; }
 .tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
 .tag-row span { padding: .42rem .62rem; border: 1px solid rgba(118,137,255,.3); border-radius: 999px; background: rgba(72,75,194,.1); }
+
+/* Interactive fingerprint, smart door and ESP32-CAM sequence */
+.project-specs > div.smart-access-demo { display: block; grid-template-columns: none; margin-top: 1.35rem; padding: 0; overflow: hidden; border: 1px solid rgba(92,221,255,.28); border-radius: 13px; background: linear-gradient(145deg, rgba(3,13,30,.96), rgba(9,30,55,.9)); box-shadow: inset 0 1px rgba(255,255,255,.035), 0 18px 36px rgba(0,0,0,.18); }
+.smart-access-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; min-height: 38px; padding: 0 .75rem; border-bottom: 1px solid rgba(92,221,255,.16); background: rgba(4,15,33,.92); }
+.smart-access-head > span { display: flex; align-items: center; gap: .45rem; color: #9bb2d7; letter-spacing: .1em; font: 750 .56rem/1 ui-monospace, monospace; }
+.smart-access-head > span i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px rgba(92,221,255,.6); }
+.smart-access-head > b { padding: .25rem .4rem; border: 1px solid rgba(92,221,255,.28); border-radius: 4px; color: var(--cyan); letter-spacing: .08em; font: 800 .52rem/1 ui-monospace, monospace; }
+.smart-access-scene { position: relative; display: grid; grid-template-columns: 92px minmax(40px,1fr) 112px; align-items: center; gap: .55rem; min-height: 185px; padding: 1rem; overflow: hidden; perspective: 700px; }
+.smart-access-scene::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(92,221,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(92,221,255,.035) 1px, transparent 1px); background-size: 24px 24px; mask-image: linear-gradient(to bottom, rgba(0,0,0,.82), transparent); pointer-events: none; }
+.fingerprint-trigger { position: relative; z-index: 2; display: grid; place-items: center; gap: .42rem; width: 90px; min-height: 108px; padding: .7rem .35rem; overflow: hidden; border: 1px solid rgba(92,221,255,.42); border-radius: 12px; background: rgba(6,25,49,.9); color: var(--cyan); cursor: pointer; box-shadow: inset 0 0 18px rgba(92,221,255,.04); transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+.fingerprint-trigger:hover { transform: translateY(-2px); border-color: var(--cyan); background: rgba(9,39,68,.94); box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 0 20px rgba(92,221,255,.08); }
+.fingerprint-trigger:disabled { cursor: default; }
+.fingerprint-trigger svg { width: 47px; height: 47px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fingerprint-trigger > span { padding: 0; border: 0; background: transparent; color: inherit; letter-spacing: .08em; font: 800 .5rem/1.2 ui-monospace, monospace; }
+.fingerprint-scan-line { position: absolute; top: -8px; right: 9px; left: 9px; height: 2px; background: #75f5c7; box-shadow: 0 0 12px #75f5c7; opacity: 0; }
+.smart-access-demo.scanning .fingerprint-trigger { border-color: #75f5c7; color: #75f5c7; box-shadow: 0 0 24px rgba(117,245,199,.12), inset 0 0 18px rgba(117,245,199,.05); }
+.smart-access-demo.scanning .fingerprint-scan-line { opacity: 1; animation: smart-fingerprint-scan .62s ease-in-out infinite alternate; }
+.access-signal { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-around; min-width: 0; }
+.access-signal::before { content: ""; position: absolute; right: 0; left: 0; height: 1px; background: rgba(92,221,255,.25); }
+.access-signal i { position: relative; width: 6px; height: 6px; border: 1px solid rgba(92,221,255,.6); border-radius: 50%; background: #07182e; }
+.smart-access-demo.scanning .access-signal i { animation: smart-signal 1s ease-in-out infinite; }
+.smart-access-demo.scanning .access-signal i:nth-child(2) { animation-delay: .15s; }
+.smart-access-demo.scanning .access-signal i:nth-child(3) { animation-delay: .3s; }
+.door-system { position: relative; z-index: 2; justify-self: end; width: 108px; }
+.camera-module { position: relative; z-index: 5; display: flex; align-items: center; gap: .4rem; width: 95px; min-height: 34px; margin: 0 auto -1px; padding: .35rem .45rem; border: 1px solid rgba(118,137,255,.35); border-radius: 7px 7px 3px 3px; background: #0d1a37; }
+.camera-module > b { color: #9eb2da; letter-spacing: .04em; font: 750 .45rem/1 ui-monospace, monospace; }
+.camera-lens { display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 1px solid rgba(92,221,255,.55); border-radius: 50%; background: #020817; }
+.camera-lens i { width: 7px; height: 7px; border-radius: 50%; background: #5cddff; box-shadow: 0 0 8px rgba(92,221,255,.7); }
+.door-frame { position: relative; width: 96px; height: 116px; margin: 0 auto; overflow: hidden; border: 3px solid #24385b; border-bottom-width: 5px; border-radius: 3px 3px 1px 1px; background: #03101e; transform-style: preserve-3d; }
+.door-interior { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at center, rgba(117,245,199,.16), rgba(3,13,25,.95) 66%); }
+.door-interior > span { padding: 0; border: 0; background: transparent; color: #75f5c7; text-align: center; letter-spacing: .12em; font: 800 .5rem/1.5 ui-monospace, monospace; opacity: .4; }
+.door-panel { position: absolute; z-index: 3; inset: 0; display: grid; place-items: center; background: linear-gradient(120deg, #142b4f, #0b1b36 70%); border-right: 1px solid rgba(92,221,255,.28); transform-origin: left center; transform: rotateY(0); transition: transform .72s cubic-bezier(.2,.78,.2,1), box-shadow .5s ease; backface-visibility: hidden; }
+.door-panel::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(92,221,255,.1); }
+.door-panel > i { position: absolute; right: 9px; width: 7px; height: 7px; border-radius: 50%; background: #ff768b; box-shadow: 0 0 8px rgba(255,118,139,.6); }
+.door-panel > span { padding: .25rem .35rem; border: 1px solid rgba(255,118,139,.35); border-radius: 4px; background: rgba(2,8,23,.48); color: #ff9bab; letter-spacing: .08em; font: 800 .45rem/1 ui-monospace, monospace; transition: color .25s ease, border-color .25s ease; }
+.smart-access-demo.authorized .door-panel { transform: rotateY(-76deg); box-shadow: 14px 0 28px rgba(0,0,0,.42); }
+.smart-access-demo.authorized .door-panel > i { background: #75f5c7; box-shadow: 0 0 9px rgba(117,245,199,.8); }
+.smart-access-demo.authorized .door-panel > span { border-color: rgba(117,245,199,.4); color: #75f5c7; }
+.smart-access-demo.relocking .door-panel { transform: rotateY(0); transition-duration: .62s; }
+.camera-flash { position: absolute; z-index: 10; inset: 0; border-radius: 8px; background: white; opacity: 0; pointer-events: none; }
+.smart-access-demo.capturing .camera-flash { animation: smart-camera-flash .42s ease-out; }
+.smart-access-demo.capturing .camera-lens { border-color: #fff4c9; box-shadow: 0 0 18px rgba(255,240,185,.82); }
+.smart-access-demo.captured .camera-module { border-color: rgba(117,245,199,.5); }
+.smart-access-demo.captured .camera-lens i { background: #75f5c7; box-shadow: 0 0 9px rgba(117,245,199,.8); }
+.smart-access-demo.authorized .smart-access-head > b,
+.smart-access-demo.captured .smart-access-head > b { border-color: rgba(117,245,199,.4); color: #75f5c7; }
+.smart-access-feed { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: .65rem; min-height: 42px; padding: .65rem .75rem; border-top: 1px solid rgba(92,221,255,.14); background: rgba(3,13,29,.78); }
+.smart-access-feed > span { overflow: hidden; padding: 0; border: 0; background: transparent; color: #aebddb; font: 650 .58rem/1.35 ui-monospace, monospace; text-overflow: ellipsis; white-space: nowrap; }
+.smart-access-feed > b { color: #7186a9; letter-spacing: .06em; font: 750 .5rem/1 ui-monospace, monospace; white-space: nowrap; }
+.smart-access-demo.authorized .smart-access-feed > b,
+.smart-access-demo.captured .smart-access-feed > b { color: #75f5c7; }
+@keyframes smart-fingerprint-scan { from { top: 12px; } to { top: calc(100% - 14px); } }
+@keyframes smart-signal { 0%,100% { background: #07182e; box-shadow: none; } 50% { background: #75f5c7; border-color: #75f5c7; box-shadow: 0 0 10px rgba(117,245,199,.9); } }
+@keyframes smart-camera-flash { 0% { opacity: 0; } 16% { opacity: .94; } 32% { opacity: .08; } 48% { opacity: .72; } 100% { opacity: 0; } }
 .project-gallery-block { margin-top: 1.5rem; padding: clamp(1.3rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: 24px; background: rgba(7,17,38,.52); }
 .gallery-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.4rem; }
 .gallery-heading h3 { margin: .35rem 0 0; font-size: clamp(1.65rem, 3vw, 2.4rem); }
@@ -547,6 +602,15 @@ footer a { color: var(--text); text-decoration: none; }
   .skill-icon svg { width: 27px; height: 27px; }
   .skill-grid h3 { margin-top: 3rem; }
   .project-number { margin-top: 3rem; }
+  .smart-access-scene { grid-template-columns: 76px minmax(24px,1fr) 88px; gap: .3rem; min-height: 168px; padding: .75rem; }
+  .fingerprint-trigger { width: 76px; min-height: 98px; }
+  .fingerprint-trigger svg { width: 40px; height: 40px; }
+  .door-system { width: 88px; }
+  .camera-module { width: 84px; padding-inline: .3rem; }
+  .camera-module > b { font-size: .4rem; }
+  .door-frame { width: 82px; height: 105px; }
+  .smart-access-feed { grid-template-columns: 1fr; gap: .25rem; }
+  .smart-access-feed > span { white-space: normal; }
   .gallery-heading { align-items: flex-start; flex-direction: column; }
   .project-gallery-block { padding: 1rem; }
   .archive-tabs { margin-right: -1rem; }
@@ -610,6 +674,7 @@ footer a { color: var(--text); text-decoration: none; }
   *, *::before, *::after { transition: none !important; }
   .scan-line, .scan-progress i, .archive-scan-line { animation-duration: .01ms !important; }
   .connection-line b, .handshake-steps li.running i { animation-duration: .01ms !important; }
+  .fingerprint-scan-line, .access-signal i, .camera-flash { animation-duration: .01ms !important; }
 }
 
 /* Clubhouse identity: midnight navy, warm gold and meaningful success green */
@@ -731,4 +796,113 @@ footer a { color: var(--text); text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .clubhouse-gallery-panel { transition: none; }
+}
+
+/* Fingerprint identity: ember-orange access controls with warm camera optics */
+.smart-access-demo {
+  --access-ember: #ff8a3d;
+  --access-ember-soft: #ffd2b3;
+  --camera-amber: #ffd166;
+}
+.project-specs > div.smart-access-demo {
+  border-color: rgba(255,138,61,.46);
+  background: linear-gradient(145deg, rgba(24,12,10,.97), rgba(48,23,17,.92));
+  box-shadow: inset 0 1px rgba(255,210,179,.06), 0 18px 38px rgba(0,0,0,.22);
+}
+.smart-access-head {
+  border-color: rgba(255,138,61,.22);
+  background: rgba(25,12,11,.95);
+}
+.smart-access-head > span i {
+  background: var(--access-ember);
+  box-shadow: 0 0 11px rgba(255,138,61,.78);
+}
+.smart-access-head > b {
+  border-color: rgba(255,138,61,.44);
+  color: var(--access-ember-soft);
+}
+.smart-access-scene::before {
+  background: linear-gradient(rgba(255,138,61,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,138,61,.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.fingerprint-trigger {
+  border-color: rgba(255,138,61,.62);
+  background: linear-gradient(145deg, rgba(61,27,18,.96), rgba(30,18,20,.96));
+  color: var(--access-ember-soft);
+  box-shadow: inset 0 0 22px rgba(255,138,61,.07);
+}
+.fingerprint-trigger:hover {
+  border-color: var(--access-ember);
+  background: rgba(74,31,19,.96);
+  box-shadow: 0 12px 28px rgba(0,0,0,.26), 0 0 23px rgba(255,138,61,.15);
+}
+.smart-access-demo.scanning .fingerprint-trigger {
+  border-color: var(--access-ember);
+  color: var(--access-ember-soft);
+  box-shadow: 0 0 26px rgba(255,138,61,.2), inset 0 0 20px rgba(255,138,61,.09);
+}
+.smart-access-demo.scanning .fingerprint-scan-line {
+  background: var(--access-ember-soft);
+  box-shadow: 0 0 13px rgba(255,210,179,.95);
+}
+.access-signal::before { background: rgba(255,138,61,.34); }
+.access-signal i {
+  border-color: rgba(255,138,61,.74);
+  background: #27100c;
+}
+.smart-access-demo.scanning .access-signal i { animation-name: smart-signal-ember; }
+.camera-module {
+  border-color: rgba(255,201,104,.48);
+  background: linear-gradient(145deg, #241c35, #11152d);
+}
+.camera-module > b { color: #eadcbf; }
+.camera-lens {
+  border-color: rgba(255,201,104,.72);
+  background: #080714;
+}
+.camera-lens i {
+  background: var(--camera-amber);
+  box-shadow: 0 0 10px rgba(255,201,104,.82);
+}
+.door-frame { border-color: #623524; }
+.door-panel {
+  background: linear-gradient(120deg, #67331f, #2a1718 72%);
+  border-color: rgba(255,138,61,.36);
+}
+.door-panel::before { border-color: rgba(255,138,61,.18); }
+.smart-access-feed {
+  border-color: rgba(255,138,61,.21);
+  background: rgba(24,11,10,.86);
+}
+.smart-access-demo.capturing .camera-lens {
+  border-color: #fff3c8;
+  box-shadow: 0 0 24px rgba(255,211,119,.95);
+}
+
+/* The ESP32-CAM shutter briefly illuminates the complete viewport. */
+html.camera-flashing::after {
+  content: "";
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: #fffdf5;
+  opacity: 0;
+  pointer-events: none;
+  animation: page-camera-flash .4s ease-out forwards;
+}
+@keyframes page-camera-flash {
+  0% { opacity: 0; }
+  14% { opacity: .92; }
+  30% { opacity: .08; }
+  47% { opacity: .56; }
+  100% { opacity: 0; }
+}
+@keyframes smart-signal-ember {
+  0%,100% { background: #27100c; box-shadow: none; }
+  50% { background: #ff8a3d; border-color: #ffd2b3; box-shadow: 0 0 11px rgba(255,138,61,.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.camera-flashing::after { animation-duration: .12s; }
+  .skill-grid article:hover .skill-icon { animation: none; }
 }
