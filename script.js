@@ -392,6 +392,12 @@ archiveViewer?.addEventListener('keydown', (event) => {
 
 // Interactive Clubhouse booking demonstration
 const facilityButtons = [...document.querySelectorAll('#facility-picker button')];
+const bookingDemo = document.querySelector('.clubhouse-booking-demo');
+const facilityAnimationStage = document.querySelector('#facility-animation-stage');
+const facilityFigure = document.querySelector('#facility-figure');
+const facilityProp = document.querySelector('#facility-prop');
+const facilityAnimationLabel = document.querySelector('#facility-animation-label');
+const bookingOpenPanel = document.querySelector('#booking-open-panel');
 const demoFacility = document.querySelector('#demo-facility');
 const demoRate = document.querySelector('#demo-rate');
 const demoCapacity = document.querySelector('#demo-capacity');
@@ -402,7 +408,7 @@ const demoReceiptId = document.querySelector('#demo-receipt-id');
 const receiptFacility = document.querySelector('#receipt-facility');
 const receiptTotal = document.querySelector('#receipt-total');
 const demoBookAgain = document.querySelector('#demo-book-again');
-let selectedFacility = facilityButtons[0]?.dataset;
+let selectedFacility = null;
 let demoBookingNumber = 1;
 let demoBookingTimers = [];
 
@@ -419,17 +425,66 @@ function resetDemoReceipt() {
   if (demoBookButtonLabel) demoBookButtonLabel.textContent = 'CREATE DEMO BOOKING';
 }
 
+function setFacilityStage(mode, figure, prop, label) {
+  facilityAnimationStage.className = `facility-animation-stage ${mode}`;
+  facilityFigure.textContent = figure;
+  facilityProp.textContent = prop;
+  facilityAnimationLabel.textContent = label;
+}
+
+function resetFacilityBooking() {
+  resetDemoReceipt();
+  selectedFacility = null;
+  bookingDemo?.classList.remove('facility-ready');
+  bookingOpenPanel?.setAttribute('aria-hidden', 'true');
+  if (demoBookButton) demoBookButton.disabled = true;
+  facilityButtons.forEach((item) => {
+    item.disabled = false;
+    item.classList.remove('active');
+    item.setAttribute('aria-pressed', 'false');
+  });
+  if (demoFacility) demoFacility.textContent = '—';
+  if (demoRate) demoRate.textContent = '—';
+  if (demoCapacity) demoCapacity.textContent = '—';
+  setFacilityStage('is-idle', '●', '+', 'SELECT A FACILITY');
+}
+
 function selectDemoFacility(button) {
+  resetDemoReceipt();
   selectedFacility = button.dataset;
   facilityButtons.forEach((item) => {
     const selected = item === button;
+    item.disabled = true;
     item.classList.toggle('active', selected);
     item.setAttribute('aria-pressed', String(selected));
   });
   if (demoFacility) demoFacility.textContent = selectedFacility.name;
   if (demoRate) demoRate.textContent = `RM${selectedFacility.rate}`;
   if (demoCapacity) demoCapacity.textContent = selectedFacility.capacity;
-  resetDemoReceipt();
+  bookingDemo?.classList.remove('facility-ready');
+  bookingOpenPanel?.setAttribute('aria-hidden', 'true');
+  if (demoBookButton) demoBookButton.disabled = true;
+
+  const activities = {
+    POOL: { mode: 'sport-pool is-playing', figure: '🤸', prop: '🌊', label: 'DIVING INTO THE POOL' },
+    BDM: { mode: 'sport-badminton is-playing', figure: '🏃', prop: '🏸', label: 'BADMINTON SMASH' },
+    GYM: { mode: 'sport-gym is-playing', figure: '🏋️', prop: '▰', label: 'WEIGHT LIFT IN PROGRESS' }
+  };
+  const activity = activities[selectedFacility.code];
+  setFacilityStage(activity.mode, activity.figure, activity.prop, activity.label);
+
+  const previewDelay = reducedMotion.matches ? 100 : 880;
+  demoBookingTimers.push(window.setTimeout(() => {
+    facilityAnimationStage.classList.remove('is-playing');
+    facilityAnimationStage.classList.add('is-ready');
+    facilityFigure.textContent = '✓';
+    facilityProp.textContent = '';
+    facilityAnimationLabel.textContent = `${selectedFacility.name.toUpperCase()} READY · BOOKING OPEN`;
+    facilityButtons.forEach((item) => { item.disabled = false; });
+    bookingDemo?.classList.add('facility-ready');
+    bookingOpenPanel?.setAttribute('aria-hidden', 'false');
+    if (demoBookButton) demoBookButton.disabled = false;
+  }, previewDelay));
 }
 
 facilityButtons.forEach((button) => button.addEventListener('click', () => selectDemoFacility(button)));
@@ -457,11 +512,15 @@ demoBookButton?.addEventListener('click', () => {
     receiptTotal.textContent = `RM${selectedFacility.rate}`;
     demoReceipt.classList.add('confirmed');
     demoReceipt.setAttribute('aria-hidden', 'false');
+    setFacilityStage('booking-success is-playing', '👍', '✦', 'BOOKING COMPLETE');
   }, confirmDelay));
 });
 
-demoBookAgain?.addEventListener('click', resetDemoReceipt);
-window.addEventListener('pageshow', resetDemoReceipt);
+demoBookAgain?.addEventListener('click', () => {
+  resetFacilityBooking();
+  facilityButtons[0]?.focus();
+});
+window.addEventListener('pageshow', resetFacilityBooking);
 
 // Expandable Clubhouse project filmstrip
 const clubhouseProjectCard = document.querySelector('.clubhouse-project-card');

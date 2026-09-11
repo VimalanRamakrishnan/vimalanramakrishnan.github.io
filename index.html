@@ -6,7 +6,7 @@
     <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure software, networking and embedded-systems projects." />
     <meta name="theme-color" content="#050b19" />
     <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=15-toolkit-live-animations" />
+    <link rel="stylesheet" href="styles.css?v=15-clubhouse-sports-animations" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -217,16 +217,25 @@
               </div>
               <p class="booking-demo-instruction">Choose a facility and create a sample one-hour booking.</p>
               <div class="facility-picker" id="facility-picker" aria-label="Choose a facility">
-                <button class="active" type="button" data-name="Swimming Pool" data-code="POOL" data-rate="22.00" data-capacity="40" aria-pressed="true"><i>PL</i><span>Pool</span></button>
+                <button type="button" data-name="Swimming Pool" data-code="POOL" data-rate="22.00" data-capacity="40" aria-pressed="false"><i>PL</i><span>Pool</span></button>
                 <button type="button" data-name="Badminton" data-code="BDM" data-rate="20.00" data-capacity="50" aria-pressed="false"><i>BD</i><span>Badminton</span></button>
                 <button type="button" data-name="Gym" data-code="GYM" data-rate="7.00" data-capacity="40" aria-pressed="false"><i>GY</i><span>Gym</span></button>
               </div>
-              <div class="booking-demo-readout">
-                <div><small>SELECTED</small><strong id="demo-facility">Swimming Pool</strong></div>
-                <div><small>RATE / HOUR</small><strong id="demo-rate">RM22.00</strong></div>
-                <div><small>CAPACITY</small><strong id="demo-capacity">40</strong></div>
+              <div class="facility-animation-stage" id="facility-animation-stage" aria-live="polite">
+                <span class="facility-figure" id="facility-figure" aria-hidden="true">●</span>
+                <span class="facility-prop" id="facility-prop" aria-hidden="true">+</span>
+                <b id="facility-animation-label">SELECT A FACILITY</b>
               </div>
-              <button class="demo-book-button" id="demo-book-button" type="button"><span>CREATE DEMO BOOKING</span><i aria-hidden="true">→</i></button>
+              <div class="booking-open-panel" id="booking-open-panel" aria-hidden="true">
+                <div class="booking-open-panel-inner">
+                  <div class="booking-demo-readout">
+                    <div><small>SELECTED</small><strong id="demo-facility">—</strong></div>
+                    <div><small>RATE / HOUR</small><strong id="demo-rate">—</strong></div>
+                    <div><small>CAPACITY</small><strong id="demo-capacity">—</strong></div>
+                  </div>
+                  <button class="demo-book-button" id="demo-book-button" type="button" disabled><span>CREATE DEMO BOOKING</span><i aria-hidden="true">→</i></button>
+                </div>
+              </div>
               <div class="booking-demo-receipt" id="booking-demo-receipt" role="status" aria-live="polite" aria-hidden="true">
                 <div><span class="receipt-check" aria-hidden="true">✓</span><p><small>BOOKING CONFIRMED</small><strong id="demo-receipt-id">CMS-0001</strong></p></div>
                 <dl><div><dt>Facility</dt><dd id="receipt-facility">Swimming Pool</dd></div><div><dt>Time</dt><dd>10:00 — 11:00</dd></div><div><dt>Total</dt><dd id="receipt-total">RM22.00</dd></div></dl>
@@ -443,6 +452,6 @@
       </div>
     </div>
 
-    <script src="script.js?v=15-toolkit-live-animations"></script>
+    <script src="script.js?v=15-clubhouse-sports-animations"></script>
   </body>
 </html>

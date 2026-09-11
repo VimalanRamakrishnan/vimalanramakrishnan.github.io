@@ -293,7 +293,7 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .archive-thumb span { position: absolute; right: .45rem; bottom: .4rem; padding: .23rem .38rem; border-radius: 5px; background: rgba(2,8,23,.84); color: var(--cyan); font: 700 .64rem/1 ui-monospace, monospace; }
 .video-thumb::before { content: "VIDEO"; position: absolute; z-index: 2; top: .4rem; left: .4rem; padding: .22rem .35rem; border: 1px solid rgba(117,245,199,.35); border-radius: 5px; background: rgba(2,8,23,.86); color: #75f5c7; letter-spacing: .08em; font: 700 .58rem/1 ui-monospace, monospace; }
 @keyframes evidence-scan { 0% { top: -8%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: 108%; opacity: 0; } }
-.upcoming-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.upcoming-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.35rem; margin-top: 1.25rem; }
 .upcoming-grid article { padding: 1.5rem; border-radius: 18px; transition: transform .25s ease, border-color .25s ease; }
 .upcoming-grid article:hover { transform: translateY(-4px); border-color: rgba(118,87,255,.48); }
 .upcoming-grid p { margin: 0 0 2.4rem; color: var(--cyan); text-transform: uppercase; letter-spacing: .08em; font: 700 .72rem/1.3 ui-monospace, monospace; }
@@ -320,6 +320,34 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .facility-picker button.active { border-color: rgba(92,221,255,.7); background: rgba(21,61,94,.72); color: #f2f8ff; box-shadow: inset 0 0 0 1px rgba(92,221,255,.1), 0 0 18px rgba(92,221,255,.08); }
 .facility-picker button i { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid rgba(92,221,255,.3); border-radius: 6px; color: var(--cyan); font: 800 .54rem/1 ui-monospace, monospace; font-style: normal; }
 .facility-picker button span { overflow: hidden; color: inherit !important; font: 700 .59rem/1.2 ui-monospace, monospace; text-overflow: ellipsis; }
+.facility-animation-stage { position: relative; height: 76px; margin: 0 .8rem .75rem; overflow: hidden; border: 1px solid rgba(244,189,103,.24); border-radius: 8px; background: radial-gradient(circle at 50% 20%, rgba(244,189,103,.08), rgba(2,8,23,.64) 70%); }
+.facility-animation-stage::before { content: ""; position: absolute; right: 0; bottom: 22px; left: 0; height: 1px; background: rgba(244,189,103,.16); }
+.facility-animation-stage > b { position: absolute; z-index: 4; right: .55rem; bottom: .38rem; left: .55rem; overflow: hidden; color: #bda989; letter-spacing: .08em; font: 800 .47rem/1 ui-monospace, monospace; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.facility-figure, .facility-prop { position: absolute; z-index: 3; display: grid; place-items: center; padding: 0 !important; border: 0 !important; background: transparent !important; font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif !important; line-height: 1 !important; }
+.facility-figure { top: 13px; left: 24%; font-size: 1.65rem !important; filter: drop-shadow(0 6px 8px rgba(0,0,0,.28)); }
+.facility-prop { top: 18px; right: 23%; color: #f4bd67 !important; font-size: 1.25rem !important; }
+.facility-animation-stage.is-idle .facility-figure { color: #f4bd67; font-size: .68rem !important; opacity: .45; animation: booking-idle-pulse 1.4s ease-in-out infinite; }
+.facility-animation-stage.is-idle .facility-prop { color: #7c684b !important; font: 700 .7rem/1 ui-monospace, monospace !important; opacity: .5; }
+.sport-pool::after { content: ""; position: absolute; right: 8%; bottom: 21px; left: 43%; height: 8px; border-top: 2px solid #62d7ff; border-radius: 50%; background: repeating-radial-gradient(ellipse at top, rgba(98,215,255,.28) 0 2px, transparent 3px 7px); opacity: .72; }
+.sport-pool.is-playing .facility-figure { animation: booking-pool-dive .88s cubic-bezier(.3,.65,.35,1) both; }
+.sport-pool.is-playing .facility-prop { animation: booking-pool-splash .88s ease-out both; }
+.sport-badminton.is-playing .facility-figure { animation: booking-badminton-smash .82s cubic-bezier(.25,.7,.25,1) both; }
+.sport-badminton.is-playing .facility-prop { animation: booking-shuttle-flight .82s cubic-bezier(.2,.8,.25,1) both; }
+.sport-gym .facility-figure { left: calc(50% - 18px); }
+.sport-gym .facility-prop { top: 11px; right: calc(50% - 31px); width: 62px; color: #ffd88c !important; font: 900 1.05rem/1 ui-monospace, monospace !important; letter-spacing: -.08em; }
+.sport-gym.is-playing .facility-figure { animation: booking-weight-lift .72s ease-in-out 2; }
+.sport-gym.is-playing .facility-prop { animation: booking-barbell-rise .72s ease-in-out 2; }
+.facility-animation-stage.is-ready .facility-figure { top: 16px; left: calc(50% - 12px); color: #75f5c7; font: 900 1.25rem/1 ui-monospace, monospace !important; }
+.facility-animation-stage.is-ready .facility-prop { display: none; }
+.facility-animation-stage.is-ready > b { color: #75f5c7; }
+.booking-success .facility-figure { top: 9px; left: calc(50% - 18px); font-size: 2rem !important; }
+.booking-success .facility-prop { top: 9px; right: calc(50% - 35px); color: #ffe09a !important; font-size: 1.2rem !important; }
+.booking-success.is-playing .facility-figure { animation: booking-thumbs-up .9s cubic-bezier(.2,.8,.25,1) infinite; }
+.booking-success.is-playing .facility-prop { animation: booking-success-spark .9s ease-in-out infinite; }
+.booking-success > b { color: #75f5c7; }
+.booking-open-panel { display: grid; grid-template-rows: 0fr; opacity: 0; transform: translateY(-5px); transition: grid-template-rows .34s cubic-bezier(.22,.78,.2,1), opacity .2s ease, transform .3s ease; }
+.booking-open-panel-inner { min-height: 0; overflow: hidden; }
+.facility-ready .booking-open-panel { grid-template-rows: 1fr; opacity: 1; transform: translateY(0); }
 .booking-demo-readout { display: grid; grid-template-columns: 1.35fr 1fr .72fr; margin: 0 .8rem .75rem; border: 1px solid rgba(125,147,197,.16); border-radius: 8px; background: rgba(2,8,23,.55); }
 .booking-demo-readout > div { min-width: 0; padding: .62rem .65rem; border-right: 1px solid rgba(125,147,197,.13); }
 .booking-demo-readout > div:last-child { border-right: 0; }
@@ -350,6 +378,15 @@ h2 { margin-bottom: 0; font-size: clamp(2.6rem, 5vw, 4.8rem); }
 .booking-demo-receipt > button:hover { color: #75f5c7; }
 @keyframes booking-led { from { opacity: .45; } to { opacity: 1; } }
 @keyframes booking-progress { from { width: 0; } to { width: 100%; } }
+@keyframes booking-idle-pulse { 0%,100% { opacity: .28; transform: scale(.82); } 50% { opacity: .78; transform: scale(1.15); } }
+@keyframes booking-pool-dive { 0% { left: 12%; top: 24px; transform: rotate(-12deg); opacity: 0; } 18% { opacity: 1; } 52% { left: 46%; top: 4px; transform: rotate(38deg); } 82% { left: 69%; top: 28px; transform: rotate(82deg) scale(.9); opacity: 1; } 100% { left: 73%; top: 42px; transform: rotate(95deg) scale(.65); opacity: 0; } }
+@keyframes booking-pool-splash { 0%,62% { opacity: 0; transform: scale(.4); } 78% { opacity: 1; transform: scale(1.35); } 100% { opacity: .4; transform: scale(.9); } }
+@keyframes booking-badminton-smash { 0% { transform: translateX(-12px) rotate(-8deg); } 40% { transform: translateX(4px) rotate(-16deg) scale(1.07); } 62% { transform: translateX(10px) rotate(12deg) scale(1.12); } 100% { transform: translateX(4px) rotate(0); } }
+@keyframes booking-shuttle-flight { 0%,42% { right: 45%; top: 12px; transform: rotate(-25deg); opacity: .3; } 56% { opacity: 1; } 100% { right: 8%; top: 30px; transform: rotate(45deg) scale(.72); opacity: .15; } }
+@keyframes booking-weight-lift { 0%,100% { transform: translateY(7px) scale(.96); } 50% { transform: translateY(-5px) scale(1.05); } }
+@keyframes booking-barbell-rise { 0%,100% { transform: translateY(13px); } 50% { transform: translateY(-3px); } }
+@keyframes booking-thumbs-up { 0%,100% { transform: translateY(4px) rotate(-7deg) scale(.9); } 45% { transform: translateY(-3px) rotate(5deg) scale(1.12); } }
+@keyframes booking-success-spark { 0%,100% { opacity: .3; transform: rotate(0) scale(.7); } 50% { opacity: 1; transform: rotate(90deg) scale(1.25); } }
 
 /* Clubhouse project filmstrip */
 .upcoming-grid .clubhouse-project-card { transition: transform .25s ease, border-color .25s ease, box-shadow .35s ease; }
@@ -969,4 +1006,6 @@ html.camera-flashing::after {
   html.camera-flashing::after { animation-duration: .12s; }
   .skill-grid article:hover .skill-icon { animation: none; }
   .skill-card.motion-active .skill-icon, .skill-motion *, .skill-motion::after { animation: none !important; }
+  .facility-animation-stage *, .facility-animation-stage::after { animation-duration: .01ms !important; }
+  .booking-open-panel { transition: none; }
 }
