@@ -110,6 +110,54 @@ const smartAccessMessage = document.querySelector('#smart-access-message');
 const smartAccessEvent = document.querySelector('#smart-access-event');
 let smartAccessTimers = [];
 let smartAccessRunning = false;
+let cameraAudioContext = null;
+
+function prepareCameraAudio() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
+
+  if (!cameraAudioContext) cameraAudioContext = new AudioContextClass();
+  if (cameraAudioContext.state === 'suspended') {
+    cameraAudioContext.resume().catch(() => {});
+  }
+}
+
+function playCameraShutter() {
+  const context = cameraAudioContext;
+  if (!context || context.state !== 'running') return;
+
+  const createClick = (delay, duration, volume, frequency) => {
+    const sampleCount = Math.max(1, Math.floor(context.sampleRate * duration));
+    const buffer = context.createBuffer(1, sampleCount, context.sampleRate);
+    const samples = buffer.getChannelData(0);
+
+    for (let index = 0; index < sampleCount; index += 1) {
+      const fade = 1 - (index / sampleCount);
+      samples[index] = (Math.random() * 2 - 1) * fade;
+    }
+
+    const source = context.createBufferSource();
+    const filter = context.createBiquadFilter();
+    const gain = context.createGain();
+    const start = context.currentTime + delay;
+
+    filter.type = 'bandpass';
+    filter.frequency.value = frequency;
+    filter.Q.value = 0.85;
+    gain.gain.setValueAtTime(volume, start);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+    source.buffer = buffer;
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(context.destination);
+    source.start(start);
+    source.stop(start + duration);
+  };
+
+  createClick(0, 0.05, 0.18, 1850);
+  createClick(0.065, 0.04, 0.12, 1050);
+}
 
 function resetSmartAccessDemo() {
   smartAccessTimers.forEach((timer) => window.clearTimeout(timer));
@@ -125,6 +173,7 @@ function resetSmartAccessDemo() {
 
 fingerprintTrigger?.addEventListener('click', () => {
   if (smartAccessRunning) return;
+  prepareCameraAudio();
   resetSmartAccessDemo();
   smartAccessRunning = true;
   fingerprintTrigger.disabled = true;
@@ -152,6 +201,7 @@ fingerprintTrigger?.addEventListener('click', () => {
     document.documentElement.classList.remove('camera-flashing');
     void document.documentElement.offsetWidth;
     document.documentElement.classList.add('camera-flashing');
+    playCameraShutter();
     smartAccessState.textContent = 'CAPTURE';
     smartAccessMessage.textContent = 'ESP32-CAM capturing access image…';
     smartAccessEvent.textContent = 'FLASH / ON';
