@@ -6,7 +6,7 @@
     <meta name="description" content="Cybersecurity portfolio of Vimalan Ramakrishnan, featuring secure software, networking and embedded-systems projects." />
     <meta name="theme-color" content="#050b19" />
     <title>Vimalan Ramakrishnan | Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=20-centered-evidence-camera-sound" />
+    <link rel="stylesheet" href="styles.css?v=25-clean-hero-no-meta" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -28,33 +28,53 @@
     </header>
 
     <main id="main">
-      <section class="hero" id="top">
-        <div class="hero-copy">
+      <section class="hero orbit-hero" id="top">
+        <div class="hero-copy orbit-hero-copy">
           <p class="eyebrow"><span></span> Cybersecurity student · Malaysia</p>
-          <h1>Building at the edge of <span>security</span> and <span>innovation.</span></h1>
-          <p class="hero-lede">I create practical systems across software, networks, and embedded hardware—then study how to make them safer.</p>
+          <h1>Build it.<br /><span>Test it.</span><br />Make it safer.</h1>
+          <p class="hero-lede">I turn software, networks and embedded hardware into working systems—then examine how they behave, connect and fail.</p>
           <div class="hero-actions">
-            <a class="button primary" id="explore-work" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
+            <a class="button primary" id="explore-work" href="#projects">Enter project archive <span aria-hidden="true">↓</span></a>
             <a class="button secondary secure-link" href="https://github.com/VimalanRamakrishnan">View GitHub <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="hero-meta" aria-label="Professional focus">
-            <p><strong>Focus</strong><span>Cybersecurity</span></p>
-            <p><strong>Degree</strong><span>Computer Security</span></p>
-            <p><strong>Status</strong><span class="status">Building</span></p>
+          <div class="hero-tech-rail" aria-label="Technology focus">
+            <span>DNS</span><span>C++</span><span>ESP32</span><span>MySQL</span><span>Security</span>
           </div>
         </div>
 
-        <aside class="identity-card" aria-label="Profile summary">
-          <div class="card-glow" aria-hidden="true"></div>
-          <p class="card-label">PROFILE / 01</p>
-          <div class="monogram" aria-hidden="true">VR</div>
-          <div class="orbit orbit-one" aria-hidden="true"></div>
-          <div class="orbit orbit-two" aria-hidden="true"></div>
-          <p class="identity-name">Vimalan<br />Ramakrishnan</p>
-          <div class="identity-path" aria-label="Professional approach">
-            <span>Learn</span><i></i><span>Analyze</span><i></i><span>Build</span><i></i><span>Protect</span>
+        <div class="orbit-visual-column">
+          <header class="orbit-owner-heading">
+            <p>PORTFOLIO OF</p>
+            <h2>Vimalan Ramakrishnan</h2>
+            <span>Computer Security · Systems Builder</span>
+          </header>
+
+        <aside class="project-orbit-console" id="project-orbit-console" aria-label="Interactive project map">
+          <div class="orbit-console-head">
+            <p><i></i> LIVE PROJECT MAP</p>
+            <span>SELECT A NODE</span>
+          </div>
+          <div class="project-orbit-stage">
+            <div class="project-orbit-ring ring-outer" aria-hidden="true"></div>
+            <div class="project-orbit-ring ring-inner" aria-hidden="true"></div>
+            <div class="orbit-hub" aria-hidden="true"><strong>VR</strong><small>CORE</small></div>
+            <button class="project-node node-iot active" type="button" data-project="iot" data-code="IOT-01" data-title="Smart Home Security" data-copy="Biometric access, ESP32-CAM capture and traceable security events." data-tags="Arduino|ESP32-CAM|IoT" data-target="#smart-home-project" aria-pressed="true"><b>01</b><span>IoT</span><small>ONLINE</small></button>
+            <button class="project-node node-club" type="button" data-project="clubhouse" data-code="APP-02" data-title="Clubhouse Management" data-copy="A complete C++ and MySQL workflow for facilities, bookings and payments." data-tags="C++|MySQL|Systems" data-target="#clubhouse-project" aria-pressed="false"><b>02</b><span>C++</span><small>ONLINE</small></button>
+            <button class="project-node node-dns" type="button" data-project="dns" data-code="NET-03" data-title="Active Directory & DNS" data-copy="Windows Server name resolution, lookup zones and client-to-domain connectivity." data-tags="Windows Server|DNS|Networking" data-target="#dns-project" aria-pressed="false"><b>03</b><span>DNS</span><small>ONLINE</small></button>
+            <i class="orbit-packet packet-one" aria-hidden="true"></i><i class="orbit-packet packet-two" aria-hidden="true"></i>
+          </div>
+          <div class="orbit-project-readout" id="orbit-project-readout" aria-live="polite">
+            <p><span id="orbit-project-code">ACTIVE NODE / IOT-01</span><i>CONNECTED</i></p>
+            <h2 id="orbit-project-title">Smart Home Security</h2>
+            <p id="orbit-project-copy">Biometric access, ESP32-CAM capture and traceable security events.</p>
+            <div class="orbit-project-footer">
+              <div id="orbit-project-tags"><span>Arduino</span><span>ESP32-CAM</span><span>IoT</span></div>
+              <a id="orbit-project-link" href="#smart-home-project">View project <span aria-hidden="true">↘</span></a>
+            </div>
           </div>
         </aside>
+        </div>
+
       </section>
 
       <section class="section about" id="about">
@@ -145,7 +165,7 @@
           <p>Practical work documented with implementation details and security considerations.</p>
         </div>
 
-        <article class="featured-project glass-panel">
+        <article class="featured-project glass-panel" id="smart-home-project">
           <div class="project-intro">
             <div class="project-topline"><span>Featured project</span><span>2026</span></div>
             <p class="project-number" aria-hidden="true">01</p>
@@ -252,7 +272,7 @@
         </div>
 
         <div class="upcoming-grid">
-          <article class="glass-panel completed-project clubhouse-project-card">
+          <article class="glass-panel completed-project clubhouse-project-card" id="clubhouse-project">
             <p>02 / C++ · MySQL</p>
             <h3>Clubhouse Management System</h3>
             <span>A console application for customer registration, facility management, bookings, payments, receipts, and sales reporting.</span>
@@ -356,7 +376,7 @@
             </div>
           </article>
           <article class="glass-panel"><p>03 / Web security</p><h3>VAPT University Lab</h3><span>Sanitized write-up in preparation</span></article>
-          <article class="glass-panel completed-project dns-project-card">
+          <article class="glass-panel completed-project dns-project-card" id="dns-project">
             <p>04 / Windows Server</p>
             <div class="dns-domain-map" aria-label="Three client computers connect through DNS to the lab domain">
               <div class="dns-client-stack">
@@ -499,6 +519,6 @@
       </div>
     </div>
 
-    <script src="script.js?v=20-centered-evidence-camera-sound"></script>
+    <script src="script.js?v=25-clean-hero-no-meta"></script>
   </body>
 </html>

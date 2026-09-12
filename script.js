@@ -73,6 +73,67 @@ const projectsSection = document.querySelector('#projects');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let scanInProgress = false;
 
+// Hero project orbit: each node controls the live project readout.
+const orbitConsole = document.querySelector('#project-orbit-console');
+const projectNodes = [...document.querySelectorAll('.project-node')];
+const orbitCode = document.querySelector('#orbit-project-code');
+const orbitTitle = document.querySelector('#orbit-project-title');
+const orbitCopy = document.querySelector('#orbit-project-copy');
+const orbitTags = document.querySelector('#orbit-project-tags');
+const orbitLink = document.querySelector('#orbit-project-link');
+let orbitIndex = 0;
+let orbitAutoplay = null;
+let orbitWasManuallySelected = false;
+
+function activateOrbitProject(node, userInitiated = false) {
+  if (!node) return;
+  orbitIndex = projectNodes.indexOf(node);
+  if (userInitiated) orbitWasManuallySelected = true;
+
+  projectNodes.forEach((item) => {
+    const selected = item === node;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-pressed', String(selected));
+  });
+
+  orbitCode.textContent = `ACTIVE NODE / ${node.dataset.code}`;
+  orbitTitle.textContent = node.dataset.title;
+  orbitCopy.textContent = node.dataset.copy;
+  orbitLink.href = node.dataset.target;
+  orbitTags.replaceChildren(...node.dataset.tags.split('|').map((tag) => {
+    const chip = document.createElement('span');
+    chip.textContent = tag;
+    return chip;
+  }));
+
+  orbitConsole.classList.remove('node-switching');
+  void orbitConsole.offsetWidth;
+  orbitConsole.classList.add('node-switching');
+}
+
+function stopOrbitAutoplay() {
+  window.clearInterval(orbitAutoplay);
+  orbitAutoplay = null;
+}
+
+function startOrbitAutoplay() {
+  if (reducedMotion.matches || orbitWasManuallySelected || orbitAutoplay || projectNodes.length < 2) return;
+  orbitAutoplay = window.setInterval(() => {
+    activateOrbitProject(projectNodes[(orbitIndex + 1) % projectNodes.length]);
+  }, 5600);
+}
+
+projectNodes.forEach((node) => node.addEventListener('click', () => {
+  stopOrbitAutoplay();
+  activateOrbitProject(node, true);
+}));
+
+orbitConsole?.addEventListener('pointerenter', stopOrbitAutoplay);
+orbitConsole?.addEventListener('pointerleave', startOrbitAutoplay);
+orbitConsole?.addEventListener('focusin', stopOrbitAutoplay);
+orbitConsole?.addEventListener('focusout', startOrbitAutoplay);
+startOrbitAutoplay();
+
 exploreButton?.addEventListener('click', (event) => {
   event.preventDefault();
   if (scanInProgress) return;
