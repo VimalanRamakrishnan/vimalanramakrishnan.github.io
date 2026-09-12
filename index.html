@@ -9,6 +9,7 @@
     <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
     <link rel="stylesheet" href="styles.css?v=29-gallery-polish" />
     <link rel="stylesheet" href="gallery-polish.css?v=29" />
+    <link rel="stylesheet" href="email-flight.css?v=31" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -441,8 +442,12 @@
       <section class="contact section glass-panel" id="contact">
         <p class="section-index">04 / Contact</p>
         <h2>Let’s build something <span>secure.</span></h2>
-        <p>I’m developing my portfolio for internship and graduate opportunities in cybersecurity and software development.</p>
-        <a class="button primary secure-link" href="https://github.com/VimalanRamakrishnan">Connect on GitHub <span aria-hidden="true">↗</span></a>
+        <p>I’m seeking a cybersecurity internship. Get in touch to discuss opportunities or ask about my projects.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
+          <a class="button primary" id="email-gmail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=vimalanramakrishnan3%40gmail.com">Email me <span aria-hidden="true">↗</span></a>
+          <a class="button secondary secure-link" href="https://github.com/VimalanRamakrishnan">Connect on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <p style="font-size:.95rem;overflow-wrap:anywhere;margin-top:1.25rem"><a href="mailto:vimalanramakrishnan3@gmail.com" style="color:inherit;text-underline-offset:.25em">vimalanramakrishnan3@gmail.com</a></p>
       </section>
     </main>
 
@@ -526,6 +531,28 @@
       </div>
     </div>
 
+    <dialog class="email-flight" id="email-flight" aria-labelledby="email-flight-title" aria-describedby="email-flight-detail">
+      <div class="email-flight-scene" aria-hidden="true">
+        <div class="email-flight-trail"></div>
+        <div class="email-flight-bird">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="mail-bird-body" x2="0" y2="1"><stop stop-color="#f3fbff"/><stop offset="1" stop-color="#a5d9ef"/></linearGradient></defs>
+            <path d="M65 79L26 65 40 95 65 94" fill="#8bd1ec"/>
+            <path d="M53 84C53 62 84 53 111 64L123 56C134 41 156 43 159 60 163 79 147 89 132 87 104 114 63 109 53 84Z" fill="url(#mail-bird-body)"/>
+            <path d="M158 61L180 69 157 74Z" fill="#e7bd6d"/>
+            <circle cx="149" cy="59" r="3.5" fill="#10243e"/>
+            <path class="email-bird-wing" d="M100 77C87 58 68 19 37 18 35 47 59 80 89 87Z" fill="#56c6ed" stroke="#b5efff" stroke-width="2"/>
+            <path d="M168 72L160 103" fill="none" stroke="#e7bd6d" stroke-width="2"/>
+            <g class="email-bird-envelope"><rect x="128" y="98" width="52" height="34" rx="5" fill="#e9bb62" stroke="#ffe1a0" stroke-width="2"/><path d="M130 101L154 119 178 101M130 129L144 116M178 129L165 116" fill="none" stroke="#725021" stroke-width="2"/></g>
+          </svg>
+        </div>
+      </div>
+      <p class="email-flight-kicker">LET’S CONNECT</p>
+      <h2 id="email-flight-title">On the way to Gmail…</h2>
+      <p id="email-flight-detail">Write to Vimalan Ramakrishnan</p>
+      <button class="email-flight-cancel" type="button">Cancel</button>
+    </dialog>
     <script src="script.js?v=29-gallery-polish"></script>
+    <script src="email-flight.js?v=31"></script>
   </body>
 </html>
