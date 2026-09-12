@@ -134,6 +134,24 @@ orbitConsole?.addEventListener('focusin', stopOrbitAutoplay);
 orbitConsole?.addEventListener('focusout', startOrbitAutoplay);
 startOrbitAutoplay();
 
+// Hidden signature: the VR core reveals the owner's nickname for a moment.
+const secretNameTrigger = document.querySelector('#secret-name-trigger');
+const secretName = document.querySelector('#secret-name');
+let secretNameTimer = null;
+
+secretNameTrigger?.addEventListener('click', () => {
+  window.clearTimeout(secretNameTimer);
+  secretNameTrigger.classList.remove('secret-revealed');
+  void secretNameTrigger.offsetWidth;
+  secretNameTrigger.classList.add('secret-revealed');
+  secretName.setAttribute('aria-hidden', 'false');
+
+  secretNameTimer = window.setTimeout(() => {
+    secretNameTrigger.classList.remove('secret-revealed');
+    secretName.setAttribute('aria-hidden', 'true');
+  }, 2600);
+});
+
 exploreButton?.addEventListener('click', (event) => {
   event.preventDefault();
   if (scanInProgress) return;
