@@ -497,8 +497,7 @@ function showArchiveImage(index, moveFocus = false) {
     else item.removeAttribute('aria-current');
   });
 
-  archiveFrame.classList.add('changing');
-  window.setTimeout(() => {
+  {
     const isVideo = thumb.dataset.type === 'video';
     archiveVideo.pause();
     if (isVideo) {
@@ -522,11 +521,15 @@ function showArchiveImage(index, moveFocus = false) {
     archiveCategory.textContent = thumb.dataset.meta;
     archiveCounter.textContent = `MEDIA ${String(activeArchiveIndex + 1).padStart(2, '0')} / ${String(visibleArchiveThumbs.length).padStart(2, '0')}`;
     archiveFrame.classList.remove('changing', 'scanning');
-    void archiveFrame.offsetWidth;
     archiveFrame.classList.add('scanning');
-    thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+    // Scroll only the thumbnail rail, never the document.
+    if (moveFocus) {
+      const rail = thumb.parentElement;
+      rail.scrollTo({top: thumb.offsetTop - rail.offsetTop, left: thumb.offsetLeft - rail.offsetLeft,
+        behavior: reducedMotion.matches ? 'instant' : 'smooth'});
+    }
     if (moveFocus) thumb.focus({ preventScroll: true });
-  }, 120);
+  }
 }
 
 archiveThumbs.forEach((thumb) => {
@@ -750,7 +753,11 @@ function showClubhouseGalleryImage(index, focusTimeline = false) {
   positionClubhouseFilmstrip();
 
   const activeTimelineButton = clubhouseTimelineButtons[clubhouseGalleryIndex];
-  activeTimelineButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  if (focusTimeline && activeTimelineButton) {
+    const rail = activeTimelineButton.parentElement;
+    rail.scrollTo({left: activeTimelineButton.offsetLeft - rail.offsetLeft - rail.clientWidth / 2,
+      behavior: reducedMotion.matches ? 'instant' : 'smooth'});
+  }
   if (focusTimeline) activeTimelineButton?.focus({ preventScroll: true });
 }
 
@@ -861,8 +868,7 @@ function showDnsGalleryItem(index, moveFocus = false) {
   dnsGalleryIndex = Math.max(0, Math.min(index, dnsGalleryItems.length - 1));
   const item = dnsGalleryItems[dnsGalleryIndex];
 
-  dnsGalleryImageWrap?.classList.add('changing');
-  window.setTimeout(() => {
+  {
     dnsGalleryImage.src = item.src;
     dnsGalleryImage.alt = item.alt;
     dnsGalleryCaption.textContent = item.title;
@@ -870,9 +876,8 @@ function showDnsGalleryItem(index, moveFocus = false) {
     dnsQueryProgress.style.width = `${((dnsGalleryIndex + 1) / dnsGalleryItems.length) * 100}%`;
     dnsGalleryImageWrap?.classList.remove('changing');
     dnsGalleryImageWrap?.classList.remove('scanning');
-    void dnsGalleryImageWrap?.offsetWidth;
     dnsGalleryImageWrap?.classList.add('scanning');
-  }, reducedMotion.matches ? 0 : 150);
+  }
 
   dnsStepButtons.forEach((button, buttonIndex) => {
     const selected = buttonIndex === dnsGalleryIndex;
@@ -892,7 +897,7 @@ dnsGalleryToggle?.addEventListener('click', () => {
   dnsGalleryPanel.setAttribute('aria-hidden', String(!opening));
   const label = dnsGalleryToggle.querySelector('b');
   if (label) label.textContent = opening ? 'HIDE PROJECT IMAGES' : 'VIEW PROJECT IMAGES';
-  if (opening) window.setTimeout(() => dnsGalleryConsole?.focus({ preventScroll: true }), 620);
+  dnsGalleryPanel.inert = !opening;
 });
 
 dnsStepButtons.forEach((button) => button.addEventListener('click', () => showDnsGalleryItem(Number(button.dataset.index), true)));
@@ -903,6 +908,36 @@ dnsGalleryConsole?.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowRight') { event.preventDefault(); showDnsGalleryItem(dnsGalleryIndex + 1, true); }
 });
 showDnsGalleryItem(0);
+
+// Warm visible gallery assets before a click; never block opening on decoding.
+const warmGallery = (panel) => {
+  panel?.querySelectorAll('img').forEach((img) => {
+    img.loading = 'eager';
+    img.decoding = 'async';
+    img.decode?.().catch(() => {});
+  });
+};
+const galleryPairs = [[evidenceGalleryToggle,evidenceGalleryPanel],
+  [clubhouseGalleryToggle,clubhouseGalleryPanel],[dnsGalleryToggle,dnsGalleryPanel]];
+galleryPairs.forEach(([toggle,panel]) => {
+  toggle?.addEventListener('pointerenter', () => warmGallery(panel), {once:true});
+  toggle?.addEventListener('focus', () => warmGallery(panel), {once:true});
+});
+const warmFirstFrames = () => {
+  [archiveImage,dnsGalleryImage,clubhouseFilmstripSlides[0]?.querySelector('img')].forEach(img => {
+    if (img) { img.loading='eager'; img.decode?.().catch(() => {}); }
+  });
+};
+if ('requestIdleCallback' in window) requestIdleCallback(warmFirstFrames,{timeout:800});
+else setTimeout(warmFirstFrames,100);
+clubhouseGalleryPanel.inert = !clubhouseProjectCard.classList.contains('gallery-open');
+dnsGalleryPanel.inert = !dnsProjectCard.classList.contains('dns-open');
+clubhouseGalleryToggle?.addEventListener('click', () => {
+  clubhouseGalleryPanel.inert = !clubhouseProjectCard.classList.contains('gallery-open');
+});
+window.addEventListener('pageshow', () => {
+  if (!location.hash || location.hash === '#top') window.scrollTo({top:0,left:0,behavior:'instant'});
+});
 
 // DNS repository resolution animation
 const dnsLink = document.querySelector('.dns-link');

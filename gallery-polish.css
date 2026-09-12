@@ -1,0 +1,54 @@
+/* Stable media stages: absolute positioning prevents intrinsic image overflow. */
+.archive-frame{height:clamp(260px,42vw,540px);aspect-ratio:auto}
+.archive-frame > .archive-media-main,
+.archive-frame > video.archive-media-main{
+  position:absolute;inset:16px;width:calc(100% - 32px)!important;
+  height:calc(100% - 32px)!important;max-width:none;max-height:none;
+  object-fit:contain!important;object-position:center;filter:none;transform:none;
+}
+.archive-frame > .archive-backdrop{display:none}
+.archive-frame.changing > .archive-media-main{transform:none}
+.dns-gallery-image-wrap{height:clamp(260px,48vw,560px);aspect-ratio:auto}
+.dns-gallery-image-wrap img{position:absolute;inset:12px;width:calc(100% - 24px);
+  height:calc(100% - 24px);padding:0;object-fit:scale-down;object-position:center;filter:none;transform:none}
+.clubhouse-filmstrip-slide img{position:absolute;inset:8px;width:calc(100% - 16px);
+  height:calc(100% - 16px);object-fit:scale-down;object-position:center;filter:none}
+.archive-thumb img{object-fit:contain;filter:none}
+/* Expand immediately, then fade content using compositor-friendly properties. */
+.evidence-gallery-panel,.clubhouse-gallery-panel,.dns-gallery-panel{
+  transition:opacity .18s ease,transform .18s ease;will-change:auto;overflow-anchor:none;
+}
+.archive-frame,.dns-gallery-image-wrap,.clubhouse-filmstrip{overflow-anchor:none}
+.archive-scan-line,.dns-scan{display:none}
+.clubhouse-filmstrip-track{transition-duration:.25s}
+.clubhouse-filmstrip-slide{transition:opacity .2s ease,transform .2s ease}
+/* Give the complete client-to-domain map its own responsive grid. */
+.dns-project-card{container-type:inline-size}
+.dns-domain-map{width:100%;max-width:620px;min-height:180px;
+  grid-template-columns:minmax(64px,1fr) minmax(14px,.35fr) minmax(70px,1fr) minmax(14px,.35fr) minmax(76px,1fr);
+  gap:6px;padding:14px;overflow:hidden}
+.dns-domain-map > *{min-width:0}
+.dns-domain-line,.dns-link-lines{overflow:hidden}
+.dns-domain-node{min-width:0;padding:8px}
+.dns-domain-node small{line-height:1.4}
+@container (max-width: 390px){
+  .dns-domain-map{grid-template-columns:minmax(64px,1fr) minmax(20px,.4fr) minmax(78px,1fr);min-height:285px;row-gap:10px}
+  .dns-client-stack{grid-column:1;grid-row:1}
+  .dns-link-lines{grid-column:2;grid-row:1}
+  .dns-server-stack{grid-column:3;grid-row:1}
+  .dns-domain-line{grid-column:3;grid-row:2;height:26px;display:block}
+  .dns-domain-line > i{height:26px;width:1px;margin:auto}
+  .dns-domain-line b{width:3px;height:8px;left:-1px;animation:dns-packet-down 1.7s infinite}
+  .dns-domain-node{grid-column:1 / -1;grid-row:3;min-height:74px;border-radius:12px}
+}
+@keyframes dns-packet-down{from{top:-8px}to{top:26px}}
+@media(max-width:600px){
+  .dns-gallery-stage{grid-template-columns:28px minmax(0,1fr) 28px;gap:4px;padding:8px}
+  .dns-gallery-stage > button{width:28px;height:42px}
+  .dns-gallery-image-wrap{height:clamp(220px,75vw,420px)}
+  .archive-frame{height:clamp(300px,95vw,480px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .evidence-gallery-panel,.clubhouse-gallery-panel,.dns-gallery-panel,.clubhouse-filmstrip-track,.clubhouse-filmstrip-slide{transition:none}
+  .dns-domain-line b{animation:none}
+}
