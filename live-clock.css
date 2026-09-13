@@ -1,0 +1,11 @@
+.smart-access-head { flex-wrap: wrap; padding-top: .5rem; padding-bottom: .5rem; }
+.smart-access-clock {
+  margin-left: auto;
+  color: #e6b88f;
+  font: 600 .58rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.smart-access-head > b { flex-shrink: 0; }
