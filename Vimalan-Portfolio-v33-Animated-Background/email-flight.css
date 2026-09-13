@@ -1,0 +1,19 @@
+.email-flight{border:1px solid #345174;border-radius:24px;padding:28px 24px 22px;width:min(520px,calc(100vw - 32px));max-height:calc(100dvh - 32px);color:#f3f7ff;background:radial-gradient(ellipse at 50% 0%,#153554,#080f20 75%);text-align:center;box-shadow:0 24px 90px #0008;overflow:auto}
+.email-flight::backdrop{background:#030814e8}
+.email-flight-scene{height:180px;position:relative;overflow:hidden;border-bottom:1px solid #29405a;margin-bottom:24px}
+.email-flight-bird{position:absolute;width:160px;left:calc(50% - 80px);top:15px;filter:drop-shadow(0 10px 15px #56c6ed25)}
+.email-flight-bird svg{width:100%;height:auto;display:block}
+.email-flight[open] .email-flight-bird{animation:email-bird-travel 1.5s cubic-bezier(.3,.1,.55,1) both}
+.email-flight[open] .email-bird-wing{transform-origin:96px 79px;animation:email-wing-beat .28s ease-in-out infinite alternate}
+.email-flight[open] .email-bird-envelope{transform-origin:160px 99px;animation:email-envelope-sway .35s ease-in-out infinite alternate}
+.email-flight-trail{position:absolute;left:0;right:0;top:105px;height:1px;background:linear-gradient(90deg,transparent,#55c8ed55,transparent)}
+.email-flight-kicker{color:#e9bb62;font:600 10px/1.5 ui-monospace,monospace;letter-spacing:2px;margin:0 0 12px}
+.email-flight h2{font:700 clamp(22px,5vw,28px)/1.3 ui-sans-serif,system-ui,sans-serif;margin:0 0 10px;letter-spacing:-.5px}
+#email-flight-detail{color:#a5b9d4;font-size:13px;margin:0 0 20px}
+.email-flight-cancel{font:inherit;font-size:12px;color:#c7d7eb;background:transparent;border:1px solid #345174;border-radius:8px;padding:9px 18px;cursor:pointer}
+.email-flight-cancel:hover{background:#1b2d44}
+.email-flight-cancel:focus-visible{outline:2px solid #5cddff;outline-offset:4px}
+@keyframes email-bird-travel{0%{transform:translate(-280px,35px) rotate(-9deg);opacity:0}15%{opacity:1}43%{transform:translate(-10px,0) rotate(0)}65%{transform:translate(25px,-7px) rotate(-3deg);opacity:1}100%{transform:translate(340px,-65px) rotate(-10deg);opacity:0}}
+@keyframes email-wing-beat{from{transform:rotate(-18deg) scaleY(.8)}to{transform:rotate(22deg) scaleY(1)}}
+@keyframes email-envelope-sway{from{transform:rotate(-7deg)}to{transform:rotate(8deg)}}
+@media(prefers-reduced-motion:reduce){.email-flight[open] .email-flight-bird,.email-flight[open] .email-bird-wing,.email-flight[open] .email-bird-envelope{animation:none}}
