@@ -134,22 +134,26 @@ orbitConsole?.addEventListener('focusin', stopOrbitAutoplay);
 orbitConsole?.addEventListener('focusout', startOrbitAutoplay);
 startOrbitAutoplay();
 
-// Hidden signature: the VR core reveals the owner's nickname for a moment.
-const secretNameTrigger = document.querySelector('#secret-name-trigger');
-const secretName = document.querySelector('#secret-name');
-let secretNameTimer = null;
-
-secretNameTrigger?.addEventListener('click', () => {
-  window.clearTimeout(secretNameTimer);
-  secretNameTrigger.classList.remove('secret-revealed');
-  void secretNameTrigger.offsetWidth;
-  secretNameTrigger.classList.add('secret-revealed');
-  secretName.setAttribute('aria-hidden', 'false');
-
-  secretNameTimer = window.setTimeout(() => {
-    secretNameTrigger.classList.remove('secret-revealed');
-    secretName.setAttribute('aria-hidden', 'true');
-  }, 2600);
+const coreControl = document.querySelector('#core-control');
+let coreTimer = null;
+function resetCore() {
+  window.clearTimeout(coreTimer);
+  coreControl?.classList.remove('core-active');
+  coreControl?.querySelector('.core-label')?.remove();
+}
+coreControl?.addEventListener('click', () => {
+  resetCore();
+  const label = document.createElement('span');
+  label.className = 'core-label';
+  label.textContent = [31, 50, 36, 50, 45, 60].map(value => String.fromCharCode(value ^ 93)).join('');
+  coreControl.append(label);
+  void coreControl.offsetWidth;
+  coreControl.classList.add('core-active');
+  coreTimer = window.setTimeout(resetCore, 2600);
+});
+window.addEventListener('pagehide', resetCore);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) resetCore();
 });
 
 exploreButton?.addEventListener('click', (event) => {
