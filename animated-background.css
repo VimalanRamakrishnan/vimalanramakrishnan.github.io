@@ -1,0 +1,11 @@
+/* Ambient background only; existing layout and project animations stay intact. */
+body.has-animated-background { isolation: isolate; background: #060d1b; }
+body.has-animated-background::before,
+body.has-animated-background > .ambient { display: none; }
+.portfolio-atmosphere { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.portfolio-atmosphere canvas { display: block; width: 100%; height: 100%; }
+.portfolio-atmosphere-glow { position: absolute; inset: 0; background: radial-gradient(280px circle at var(--ambient-x,70%) var(--ambient-y,30%), #64dcff16, transparent 85%); }
+.portfolio-motion-toggle { display: block; margin: 16px auto 0; padding: 10px 13px; min-height: 44px; border: 1px solid #34445e; border-radius: 7px; background: #0c192a; color: #a8bbd2; font: 12px/1.4 Arial, sans-serif; cursor: pointer; }
+.portfolio-motion-toggle:hover { border-color: #70d6ee; color: #e7f8ff; }
+.portfolio-motion-toggle:focus-visible { outline: 2px solid #70d6ee; outline-offset: 4px; }
+@media print { .portfolio-atmosphere, .portfolio-motion-toggle { display: none !important; } }
